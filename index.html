@@ -81,21 +81,21 @@
                     <div class="content_scroll">
                         <div class="content_list" v-for="(item,index) in titleList">
                             <h4>{{item.title}}</h4>
-                            <p class="content_text" @click="readChange(item,index)" :class="{entable:item.entable}">
+                            <p class="content_text" @click="readChange(item,index)" :class="{entable:postIndex == index}">
                                 {{item.content}}
                             </p>
                             <div class="comment">
                                 <p>发布于{{item.create_at}}</p>
                                 <ul>
                                     <li class="read" @click="readChange(item,index)">
-                                        <span v-show="!item.entable">阅读全文</span>
-                                        <span v-show="item.entable">收起全文</span>
-                                        <img src="img/icon-01 (2).png" alt="" v-show="!item.entable">
-                                        <img src="img/icon-01 (1).png" alt="" v-show="item.entable">
+                                        <span v-if="postIndex != index">阅读全文</span>
+                                        <span v-else>收起全文</span>
+                                        <img src="img/icon-01 (2).png" alt="" v-if="postIndex != index">
+                                        <img src="img/icon-01 (1).png" alt="" v-else>
                                     </li>
-                                    <li>
-                                        <img v-if="item.status == 0" @click="likePostOrComment(item.id,'',0)" v-if="1 == 1" src="img/icon-06.png" class="icon-like">
-                                        <img v-else @click="likePostOrComment(item.id,'',0)" src="img/icon-07.png" class="icon-like">
+                                    <li @click="likePostOrComment(item.id,'',0)" class="pointer">
+                                        <img v-if="item.status == 0"  src="img/icon-06.png" class="icon-like">
+                                        <img v-else src="img/icon-07.png" class="icon-like">
                                         <span>{{item.records}}赞</span>
                                     </li>
                                     <li @click="comChange(index)">
@@ -534,11 +534,10 @@
                             </div>
                             <p v-html="item.content"></p>
                             <div class="see_uu_three">
-                                <div class="see_uu_btn">
+                                <div @click="likePostOrComment('',item.id,1)" class="see_uu_btn pointer">
                                     <img v-if="item.status == 0" src="img/icon-06.png" alt="">
                                     <img v-else src="img/icon-07.png" alt="">
-                                    <span @click="likePostOrComment('',item.id,1)"
-                                        class="pointer">{{item.phraise}}赞</span>
+                                    <span>{{item.phraise}}赞</span>
                                 </div>
                                 <span @click="gospeak1(index)" class="pointer">回复</span>
                             </div>

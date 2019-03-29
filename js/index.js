@@ -53,7 +53,8 @@ var xm = new Vue({
         currentComment: {}, //当前查看的评论,
         currentPostId: '',
         currentCommentId: '',
-        selectedCatId: ''
+        selectedCatId: '',
+        postIndex:-1
     },
     methods: {
         goClose() { //关闭遮罩
@@ -74,12 +75,18 @@ var xm = new Vue({
             window.location.href = "user.html"
         },
         readChange(item, index, e) { //产看文章
-            console.log(index)
-            if (item.entable) {
-                Vue.set(item, 'entable',
-                    false);
-            } else {
-                Vue.set(item, 'entable', true);
+            // console.log(index)
+            // if (item.entable) {
+            //     Vue.set(item, 'entable',
+            //         false);
+            // } else {
+            //     Vue.set(item, 'entable', true);
+            // }
+            if(this.postIndex != index) {
+                this.postIndex = index;
+            }
+            else {
+                this.postIndex = -1;
             }
 
         },
