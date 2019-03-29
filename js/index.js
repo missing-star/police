@@ -25,7 +25,7 @@ var xm = new Vue({
         titleList: [{}, {}], //论坛列表
         allList: [], //报备列表
         infoList: [{}], //论坛关键词
-        list: [],//报备列表
+        list: [], //报备列表
         chatList: [], //聊天列表
         roomList: [{}],
         comlist: [{}, {}], //评论列表
@@ -39,7 +39,7 @@ var xm = new Vue({
         currentActive: -1,
         oneIndex: -1,
         currentIndex: 0,
-        numIndex: -1,
+        numIndex: 0,
         commentActive: -1,
         Ptitle: '', //论坛标题
         Pcontent: '', //论坛内容
@@ -49,11 +49,11 @@ var xm = new Vue({
         Ctitle: '', //常用聊天室标题
         Ctopic_name: '', //常用聊天室标题
         roomName: '', //修改聊天室名称,
-        replyComment:'',//回复评论的内容,
-        currentComment:{},//当前查看的评论,
-        currentPostId:'',
-        currentCommentId:'',
-        selectedCatId:''
+        replyComment: '', //回复评论的内容,
+        currentComment: {}, //当前查看的评论,
+        currentPostId: '',
+        currentCommentId: '',
+        selectedCatId: ''
     },
     methods: {
         goClose() { //关闭遮罩
@@ -93,7 +93,7 @@ var xm = new Vue({
             $(".answer").slideToggle("400");
         },
         gospeak(index) { //回复
-            this.currentActive = this.currentActive == index ? -1 : index;    
+            this.currentActive = this.currentActive == index ? -1 : index;
         },
         gospeak1(index) { //查看回复  回复
             this.oneIndex = this.oneIndex == index ? -1 : index
@@ -144,8 +144,8 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
-                    this.isshade =false
-                    this.isCase =false
+                    this.isshade = false
+                    this.isCase = false
                     this.roomList = res.data;
                 }
             })
@@ -302,7 +302,7 @@ var xm = new Vue({
                 }
             })
         },
-        lookchange(post_id,comment_id) { //查看回复
+        lookchange(post_id, comment_id) { //查看回复
             this.currentPostId = post_id;
             this.currentCommentId = comment_id;
             this.currentComment = this.titleList.filter((posts) => {
@@ -362,7 +362,7 @@ var xm = new Vue({
                 }
             })
         },
-        btnChange(selectedCatId,index) { //写论坛 点击添加颜色
+        btnChange(selectedCatId, index) { //写论坛 点击添加颜色
             this.changeRed = index;
             this.selectedCatId = selectedCatId;
         },
@@ -393,7 +393,7 @@ var xm = new Vue({
             }
         },
         banner(index) {
-            this.ismore =false
+            this.ismore = false
             if (index != this.numIndex) {
                 this.numIndex = index;
             }
@@ -418,6 +418,7 @@ var xm = new Vue({
             }
             if (index == 3) {
                 this.ismore = !this.ismore
+                index = 4
             } else {
                 this.ismore = false
             }
@@ -436,15 +437,13 @@ var xm = new Vue({
             })
         },
         pulishChange() { //发布论坛
-            if(this.Ptitle.trim() == '') {
+            if (this.Ptitle.trim() == '') {
                 alert('请输入标题!');
                 return false;
-            }
-            else if(this.Pcontent.trim() == '') {
+            } else if (this.Pcontent.trim() == '') {
                 alert('请输入内容!');
                 return false;
-            }
-            else if(this.selectedCatId == '') {
+            } else if (this.selectedCatId == '') {
                 alert('请选择分类标签');
                 return false;
             }
@@ -463,29 +462,28 @@ var xm = new Vue({
                 }
             })
         },
-        commentChange(post_id,comment_id,uid,type) { //发布评论
-            if(comment_id) {
-                if(this.replyComment.trim() == '') {
+        commentChange(post_id, comment_id, uid, type) { //发布评论
+            if (comment_id) {
+                if (this.replyComment.trim() == '') {
                     alert('请输入回复内容');
                     return false;
                 }
                 $.ajax({
-                    url:`${api}/index/api/replayComment`,
-                    type:'post',
-                    dataType:'json',
-                    data:{
-                        post_id:post_id,
-                        comment_id:comment_id,
-                        comment_uid:uid,
-                        content:this.replyComment
+                    url: `${api}/index/api/replayComment`,
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        post_id: post_id,
+                        comment_id: comment_id,
+                        comment_uid: uid,
+                        content: this.replyComment
                     },
                     success: (res) => {
                         this.replyComment = '';
-                        if(type == 1) {
+                        if (type == 1) {
                             this.oneIndex = -1;
-                            this.lookchange(this.currentPostId,this.currentCommentId);
-                        }
-                        else {
+                            this.lookchange(this.currentPostId, this.currentCommentId);
+                        } else {
                             this.currentActive = -1;
                         }
                     },
@@ -543,12 +541,11 @@ var xm = new Vue({
                     post_id: post_id,
                     comment_id: comment_id
                 },
-                success:(res) => {
-                    if(type == 1) {
+                success: (res) => {
+                    if (type == 1) {
                         //弹窗评论点赞
-                        this.lookchange(this.currentPostId,this.currentCommentId);
-                    }
-                    else {
+                        this.lookchange(this.currentPostId, this.currentCommentId);
+                    } else {
                         this.bannerChange(this.currentIndex);
                     }
                 },
@@ -591,9 +588,9 @@ var xm = new Vue({
     created() {
         //初始化富文本编辑器
         this.$nextTick(() => {
-            KindEditor.ready(function(K) {
-                window.editor = K.create('#Ftext',{
-                    items : ['bold','italic','underline','fontsize']
+            KindEditor.ready(function (K) {
+                window.editor = K.create('#Ftext', {
+                    items: ['bold', 'italic', 'underline', 'fontsize']
                 });
             });
         });
