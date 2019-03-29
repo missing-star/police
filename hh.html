@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<style>
+    .btn {
+        
+    }
+    ul {
+        display: flex;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <div>
+             <ul>
+                <li v-for="(item,index) in cartList">
+                    <div class="btn" :class="{'active':item.active}"> hahahaha </div>
+                    <button @click="togglePay(item,index)">点击</button>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/vue.js"></script>
+<script>
+    var xm = new Vue({
+        el: "#app",
+        data: {
+            cartList: [{}, {}, {}]
+        },
+        methods: {
+            togglePay: function (item, index) {
+                if (item.active) {
+                    Vue.set(item, 'active',
+                        false); //为item添加不存在的属性，需要使用vue提供的Vue.set( object, key, value )方法。 
+                } else {
+                    Vue.set(item, 'active', true);
+                }
+            }
+        }
+    })
+</script>

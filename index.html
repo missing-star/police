@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>浦口公安局</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/page/zxf_page.css" />
+    <link rel="stylesheet" href="css/page/iconfont.css">
+    <style>
+        .banner_uu li {
+            font-size: 16px;
+            position: inherit;
+        }
+
+        .content {
+            padding-top: 4.3%;
+        }
+
+        .content_list {
+            padding: 20px 31px 20px 20px;
+        }
+
+        .content_list h4 {
+            font-size: 18px;
+            margin-bottom: 9px;
+        }
+
+        .content_list .content_text {
+            font-size: 16px;
+        }
+
+        .comment ul li,
+        .comment ul li:nth-child(1) span {
+            font-size: 14px;
+        }
+
+        .comment ul li img {
+            width: 10px;
+            height: 10px;
+        }
+
+        .make_uu li img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .make_uu li p {
+            color: #444;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        .make_uu {
+            padding: 10px 0px;
+        }
+
+        .make_uu li,
+        .content_make {
+            height: auto;
+        }
+
+        .make_uu li:nth-child(1) {
+            height: auto;
+        }
+
+        .report_banner ul {
+            height: auto;
+            font-size: 16px;
+        }
+
+        .report_list_uu {
+            font-size: 16px;
+        }
+
+        .appCenter,
+        .chat_room_uu,
+        .chat_user,
+        .chatRoom,
+        .report_list_uu,
+        .report {
+            height: auto;
+        }
+
+        .chatRoom {
+            margin-top: 10px;
+        }
+
+        .chat_more {
+            line-height: 2.5;
+        }
+
+        .chat_user {
+            padding: 15px 27px 15px 17px;
+            margin-top: 10px;
+            border-bottom: 0;
+        }
+
+        .app_uu li {
+            text-align: center;
+        }
+
+        .app_uu li img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .app_logo {
+            margin-top: 0;
+        }
+
+        .index_content a img {
+            width: 70%;
+        }
+
+        .index_header {
+            height: auto;
+            padding: 15px 0px;
+            position: fixed;
+        }
+
+        .search {
+            background: #eee;
+        }
+
+        .content_list .content_text {
+            line-height: 1.67;
+            cursor: pointer;
+        }
+
+        .comment {
+            margin-top: 9px;
+        }
+
+        .chat_more .left {
+            float: left;
+        }
+
+        .chat_more .right {
+            float: right;
+        }
+
+        .chat_room_uu li {
+            height: 50px;
+        }
+
+        .chat_room_uu_right {
+            width: 65px;
+            height: 28px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app" v-cloak>
+
+        <div class="index_header">
+            <div class="index_content container">
+                <a href="index.html">
+                    <img src="img/首页logo.png" alt="">
+                </a>
+                <div class="header_mid">
+                    <input class="search" type="text" v-model="keyWords" placeholder="搜索关键词">
+                    <span @click="searchChange"></span>
+                </div>
+                <div class="header_img" @click="goAnswer">
+                    <img src="img/信息.png" alt="">
+                    <span v-show="isnum">9</span>
+                </div>
+                <div class="header_name">
+                    <span><img src="" alt=""></span>
+                    <span @click="goname">张三</span>
+                </div>
+                <!-- 通知 -->
+                <div class="answer">
+                    <!-- <span></span> -->
+                    <ul class="answer_uu">
+                        <li v-for="item in list">张三回复了你的《反家暴法》实施三周年，一些未成年人为自己维权。</li>
+                    </ul>
+                    <p>查看全部回复</p>
+                </div>
+                <!-- 个人中心 -->
+                <div class="header_two">
+                    <span></span>
+                    <ul class="header_two_uu">
+                        <li @click="gouser">我的主页</li>
+                        <li>退出登录</li>
+                        <li @click="goPass">修改密码</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="content">
+            <div class="content_main container">
+                <div class="content_left">
+                    <div class="banner">
+                        <ul class="banner_uu">
+                            <li :class="{active:index == currentIndex}" v-for="(item,index) in ForumCate.slice(0, 4)"
+                                @click="bannerChange(index)">
+                                {{item.title}}
+                            </li>
+                            <div class="banner_more" v-show="ismore">
+                                <span></span>
+                                <ul class="more_uu">
+                                    <li v-for="(item,index) in ForumCate.slice(4, )" :class="{active:index == numIndex}"
+                                        @click="banner(index)">
+                                        {{item.title}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </ul>
+                    </div>
+
+                    <div class="content_scroll">
+                        <div class="content_list" v-for="(item,index) in titleList">
+                            <h4>{{item.title}}</h4>
+                            <p class="content_text" @click="readChange(item,index)" :class="{entable:item.entable}">
+                                {{item.content}}
+                            </p>
+                            <div class="comment">
+                                <p>发布于{{item.create_at}}</p>
+                                <ul>
+                                    <li class="read" @click="readChange(item,index)">
+                                        <span v-show="!item.entable">阅读全文</span>
+                                        <span v-show="item.entable">收起全文</span>
+                                        <img src="img/icon-01 (2).png" alt="" v-show="!item.entable">
+                                        <img src="img/icon-01 (1).png" alt="" v-show="item.entable">
+                                    </li>
+                                    <li>
+                                        <img src="img/icon-06.png" alt="">
+                                        <span @click="likePostOrComment(item.id,'',0)">{{item.records}}点赞</span>
+                                    </li>
+                                    <li @click="comChange(index)">
+                                        <img src="img/评论.png" alt="">
+                                        <span v-show="!iscomment">{{item.comment_list.length}}条评论</span>
+                                        <span v-show="iscomment">收起评论</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="comment_main" v-cloak v-show="commentActive ==index">
+                                <div class="comment_list" v-for="(comment,index) in item.comment_list">
+                                    <h5>{{comment.nickname}}</h5>
+                                    <p>
+                                        {{comment.content}}
+                                    </p>
+                                    <div class="reply">
+                                        <span class="pointer" @click="likePostOrComment('',comment.id,0)">
+                                            <img src="img/icon-06.png" alt="">
+                                            {{comment.phraise}}赞
+                                        </span>
+                                        <span @click="lookchange(item.id,comment.id)" class="pointer">查看回复</span>
+                                        <span @click="gospeak(index)" class="pointer">回复</span>
+                                    </div>
+
+                                    <div class="reply_one" v-if="currentActive==index">
+                                        <input type="text" placeholder="写下你的回复" v-model="replyComment">
+                                        <img src="img/表情.png" alt="">
+                                        <span @click="commentChange(item.id,comment.id,item.uid)">发布</span>
+                                    </div>
+                                </div>
+
+                                <div class="comment_inp">
+                                    <input type="text" v-model="Pcomment">
+                                    <img src="img/表情.png" alt="">
+                                    <span @click="commentChange(item.id)">发布</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 未搜索到 -->
+                    <div class="content_img" v-show="isNone">
+                        <img src="img/矢量智能对象.png" alt="">
+                        <p>没有找到符合条件的结果</p>
+                    </div>
+                </div>
+                <div class="content_right">
+                    <!-- 论坛报备 -->
+                    <div class="content_make">
+                        <ul class="make_uu">
+                            <li @click="writeReply">
+                                <img src="img/论坛.png" alt="">
+                                <p>写论坛</p>
+                            </li>
+                            <li @click="reportChange">
+                                <img src="img/报备.png" alt="">
+                                <p>去报备</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 应用中心 -->
+                    <div class="appCenter">
+                        <!--<h4>应用中心</h4>-->
+                        <div class="app_logo">
+                            <ul class="app_uu">
+                                <li>
+                                    <a href="heart.html#go1">
+                                        <img src="img/icon-08.png" alt="">
+                                        <p>插件中心</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="heart.html#go2">
+                                        <img src="img/icon-09.png" alt="">
+                                        <p>音乐中心</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="heart.html#go3">
+                                        <img src="img/icon-10.png" alt="">
+                                        <p>书籍中心</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="heart.html#go4">
+                                        <img src="img/icon-11.png" alt="">
+                                        <p>教程中心</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="heart.html#go4">
+                                        <img src="img/icon-12.png" alt="">
+                                        <p>研判工具</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="heart.html#go4">
+                                        <img src="img/icon-13.png" alt="">
+                                        <p>技战法</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- 聊天室 -->
+                    <div class="chatRoom">
+
+                        <div class="chat_room">
+                            <div class="chat_more"><span class="left" @click="creatChange">+创建聊天室</span><span
+                                    class="right" @click="allChat">所有聊天室>></span>
+                                <div style="clear:both;"></div>
+                            </div>
+                            <ul class="chat_room_uu">
+                                <li v-for="(item,index) in chatList">
+                                    <div class="chat_room_uu_left">
+                                        <p>{{item.title}}</p>
+                                        <span>{{item.topic_name}}</span>
+                                        <span>13人正在聊天</span>
+                                    </div>
+                                    <div class="chat_room_uu_right" @click="goInchange(index)">
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- 所有报备列表 -->
+                    <div class="report">
+                        <div class="report_banner">
+                            <ul>
+                                <li :class="{black:!isshow}" @click="tagChange">所有报备</li>
+                                <li :class="{black:isshow}" @click="tagChange">我的报备</li>
+                            </ul>
+                        </div>
+
+                        <div class="report_list">
+                            <ul class="report_list_uu">
+                                <li>
+                                    <p>报备内容</p>
+                                    <p>报备情况</p>
+                                    <p>处理人</p>
+                                </li>
+                                <li v-for="(item,index) in allList">
+                                    <span>{{item.title}} {{item.create_at}}</span>
+                                    <span :class="{red:item.status==0}">{{item.status==0?"未解决":"已解决"}}</span>
+                                    <span>{{item.name}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <p class="report_look" @click="allChange">查看全部>></p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 遮罩 -->
+        <!-- <transition name="mybox"> -->
+        <div class="shade" v-cloak v-show="isshade">
+            <!-- 论谈 -->
+            <div class="forum" v-show="isforum">
+                <h3>写论坛</h3>
+                <div class="forum_main">
+                    <ul class="forum_main_uu">
+                        <li>
+                            <label class="">论坛标题：</label>
+                            <input type="text" v-model="Ptitle">
+                        </li>
+                        <li>
+                            <label for="">论坛内容：</label>
+                            <div class="forum_content">
+                                <div class="forum_content_banner">
+                                    <span class="iconfont icon-jiacu"></span>
+                                    <span class="iconfont icon-Italic"></span>
+                                    <span class="iconfont icon-Underline"></span>
+                                    <select name="" id="testSelect">
+                                        <option value="1">12px</option>
+                                        <option value="2">14px</option>
+                                        <option value="3" selected="selected">16px</option>\
+                                        <option value="4">18px</option>
+                                        <option value="5">20px</option>
+                                    </select>
+                                    <span><img src="img/图片.png" alt=""></span>
+                                </div>
+                                <textarea v-model="Pcontent" id="Ftext" cols="30" rows="10">
+                                </textarea>
+                            </div>
+                        </li>
+                        <li>
+                            <label class="forum_text">关键词：</label>
+                            <div class="forum_tag">
+                                <span v-for="(item,index) in ForumCate" :class="{sky:changeRed == index,pointer:true}"
+                                    @click="btnChange(item.id,index)">{{item.title}}</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <span class="forum_btn" @click="pulishChange"></span>
+                </div>
+            </div>
+
+            <!-- 报备 -->
+            <div class="case" v-show="isCase">
+                <div class="case_title">
+                    报备
+                </div>
+                <div class="case_main">
+                    <ul class="case_uu">
+                        <li>
+                            <label for="">报备类型：</label>
+                            <select name="" id="myselect">
+                                <option value="index" v-for="(item,index) in repairSorts" :key=index>
+                                    {{item.name}}
+                                </option>
+                            </select>
+                        </li>
+                        <li>
+                            <label class="case_main_one">报备内容：</label>
+                            <textarea class="wishContent" maxlength="60"></textarea>
+                            <span class="wordsNum">60字以内 0/60</span>
+                        </li>
+                    </ul>
+                    <span class="case_btn" @click="reChange"></span>
+                </div>
+            </div>
+
+            <!-- 创建聊天室 -->
+            <div class="creatChat" v-show="isCreat">
+                <div class="creatChat_title">
+                    创建聊天框
+                </div>
+                <div class="creatChat_main">
+                    <ul class="creatChat_uu">
+                        <li>
+                            <label for="">房间名：</label>
+                            <input type="text" v-model="Troom">
+                        </li>
+                        <li>
+                            <label for="">房间类型：</label>
+                            <select name="" id="myselect">
+                                <option value="index" v-for="(item,index) in roomList" :key=index>
+                                    {{item.topic_name}}
+                                </option>
+                            </select>
+                        </li>
+                    </ul>
+                    <span class="creatChat_btn" @click="creatRoom"></span>
+                </div>
+            </div>
+            <!-- 编辑 -->
+            <div class="chatting" v-show="isChatting">
+                <div class="chatting_title">
+                    编辑聊天框
+                </div>
+                <div class="chatting_main">
+                    <ul class="chatting_uu">
+                        <li>
+                            <label for="">房间名：</label>
+                            <input type="text" v-model="roomName">
+                        </li>
+                        <li>
+                            <label for="">房间类型：</label>
+                            <select name="" id="myselect">
+                                <option value="index" v-for="(item,index) in roomList" :key=index>
+                                    {{item.topic_name}}
+                                </option>
+                            </select>
+                        </li>
+                    </ul>
+                    <span class="chatting_btn">
+                        <span @click="confirm()"></span>
+                        <span></span>
+                    </span>
+                </div>
+            </div>
+
+
+            <!-- 所有聊天室 -->
+            <div class="Croom" v-show="isCroom">
+                <div class="Croom_text">
+                    所有聊天室
+                </div>
+                <div class="Croom_main">
+                    <div class="Croom_main_left">
+                        <ul class="Croom_uu">
+                            <li v-for="(item,index) in allRoom" :class="{white:index==current}" @click="goRoom(index)">
+                                {{item.topic_name}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="Croom_main_right">
+                        <div class="Croom_main_right_title">
+                            <span>房间名</span>
+                            <span>创建人</span>
+                            <span>当前在线人数</span>
+                        </div>
+                        <ul class="Croom_uu_one">
+                            <li v-for="(item,index) in roomList">
+                                <span>{{item.title}}</span>
+                                <span>张三三</span>
+                                <span>{{item.users}}</span>
+                                <span @click="JoinChange(index)">进入</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 常用聊天室 -->
+            <div class="commonly" v-show="iscommonly">
+                <div class="commonly_title">
+                    <span>{{Ctitle}}</span>
+                    <span>{{Ctopic_name}}</span>
+                    <p @click="editChange">编辑</p>
+                </div>
+
+                <div class="commonly_main">
+                    <div class="commonly_main_left">
+                        <h4>聊天室成员</h4>
+                        <ul class="commonly_uu">
+                            <li>
+                                <span><img src="" alt=""></span>
+                                <span>张三</span>
+                            </li>
+                            <li>
+                                <span><img src="" alt=""></span>
+                                <span>张三</span>
+                            </li>
+                            <li>
+                                <span><img src="" alt=""></span>
+                                <span>张三</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="commomly_main_right">
+                        <div class="commonly_content">
+                            <div class="commonly_people">
+                                <span class="commonly_pic"><img src="" alt=""></span>
+                                <div class="name">
+                                    <p>张三</p>
+                                    <span>大家好，我是张三</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="commonly_main_bot">
+                            <textarea name="" id="" cols="30" rows="10"></textarea>
+                            <div class="commonly_look">
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 审核中 -->
+            <div class="auditing" v-show="isauditing">
+                <img src="img/icon-14.png" alt="">
+                <p>创建完成，正在审核中...</p>
+                <span></span>
+            </div>
+
+
+            <!-- 全部报备 -->
+            <div class="allReply" v-show="isall">
+                <div class="allReply_tag">
+                    <ul class="allReply_uu">
+                        <li :class="{on:!isstar}" @click="onli">所有报备</li>
+                        <li :class="{on:isstar}" @click="on">我的报备</li>
+                    </ul>
+                    <div class="allReply_table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th width="100">报备时间</th>
+                                    <th width="100">报备类型</th>
+                                    <th width="328">报备内容</th>
+                                    <th width="88">报备人</th>
+                                    <th width="92">报备状态</th>
+                                    <th width="100">接单人</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="item in repairList" v-if="!isstar">
+                                    <td>{{item.create_at | filterTime}}</td>
+                                    <td>{{item.name}}</td>
+                                    <td>
+                                        <span>{{item.content}}</span>
+                                    </td>
+                                    <td>{{item.user}}</td>
+                                    <td :class="{red:item.status==0}">
+                                        {{item.status==0?"未接单":"接单"}}
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <!-- 我的报备 -->
+                                <tr v-for="(item,index) in repairList" v-if="isstar">
+                                    <td>{{item.create_at | filterTime}}</td>
+                                    <td>{{item.name}}</td>
+                                    <td>
+                                        <span>{{item.content}}</span>
+                                    </td>
+                                    <td>{{item.user}}</td>
+                                    <td :class="{red:item.status==0}">
+                                        {{item.status==0?"未完成":"已完成"}}
+                                    </td>
+                                    <td @click="Repair(index)">完成</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- <div class="zxf_pagediv"></div> -->
+                </div>
+            </div>
+
+            <!-- 查看回复 -->
+            <div class="see" v-show="isspeak">
+                <div class="see_text">
+                    <div class="see_text_top">
+                        <h4>张三</h4>
+                        <span>2019-03-11 12:31</span>
+                    </div>
+                    <p>
+                        2月28日，在《反家暴法》实施三周年前夕
+                    </p>
+                </div>
+                <div class="see_main">
+                    <ul class="see_uu" v-for="(item,index) in seelist">
+                        <li>
+                            <div class="see_uu_one">
+                                <h4>{{item.nickname}}回复{{item.comment_user}}</h4>
+                                <span>{{item.create_at | filterTime}}</span>
+                            </div>
+                            <p v-html="item.content"></p>
+                            <div class="see_uu_three">
+                                <div class="see_uu_btn">
+                                    <img src="img/icon-06.png" alt="">
+                                    <span @click="likePostOrComment('',item.id,1)"
+                                        class="pointer">{{item.phraise}}赞</span>
+                                </div>
+                                <span @click="gospeak1(index)" class="pointer">回复</span>
+                            </div>
+                            <div class="see_inp" v-show="oneIndex == index">
+                                <input v-model="replyComment" type="text">
+                                <span></span>
+                                <span class="pointer" @click="commentChange(currentPostId,item.id,item.uid,1)">发布</span>
+                            </div>
+                        </li>
+                        <ul v-for="one in item.child">
+                            <li>
+                                <div class="see_uu_one">
+                                    <h4>{{one.nickname}}回复{{item.nickname}}</h4>
+                                    <span>{{one.create_at | filterTime}}</span>
+                                </div>
+                                <p v-html="one.content"></p>
+                                <div class="see_uu_three">
+                                    <div class="see_uu_btn">
+                                        <img src="img/icon-06.png" alt="">
+                                        <span>12赞</span>
+                                    </div>
+                                    <span @click="gospeak1(index)">回复</span>
+                                </div>
+                                <div class="see_inp" v-show="oneIndex == index">
+                                    <input type="text">
+                                    <span></span>
+                                    <span>发布</span>
+                                </div>
+                            </li>
+                            <ul v-for="two in one.child">
+                                <li>
+                                    <div class="see_uu_one">
+                                        <h4>{{two.nickname}}回复{{one.nickname}}</h4>
+                                        <span>{{two.create_at | filterTime}}</span>
+                                    </div>
+                                    <p v-html="two.content"></p>
+                                    <div class="see_uu_three">
+                                        <div class="see_uu_btn">
+                                            <img src="img/icon-06.png" alt="">
+                                            <span>12赞</span>
+                                        </div>
+                                        <span @click="gospeak1(index)">回复</span>
+                                    </div>
+                                    <div class="see_inp" v-show="oneIndex == index">
+                                        <input type="text">
+                                        <span></span>
+                                        <span>发布</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+            <!-- 修改密码 -->
+            <div class="pass" v-show="ispass">
+                <div class="pass_top">
+                    修改密码
+                </div>
+                <div class="pass_bot">
+                    <ul class="pass_uu">
+                        <li>
+                            <span>原密码：</span>
+                            <input type="password">
+                        </li>
+                        <li>
+                            <span>新密码：</span>
+                            <input type="password">
+                        </li>
+                        <li>
+                            <span>重新输入密码：</span>
+                            <input type="password">
+                        </li>
+                    </ul>
+                    <p>确认</p>
+                </div>
+            </div>
+
+
+            <div class="close" @click="goClose">
+            </div>
+        </div>
+        <!-- </transition> -->
+
+    </div>
+
+
+</body>
+
+</html>
+<script src="js/jquery.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/components.js"></script>
+<script type="text/javascript" src="js/pagejs/zxf_page.js"></script>
+<script src="js/api.js"></script>
+<script src="js/index.js"></script>
+<script type="text/javascript">
+    //翻页
+    $(".zxf_pagediv").createPage({
+        pageNum: 5,
+        current: 1,
+        backfun: function (e) {}
+    });
+</script>

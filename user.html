@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>浦口公安局</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/user.css">
+    <link rel="stylesheet" href="css/header.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- 头部 -->
+        <div class="user_header">
+            <cp-banner @go-answer="goAnswer" @go-name="goname"></cp-banner>
+            <!-- 通知 -->
+            <div class="user_banner container">
+                <div class="answer">
+                    <span></span>
+                    <ul class="answer_uu">
+                        <li v-for="item in list">张三回复了你的《反家暴法》实施三周年，一些未成年人为自己维权。</li>
+                    </ul>
+                    <p>查看全部回复</p>
+                </div>
+                <!-- 个人中心 -->
+                <div class="header_two">
+                    <span></span>
+                    <ul class="header_two_uu">
+                        <li>我的主页</li>
+                        <li>退出登录</li>
+                        <li @click="">修改密码</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 内容 -->
+        <div class="user_content container">
+            <div class="user_content_left">
+                <div class="user_content_img">
+                    <img src="" alt="">
+                </div>
+                <div class="user_content_text">
+                    <p>张三</p>
+                    <div class="user_content_name" v-show="isname">
+                        <div class="user_edit">
+                            聊天室昵称：<span id="up_text">哈哈哈</span>
+                        </div>
+                        <span class="user_content_btn" @click="editName">修改</span>
+                    </div>
+
+                    <div class="user_content_one" v-show="!isname">
+                        <input type="text" id="editor">
+                        <span @click="confire">确认修改</span>
+                        <span @click="editName">取消</span>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="user_content_right">
+                <p>总积分</p>
+                <p>140 <span>分</span></p>
+            </div>
+        </div>
+
+        <div class="user_title container">
+            <div class="user_title_left">
+                <div class="user_title_banner">
+                    <ul>
+                        <li :class="{blue:isone}" @click="userTag">发布</li>
+                        <li :class="{blue:!isone}" @click="userTag">回复</li>
+                    </ul>
+                </div>
+                <!-- 发布 -->
+                <div class="user_title_content" v-show="isone">
+                    <div class="content_list" v-for="(item,index) in titleList">
+                        <div class="content_nav">
+                            <h4>《反家暴法》实施三周年，一些未成年人为自己维权。</h4>
+                            <span v-show="!isGood" @click="deleteChange">删除</span>
+                            <div class="good" v-show="isGood">
+                                <span>确认删除</span>
+                                <span @click="deleteChange"></span>
+                                <span></span>
+                            </div>
+                        </div>
+
+                        <p class="content_text entable">2月28日，在《反家暴法》实施三周年前夕，南京市第十届家庭学法竞赛启动仪式暨《反家暴法》实施三周年广场活动举办。
+                            《反家暴法》实施以来，越来越多的人意识到，家庭暴力不再是“家务事”，主动为自己维权、举报他人的市民.越来越多的人意识到，家庭暴力不再是“家务事”，主动为自己维权、举报他人的市民
+                        </p>
+                        <div class="comment">
+                            <p>发布于2019-03-06 13:32</p>
+                            <ul>
+                                <li class="read" @click="readChange">
+                                    <span>{{msg}}</span>
+                                    <img src="img/icon-01 (2).png" alt="" v-show="isent">
+                                    <img src="img/icon-01 (1).png" alt="" v-show="!isent">
+                                </li>
+                                <li>
+                                    <img src="img/icon-06.png" alt="">
+                                    <span>点赞</span>
+                                </li>
+                                <li @click="comChange">
+                                    <img src="img/评论.png" alt="">
+                                    <span v-show="!iscomment">{{num}}条评论</span>
+                                    <span v-show="iscomment">收起评论</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="comment_main" v-cloak v-show="iscomment">
+                            <div class="comment_list" v-for="(item,index) in comlist">
+                                <h5>张三</h5>
+                                <p>
+                                    2月28日，在《反家暴法》实施三周年前夕，南京市第十届家庭学法竞赛启动仪式暨《反家暴法》
+                                    实施三周年广场活动举办。《反家暴法》实施以来，越来越多的人意识到，家庭暴力不再是“家务事”，
+                                    主动为自己维权、举报他人的市民增多，也有一些未成年人打举报电话为自己维权。
+                                </p>
+                                <div class="reply">
+                                    <span>
+                                        <img src="img/icon-06.png" alt="">
+                                        13赞</span>
+                                    <span @click="lookchange">查看回复</span>
+                                    <span @click="gospeak">回复</span>
+                                </div>
+
+                                <div class="reply_one" v-show="isreply">
+                                    <input type="text" placeholder="写下你的回复">
+                                    <img src="img/表情.png" alt="">
+                                    <span>发布</span>
+                                </div>
+                            </div>
+
+                            <div class="comment_inp">
+                                <input type="text" class="">
+                                <img src="img/表情.png" alt="">
+                                <span>发布</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- 没有发布 -->
+                    <div class="user_none" v-if="isnone">
+                    </div>
+                </div>
+                <!-- 赞同 -->
+                <div class="agree" v-show="!isone">
+                    <div class="agree_one" v-for="(item,index) in userlist">
+                        <h4>张三评论了 <span>我发布的某个论坛。</span></h4>
+                        <p>2月28日，在《反家暴法》实施三周年前夕，
+                            南京市第十届家庭学法竞赛启动仪式暨《反家暴法》实施三周年广场活动举办。
+                            《反家暴法》实施以来，越来越多的人意识到，家庭暴力不再是“家务事”，主动为自己维权、
+                            举报他人的市民 。</p>
+                        <div class="agree_img">
+                            <ul class="agree_uu">
+                                <li>
+                                    <img src="img/icon-07.png" alt="">
+                                    <span>点赞</span>
+                                </li>
+                                <li @click="agreeChange(index)">
+                                    <img src="img/评论.png" alt="">
+                                    <span>回复</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- 回复 -->
+                        <div class="agree_inp" v-if="currentActive==index">
+                            <input type="text">
+                            <span @click="send()">发送</span>
+                        </div>
+                    </div>
+
+                    <!-- 没有回复 -->
+                    <div class="agree_none" v-if="isnone">
+                    </div>
+                </div>
+            </div>
+            <!-- 右边 -->
+            <div class="user_title_right">
+                <h4>积分排行</h4>
+                <div class="user_table">
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>登录积分</th>
+                            <th>发布积分</th>
+                            <th>获赞积分</th>
+                            <th>总积分</th>
+                        </tr>
+                        <tr v-for="(item,index) in userlist">
+                            <td>1. 张三</td>
+                            <td>10</td>
+                            <td>30</td>
+                            <td>20</td>
+                            <td>50</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/components.js"></script>
+<script src="js/api.js"></script>
+<script src="js/user.js"></script>

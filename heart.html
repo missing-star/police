@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>浦口公安局</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/heart.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="css/page/zxf_page.css" />
+</head>
+
+<body>
+
+    <div id="app" v-cloak>
+        <!-- 头部 -->
+        <cp-banner @go-answer="goAnswer" @go-name="goname"></cp-banner>
+        <!-- 通知 -->
+        <div class="heart_banner container">
+            <div class="answer" v-show="isanswer">
+                <span></span>
+                <ul class="answer_uu">
+                    <li v-for="item in list">张三回复了你的《反家暴法》实施三周年，一些未成年人为自己维权。</li>
+                </ul>
+                <p>查看全部回复</p>
+            </div>
+            <!-- 个人中心 -->
+            <div class="header_two" v-show="isUser">
+                <span></span>
+                <ul class="header_two_uu">
+                    <li @click="gouser">我的主页</li>
+                    <li>退出登录</li>
+                    <li @click="">修改密码</li>
+                </ul>
+            </div>
+        </div>
+
+
+        <!-- 内容 -->
+        <div class="heart_main container">
+            <div class="nav">
+                <ul class="nav_uu">
+                    <li><a href="index.html">首页</a></li>
+                    <li class="blue" data-to="go1">插件中心</li>
+                    <li data-to="go2">音乐中心</li>
+                    <li data-to="go3">书籍中心</li>
+                    <li data-to="go4">教程中心</li>
+                    <li data-to="go4">研判工具</li>
+                    <li data-to="go4">技战法</li>
+                </ul>
+            </div>
+
+            <!-- 插件中心 -->
+            <div class="plug">
+                <p id="go1"></p>
+                <h4>插件中心</h4>
+                <ul class="plug_uu">
+                    <li v-for="(item,index) in plugList" @click="openChange(index)">
+                        <span><img src="" alt=""></span>
+                        <p>{{item.name}}</p>
+                    </li>
+                </ul>
+                <div class="zxf" v-show="isPage"></div>
+            </div>
+            <!-- 音乐中心 -->
+            <div class="music">
+                <p id="go2"></p>
+                <h4>音乐中心</h4>
+                <div class="music_nav">
+                    <div class="music_one" v-for="item in musicSort">
+                        <h5>{{item.name}}</h5>
+                        <ul class="music_uu">
+                            <li v-for="(item,index) in musicList">
+                                <p>{{item.name}}</p>
+                                <div class="music_img">
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="music_btn">
+                            <button>上一页</button>
+                            <button>下一页</button>
+                        </div>
+                    </div>
+                    <!-- 流行音乐
+                    <div class="music_one">
+                        <h5>流行音乐</h5>
+                        <ul class="music_uu">
+                            <li v-for="item in musicList">
+                                <p>{{item.name}}</p>
+                                <div class="music_img">
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="music_btn">
+                            <button>上一页</button>
+                            <button>下一页</button>
+                        </div>
+                    </div>
+                    轻音乐
+                    <div class="music_one">
+                        <h5>轻音乐</h5>
+                        <ul class="music_uu">
+                            <li v-for="item in musicList">
+                                <p>{{item.name}}</p>
+                                <div class="music_img">
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="music_btn">
+                            <button>上一页</button>
+                            <button>下一页</button>
+                        </div>
+                    </div> -->
+                </div>
+
+
+            </div>
+
+
+            <!-- 书籍中心 -->
+            <div class="book">
+                <p id="go3"></p>
+                <div class="book_left">
+                    <div class="book_left_text">
+                        书籍中心
+                    </div>
+                    <div class="book_left_tag">
+                        <ul class="book_left_uu">
+                            <li v-for="(item,index) in bookSort" :class="{white:index==current}"
+                                @click="bookChange(index)">{{item.name}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="book_right">
+                    <div class="book_right_top">
+                        <input type="text">
+                        <span></span>
+                    </div>
+
+                    <div class="book_right_bot">
+                        <ul class="book_uu">
+                            <li v-for="(item,index) in bookList"
+                             @click="bookDown(index)">
+                                <span><img src="" alt=""></span>
+                                <p>{{item.name}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="zxf_pagediv" v-show="isPage"></div>
+                </div>
+            </div>
+
+
+            <!-- 教程中心 -->
+            <div class="book" id="go4">
+                <div class="book_left">
+                    <div class="book_left_text">
+                        教程中心
+                    </div>
+                    <div class="book_left_tag">
+                        <ul class="book_left_uu">
+                            <li v-for="(item,index) in tutorialSort" 
+                                :class="{white:index==current}"
+                                @click="turtorChange(index)">{{item.name}}</li>
+                            <li class="Pne" @click="Ychange">研判工具</li>
+                            <li class="Pne" @click="Jchange">技战法</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="book_right">
+                    <div class="book_right_top">
+                        <input type="text">
+                        <span></span>
+                    </div>
+
+                    <div class="book_right_bot">
+                        <ul class="book_uu">
+                            <li v-for="(item,index) in tutorialList" @click="Tdown(index)">
+                                <span><img src="" alt=""></span>
+                                <p>{{item.name}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="center"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 弹框 -->
+        <div class="shade" v-show="isshade">
+            <!-- 书籍 -->
+            <div class="book_shade" v-show="isbook">
+                <div class="book_name">
+                    <span>
+                        <img src="" alt="">
+                    </span>
+                    <div class="book_name_right">
+                        <p>{{name}}</p>
+                        <p>{{create_at | filterTime}}</p>
+                    </div>
+
+                </div>
+                <p class="book_shade_content">
+                    {{description}}
+                </p>
+
+                <div class="book_btn">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <!-- 插件 -->
+            <div class="book_shade" v-show="isplug">
+                <div class="book_name">
+                    <span>
+                        <img src="" alt="">
+                    </span>
+                    <div class="book_name_right">
+                        <p>{{name}}</p>
+                        <p>{{create_at | filterTime}}</p>
+                    </div>
+
+                </div>
+                <p class="book_shade_content">
+                    {{description}}
+                </p>
+                <div class="plug_btn" @click="upDown()">
+                    <span></span>
+                </div>
+            </div>
+            <!-- 教程 -->
+            <div class="book_shade" v-show="istotur">
+                <div class="book_name">
+                    <span>
+                        <img src="" alt="">
+                    </span>
+                    <div class="book_name_right">
+                        <p>{{Tname}}</p>
+                        <!-- <p>{{create_at | filterTime}}</p> -->
+                    </div>
+
+                </div>
+                <p class="book_shade_content">
+                    {{Tdescription}}
+                </p>
+                <div class="totur_btn" @click="upDown()">
+                    查看
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/components.js"></script>
+<script src="js/api.js"></script>
+<script type="text/javascript" src="js/pagejs/zxf_page.js"></script>
+<script src="js/heart.js"></script>
+
+<script type="text/javascript">
+    //书籍分页
+    console.log(xm.bookList)
+    $(".zxf_pagediv").createPage({
+        pageNum: parseInt(8 / 8),
+        current: 1,
+        backfun: function (e) {
+            var page = e.current
+            $.ajax({
+                type: "post",
+                url: `${api}/index/api/bookList`,
+                async: true,
+                data: {
+                    page: page,
+                    book_id: 1
+                },
+                dataType: 'json',
+                success: (res) => {
+                    xm.bookList = res.data
+                }
+            })
+        }
+    });
+    // 插件
+    $(".zxf").createPage({
+        pageNum: parseInt(16 / 8),
+        current: 1,
+        backfun: function (e) {
+            var page = e.current
+            console.log(page)
+            $.ajax({
+                type: "post",
+                url: `${api}/index/api/pluginList`,
+                async: true,
+                data: {
+                    page: page,
+                    tool_id: 1
+                },
+                dataType: 'json',
+                success: (res) => {
+                    xm.plugList = res.data
+                }
+            })
+        }
+    });
+    // 教程
+    $(".center").createPage({
+        pageNum: parseInt(8 / 8),
+        current: 1,
+        backfun: function (e) {
+            var page = e.current
+            $.ajax({
+                type: "post",
+                url: `${api}/index/api/tutorialList`,
+                async: true,
+                data: {
+                    page: page,
+                    tutorial_id: 1
+                },
+                dataType: 'json',
+                success: (res) => {
+                    console.log(res)
+                    xm.tutorialList = res.data
+                }
+            })
+        }
+    });
+</script>

@@ -1,0 +1,454 @@
+.nav {
+    width: 1200px;
+    height: 60px;
+    background: rgba(255, 255, 255, 1);
+    margin: 0 0 5px 0;
+    position: fixed;
+    z-index: 11;
+}
+
+.nav_uu {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.nav_uu li {
+    font-size: 18px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 1);
+    margin: 0 20px;
+    height: 90%;
+    line-height: 60px;
+    border-bottom: 4px solid white;
+    cursor: pointer;
+}
+
+.blue {
+    border-bottom: 4px solid #1D5598 !important;
+    border-radius: 2px;
+}
+
+
+
+/* 插件中心 */
+.plug {
+    width: 1200px;
+    height: 456px;
+    background: rgba(255, 255, 255, 1);
+    padding-top: 32px;
+    margin-top: 60px;
+    position: relative;
+}
+
+.plug h4,
+.music h4 {
+    font-size: 24px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 1);
+    line-height: 23px;
+    margin: 0 0 41px 21px;
+}
+
+.plug_uu {
+    display: flex;
+    padding: 0 69px 0 47px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    height: 318px;
+}
+
+.plug_uu li {
+    text-align: center;
+    font-size: 18px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 1);
+    line-height: 23px;
+    margin: 0 96px 0 0;
+}
+
+.plug_uu li:nth-child(-n+6) {
+    margin-bottom: 34px;
+}
+
+.plug_uu li:nth-child(6) {
+    margin-right: 0;
+}
+
+.plug_uu li:nth-child(12) {
+    margin-right: 0;
+}
+
+.plug_uu li span {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background: rgba(29, 85, 152, 1);
+    margin-bottom: 19px;
+}
+
+.plug_uu li span img {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/* 音乐中心 */
+.music {
+    width: 1200px;
+    height: 534px;
+    background: rgba(255, 255, 255, 1);
+    margin: 10px 0 22px 0;
+    padding-top: 32px;
+    position: relative;
+}
+
+.music_nav {
+    display: flex;
+    padding-left: 94px;
+}
+
+.music_one {
+    width: 260px;
+    height: 399px;
+    border: 2px solid rgba(0, 0, 0, 1);
+    margin-right: 110px;
+}
+
+.music_one:last-child {
+    margin-right: 0;
+}
+
+.music_nav h5 {
+    font-size: 24px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 1);
+    line-height: 23px;
+    margin: 25px 0 30px 21px;
+}
+
+.music_uu {
+    height: 282px;
+    overflow: hidden;
+}
+
+.music_uu p {
+    width: 140px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.music_uu li {
+    font-size: 20px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 1);
+    line-height: 20px;
+    margin: 0 0 18px 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.music_img span:nth-child(1) {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background: url(../img/播放.png)no-repeat;
+    background-size: 100% 100%;
+}
+
+.music_img span:nth-child(2) {
+    display: inline-block;
+    width: 20px;
+    height: 21px;
+    background: url(../img/xiazai.png)no-repeat;
+    background-size: 100% 100%;
+    margin: 0 15px 0 14px;
+}
+
+.music_btn {
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.music_btn button {
+    font-size: 16px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 1);
+    line-height: 38px;
+    border: 0;
+    outline: none;
+    background: white;
+}
+
+
+
+
+/* 书籍中心 */
+.book {
+    width: 1200px;
+    height: 648px;
+    background: rgba(255, 255, 255, 1);
+    padding-top: 32px;
+    margin-bottom: 30px;
+    display: flex;
+    position: relative;
+}
+
+.book_left_text {
+    width: 129px;
+    height: 108px;
+    font-size: 24px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 1);
+    line-height: 24px;
+    margin-left: 21px;
+}
+
+.book_left_tag {
+    width: 150px;
+    height: 540px;
+    background: rgba(210, 210, 210, 1);
+}
+
+.book_left_uu {
+    padding: 30px 0 0 0;
+}
+
+.book_left_uu li {
+    height: 40px;
+    font-size: 22px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 1);
+    line-height: 40px;
+    /* margin-bottom: 15px; */
+    cursor: pointer;
+    text-align: center;
+}
+
+.book_right_top {
+    position: relative;
+    margin: 33px 177px 58px 91px;
+}
+
+.book_right_top input {
+    width: 770px;
+    height: 36px;
+    background: rgba(239, 239, 239, 1);
+    border: 1px solid rgba(220, 220, 220, 1);
+    border-radius: 18px;
+    outline: none;
+    padding-left: 10px;
+}
+
+.book_right_top span {
+    display: inline-block;
+    width: 21px;
+    height: 24px;
+    background: url(../img/sousuo.png)no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    right: 18px;
+    top: 6px;
+}
+
+.book_uu {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 0 15px 94px;
+    height: 442px;
+}
+
+.book_uu li {
+    text-align: center;
+    font-size: 18px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 1);
+    line-height: 18px;
+    margin: 0 77px 32px 0;
+}
+
+.book_uu li span {
+    display: inline-block;
+    width: 120px;
+    height: 160px;
+    background: rgba(29, 85, 152, 1);
+    margin-bottom: 19px;
+}
+
+.book_uu li span img {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/* 遮罩 */
+.shade {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1111;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.book_shade {
+    width: 280px;
+    height: 445px;
+    background: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 27px 18px 0 21px;
+}
+
+.book_name span {
+    display: inline-block;
+    width: 100px;
+    height: 134px;
+    background: rgba(239, 239, 239, 1);
+    margin-right: 22px;
+}
+
+.book_name {
+    display: flex;
+}
+
+.book_name span img {
+    width: 100%;
+    height: 100%;
+}
+
+.book_name p:nth-child(1) {
+    font-size: 24px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 1);
+    margin: 52px 0 39px 0;
+}
+
+.book_name p:nth-child(2) {
+    font-size: 18px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(121, 121, 121, 1);
+}
+
+.book_shade_content {
+    height: 162px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 10;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 16px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 1);
+    margin: 36px 0 44px 0;
+}
+
+.book_btn span:nth-child(1) {
+    display: inline-block;
+    width: 120px;
+    height: 32px;
+    background: url(../img/在线预览.png)no-repeat;
+    background-size: 100% 100%;
+    margin-right: 32px;
+}
+
+.book_btn span:nth-child(2) {
+    display: inline-block;
+    width: 120px;
+    height: 32px;
+    background: url(../img/下载.png)no-repeat;
+    background-size: 100% 100%;
+}
+
+.plug_btn {
+    text-align: center
+}
+
+.plug_btn span {
+    display: inline-block;
+    width: 221px;
+    height: 32px;
+    background: url(../img/下载1.png)no-repeat;
+    background-size: 100% 100%;
+
+}
+
+
+.book_right {
+    position: relative;
+}
+
+#btn {
+    position: relative;
+    bottom: 0;
+    left: 34%;
+}
+
+
+
+.index_header {
+    position: fixed;
+    z-index: 111;
+}
+
+.heart_main {
+    padding-top: 92px;
+}
+
+#go1 {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -152px;
+}
+
+#go2 {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -152px;
+}
+
+#go3 {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -152px;
+}
+
+
+.white {
+    background: white;
+}
+
+.totur_btn {
+    width: 221px;
+    height: 32px;
+    background: rgba(126, 206, 244, 1);
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    line-height: 32px;
+    margin: 0 auto;
+}
