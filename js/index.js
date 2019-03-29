@@ -588,14 +588,6 @@ var xm = new Vue({
         },
     },
     created() {
-        //初始化富文本编辑器
-        this.$nextTick(() => {
-            KindEditor.ready(function (K) {
-                window.editor = K.create('#Ftext', {
-                    items: ['bold', 'italic', 'underline', 'fontsize']
-                });
-            });
-        });
         // 获取论坛分类
         $.ajax({
             type: "post",

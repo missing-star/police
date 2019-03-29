@@ -303,8 +303,9 @@
 }
 
 .reply span img {
-    width: 16px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
+    margin: 0 5px;
 }
 
 .reply span:nth-child(1) {
@@ -2109,4 +2110,9 @@ td {
 .chat_room_uu_right {
     width: 65px;
     height: 28px;
+}
+
+img.icon-like {
+    width: 18px !important;
+    height: 18px !important;
 }

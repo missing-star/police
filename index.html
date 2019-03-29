@@ -95,8 +95,9 @@
                                         <img src="img/icon-01 (1).png" alt="" v-show="item.entable">
                                     </li>
                                     <li>
-                                        <img src="img/icon-06.png" alt="">
-                                        <span @click="likePostOrComment(item.id,'',0)">{{item.records}}点赞</span>
+                                        <img v-if="item.status == 0" @click="likePostOrComment(item.id,'',0)" v-if="1 == 1" src="img/icon-06.png" class="icon-like">
+                                        <img v-else @click="likePostOrComment(item.id,'',0)" src="img/icon-07.png" class="icon-like">
+                                        <span>{{item.records}}赞</span>
                                     </li>
                                     <li @click="comChange(index)">
                                         <img src="img/评论.png" alt="">
@@ -114,7 +115,8 @@
                                     </p>
                                     <div class="reply">
                                         <span class="pointer" @click="likePostOrComment('',comment.id,0)">
-                                            <img src="img/icon-06.png" alt="">
+                                            <img v-if="comment.status == 0" src="img/icon-06.png" alt="">
+                                            <img v-else src="img/icon-07.png" alt="">
                                             {{comment.phraise}}赞
                                         </span>
                                         <span @click="lookchange(item.id,comment.id)" class="pointer">查看回复</span>
@@ -519,12 +521,10 @@
             <div class="see" v-show="isspeak">
                 <div class="see_text">
                     <div class="see_text_top">
-                        <h4>张三</h4>
-                        <span>2019-03-11 12:31</span>
+                        <h4>{{currentComment.nickname}}</h4>
+                        <span>{{currentComment.create_at | filterTime}}</span>
                     </div>
-                    <p>
-                        2月28日，在《反家暴法》实施三周年前夕
-                    </p>
+                    <p v-html="currentComment.content"></p>
                 </div>
                 <div class="see_main">
                     <ul class="see_uu" v-for="(item,index) in seelist">
@@ -536,7 +536,8 @@
                             <p v-html="item.content"></p>
                             <div class="see_uu_three">
                                 <div class="see_uu_btn">
-                                    <img src="img/icon-06.png" alt="">
+                                    <img v-if="item.status == 0" src="img/icon-06.png" alt="">
+                                    <img v-else src="img/icon-07.png" alt="">
                                     <span @click="likePostOrComment('',item.id,1)"
                                         class="pointer">{{item.phraise}}赞</span>
                                 </div>
@@ -548,7 +549,7 @@
                                 <span class="pointer" @click="commentChange(currentPostId,item.id,item.uid,1)">发布</span>
                             </div>
                         </li>
-                        <ul v-for="one in item.child">
+                        <!-- <ul v-for="one in item.child">
                             <li>
                                 <div class="see_uu_one">
                                     <h4>{{one.nickname}}回复{{item.nickname}}</h4>
@@ -558,6 +559,7 @@
                                 <div class="see_uu_three">
                                     <div class="see_uu_btn">
                                         <img src="img/icon-06.png" alt="">
+                                        <img src="img/icon-07.png" alt="">
                                         <span>12赞</span>
                                     </div>
                                     <span @click="gospeak1(index)">回复</span>
@@ -589,7 +591,7 @@
                                     </div>
                                 </li>
                             </ul>
-                        </ul>
+                        </ul> -->
                     </ul>
                 </div>
             </div>
