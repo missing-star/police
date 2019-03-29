@@ -244,7 +244,7 @@
                                     <p>处理人</p>
                                 </li>
                                 <li v-for="(item,index) in allList">
-                                    <span>{{item.title}} {{item.create_at}}</span>
+                                    <span>{{item.title}}-于{{item.create_at}}报修</span>
                                     <span :class="{red:item.status==0}">{{item.status==0?"未解决":"已解决"}}</span>
                                     <span>{{item.name}}</span>
                                 </li>
