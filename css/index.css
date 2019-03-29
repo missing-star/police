@@ -1940,6 +1940,9 @@ td {
 .red {
     color: red !important;
 }
+.blue{
+    color: rgba(29, 85, 152, 1) !important;
+}
 
 .bod {
     overflow: hidden;
