@@ -472,13 +472,17 @@ var xm = new Vue({
                 type: "post",
                 url: `${api}/index/api/publishPost`,
                 data: {
-                    info_id: 1,
+                    info_id: this.selectedCatId,
                     title: this.Ptitle,
                     content: this.Ptitle
                 },
                 dataType: 'json',
                 success: (res) => {
                     this.allList = res.data;
+                    this.bannerChange(this.currentIndex);
+                    this.selectedCatId = '';
+                    this.Ptitle = '';
+                    this.Pcontent = '';
                     this.goClose();
                 }
             })
