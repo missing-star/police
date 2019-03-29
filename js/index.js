@@ -410,6 +410,12 @@ var xm = new Vue({
                 dataType: 'json',
                 success: (res) => {
                     this.titleList = res.result
+                    if(this.titleList.length == 0) {
+                        this.isNone = true;
+                    }
+                    else {
+                        this.isNone = false;
+                    }
                 }
             })
         },
@@ -433,7 +439,13 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
-                    this.titleList = res.result
+                    this.titleList = res.result;
+                    if(this.titleList.length == 0) {
+                        this.isNone = true;
+                    }
+                    else {
+                        this.isNone = false;
+                    }
                 }
             })
         },

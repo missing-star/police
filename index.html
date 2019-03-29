@@ -7,9 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>浦口公安局</title>
     <link rel="stylesheet" href="css/reset.css?v=1.0.0">
-    <link rel="stylesheet" href="css/index.css?v=1.0.0">
+    <link rel="stylesheet" href="css/index.css?v=1.0.2">
     <link rel="stylesheet" type="text/css" href="css/page/zxf_page.css?v=1.0.0" />
-    <link rel="stylesheet" href="css/page/iconfont.css?v=1.0.0">
+    <link rel="stylesheet" href="css/page/iconfont.css?v=1.0.1">
     <style>
     
     </style>
@@ -25,7 +25,7 @@
                     <img src="img/首页logo.png" alt="">
                 </a>
                 <div class="header_mid">
-                    <input class="search" type="text" v-model="keyWords" placeholder="搜索关键词">
+                    <input @keydown.enter="searchChange" class="search" type="text" v-model="keyWords" placeholder="搜索关键词">
                     <span @click="searchChange"></span>
                 </div>
                 <div class="header_img" @click="goAnswer">
@@ -244,8 +244,8 @@
                                     <p>处理人</p>
                                 </li>
                                 <li v-for="(item,index) in allList">
-                                    <span>{{item.title}}-于{{item.create_at}}报修</span>
-                                    <span :class="{red:item.status==0}">{{item.status==0?"未解决":"已解决"}}</span>
+                                    <span>{{item.title}} {{item.create_at}}</span>
+                                    <span :class="{red:item.status==0}">{{item.status==0?"待接单":(item.status == 1 ? "待处理":"已处理")}}</span>
                                     <span>{{item.name}}</span>
                                 </li>
                             </ul>
@@ -492,8 +492,8 @@
                                         <span>{{item.content}}</span>
                                     </td>
                                     <td>{{item.user}}</td>
-                                    <td :class="{red:item.status==0}">
-                                        {{item.status==0?"未接单":"接单"}}
+                                    <td :class="{red:item.status==0,blue:item.status==1}">
+                                        {{item.status==0?"待接单":(item.status == 1 ? "待处理":"已处理")}}
                                     </td>
                                     <td></td>
                                 </tr>
@@ -505,10 +505,10 @@
                                         <span>{{item.content}}</span>
                                     </td>
                                     <td>{{item.user}}</td>
-                                    <td :class="{red:item.status==0}">
-                                        {{item.status==0?"未完成":"已完成"}}
+                                    <td :class="{red:item.status==0,blue:item.status==1}">
+                                        {{item.status==0?"待接单":(item.status == 1 ? "待处理":"已处理")}}
                                     </td>
-                                    <td @click="Repair(index)">完成</td>
+                                    <td @click="Repair(index)"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -548,49 +548,6 @@
                                 <span class="pointer" @click="commentChange(currentPostId,item.id,item.uid,1)">发布</span>
                             </div>
                         </li>
-                        <!-- <ul v-for="one in item.child">
-                            <li>
-                                <div class="see_uu_one">
-                                    <h4>{{one.nickname}}回复{{item.nickname}}</h4>
-                                    <span>{{one.create_at | filterTime}}</span>
-                                </div>
-                                <p v-html="one.content"></p>
-                                <div class="see_uu_three">
-                                    <div class="see_uu_btn">
-                                        <img src="img/icon-06.png" alt="">
-                                        <img src="img/icon-07.png" alt="">
-                                        <span>12赞</span>
-                                    </div>
-                                    <span @click="gospeak1(index)">回复</span>
-                                </div>
-                                <div class="see_inp" v-show="oneIndex == index">
-                                    <input type="text">
-                                    <span></span>
-                                    <span>发布</span>
-                                </div>
-                            </li>
-                            <ul v-for="two in one.child">
-                                <li>
-                                    <div class="see_uu_one">
-                                        <h4>{{two.nickname}}回复{{one.nickname}}</h4>
-                                        <span>{{two.create_at | filterTime}}</span>
-                                    </div>
-                                    <p v-html="two.content"></p>
-                                    <div class="see_uu_three">
-                                        <div class="see_uu_btn">
-                                            <img src="img/icon-06.png" alt="">
-                                            <span>12赞</span>
-                                        </div>
-                                        <span @click="gospeak1(index)">回复</span>
-                                    </div>
-                                    <div class="see_inp" v-show="oneIndex == index">
-                                        <input type="text">
-                                        <span></span>
-                                        <span>发布</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </ul> -->
                     </ul>
                 </div>
             </div>
@@ -619,7 +576,7 @@
             </div>
 
 
-            <div class="close" @click="goClose">
+            <div class="close pointer" @click="goClose">
             </div>
         </div>
         <!-- </transition> -->
