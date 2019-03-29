@@ -7,7 +7,7 @@ var xm = new Vue({
         isorder: false, //接单员登录
         Oname: '',
         Opsw: '',
-        ip: '127.0.0.1',
+        ip: '',
         Pname: '',
         Ppsw: '',
     },
@@ -25,8 +25,6 @@ var xm = new Vue({
         goPolice: function () {
             this.isrole = false
             this.ispolice = true
-            var ip = returnCitySN["cip"]
-            this.ip = '127.0.0.1';
         },
         goMatron: function () {
             this.isrole = false
@@ -75,6 +73,8 @@ var xm = new Vue({
         }
     },
     created() {
-
+        getIpAdd((ip) => {
+            this.ip = ip;
+        });
     }
 })
