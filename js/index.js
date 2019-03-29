@@ -397,7 +397,9 @@ var xm = new Vue({
             if (index != this.numIndex) {
                 this.numIndex = index;
             }
+
             var num = index + 4
+            this.currentIndex =num
             var list = this.ForumCate
             var id = list[num].id
             $.ajax({

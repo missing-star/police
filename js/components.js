@@ -7,16 +7,14 @@ const indexBanner = {
             <a href="index.html">
                 <img src="img/首页logo.png" alt="">
             </a>
-            <div class="header_mid">
-                <input class="search" type="text">
-                <span></span>
-            </div>
-            <div class="header_img" @click="goAnswer">
-                <img src="img/信息.png" alt="">
-            </div>
-            <div class="header_name">
-                <span><img src="" alt=""></span>
-                <span @click="goname">张三</span>
+            <div class="index_right">
+                <div class="header_img" @click="goAnswer">
+                    <img src="img/信息.png" alt="">
+                </div>
+                <div class="header_name">
+                    <span><img src="" alt=""></span>
+                    <span @click="goname">张三</span>
+                </div>
             </div>
         </div>
     </div>

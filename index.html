@@ -69,7 +69,8 @@
                             <div class="banner_more" v-show="ismore">
                                 <span></span>
                                 <ul class="more_uu">
-                                    <li v-for="(item,index) in ForumCate.slice(4, )" :class="{active:index == numIndex}"
+                                    <li v-for="(item,index) in ForumCate.slice(4, )"
+                                     :class="{active:index == numIndex}"
                                         @click="banner(index)">
                                         {{item.title}}
                                     </li>
@@ -81,7 +82,7 @@
                     <div class="content_scroll">
                         <div class="content_list" v-for="(item,index) in titleList">
                             <h4>{{item.title}}</h4>
-                            <p class="content_text" @click="readChange(item,index)" :class="{entable:item.entable}">
+                            <p class="content_text" :class="{entable:item.entable}">
                                 {{item.content}}
                             </p>
                             <div class="comment">

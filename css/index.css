@@ -2078,6 +2078,7 @@ td {
     height: auto;
     padding: 15px 0px;
     position: fixed;
+    z-index: 11;
 }
 
 .search {

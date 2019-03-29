@@ -7,7 +7,7 @@ var xm = new Vue({
         isorder: false, //接单员登录
         Oname: '',
         Opsw: '',
-        ip: '',
+        ip: '127.0.0.1',
         Pname: '',
         Ppsw: '',
     },
