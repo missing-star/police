@@ -511,7 +511,7 @@
 }
 
 .report_list_uu li p:nth-child(2) {
-    margin: 0 12px 0 210px
+    margin: 0 12px 0 224px
 }
 
 .report_list_uu li span {
@@ -2039,7 +2039,6 @@ td {
 .chat_room_uu,
 .chat_user,
 .chatRoom,
-.report_list_uu,
 .report {
     height: auto;
 }
