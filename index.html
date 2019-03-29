@@ -69,7 +69,8 @@
                             <div class="banner_more" v-show="ismore">
                                 <span></span>
                                 <ul class="more_uu">
-                                    <li v-for="(item,index) in ForumCate.slice(4, )" :class="{active:index == numIndex}"
+                                    <li v-for="(item,index) in ForumCate.slice(4, )"
+                                     :class="{active:index == numIndex}"
                                         @click="banner(index)">
                                         {{item.title}}
                                     </li>

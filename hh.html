@@ -9,28 +9,27 @@
 
 </head>
 <style>
-    .btn {
-        
+    body,
+    html {
+        font-size: calc(100vw / 19.2);
     }
-    ul {
-        display: flex;
+
+    .uu {
+        width: 2rem;
+        height: 1rem;
+        background: red;
+    }
+
+    .uu {
+        min-width: 1rem;
     }
 </style>
 
 <body>
-    <div id="app">
-        <div>
-             <ul>
-                <li v-for="(item,index) in cartList">
-                    <div class="btn" :class="{'active':item.active}"> hahahaha </div>
-                    <button @click="togglePay(item,index)">点击</button>
-                </li>
 
-            </ul>
-        </div>
+    <div class="uu">
 
     </div>
-
 
 </body>
 
@@ -39,20 +38,5 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/vue.js"></script>
 <script>
-    var xm = new Vue({
-        el: "#app",
-        data: {
-            cartList: [{}, {}, {}]
-        },
-        methods: {
-            togglePay: function (item, index) {
-                if (item.active) {
-                    Vue.set(item, 'active',
-                        false); //为item添加不存在的属性，需要使用vue提供的Vue.set( object, key, value )方法。 
-                } else {
-                    Vue.set(item, 'active', true);
-                }
-            }
-        }
-    })
+
 </script>

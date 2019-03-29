@@ -1,13 +1,13 @@
 var xm = new Vue({
     el: "#app",
     data: {
-        isrole: true, //选择登录角色
-        ispolice: false, //警员登录
+        isrole: false, //选择登录角色
+        ispolice: true, //警员登录
         ismatron: false, //管理登录
         isorder: false, //接单员登录
         Oname: '',
         Opsw: '',
-        ip: '',
+        ip: '127.0.0.1',
         Pname: '',
         Ppsw: '',
     },
