@@ -26,7 +26,7 @@ var xm = new Vue({
             this.isrole = false
             this.ispolice = true
             var ip = returnCitySN["cip"]
-            this.ip =ip
+            this.ip = '127.0.0.1';
         },
         goMatron: function () {
             this.isrole = false
