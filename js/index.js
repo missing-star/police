@@ -75,13 +75,6 @@ var xm = new Vue({
             window.location.href = "user.html"
         },
         readChange(item, index, e) { //产看文章
-            // console.log(index)
-            // if (item.entable) {
-            //     Vue.set(item, 'entable',
-            //         false);
-            // } else {
-            //     Vue.set(item, 'entable', true);
-            // }
             if(this.postIndex != index) {
                 this.postIndex = index;
             }
@@ -404,7 +397,6 @@ var xm = new Vue({
             if (index != this.numIndex) {
                 this.numIndex = index;
             }
-
             var num = index + 4
             this.currentIndex =num
             var list = this.ForumCate
@@ -433,7 +425,7 @@ var xm = new Vue({
             }
             if (index == 3) {
                 this.ismore = !this.ismore
-                index = 4
+                return
             } else {
                 this.ismore = false
             }

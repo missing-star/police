@@ -548,49 +548,6 @@
                                 <span class="pointer" @click="commentChange(currentPostId,item.id,item.uid,1)">发布</span>
                             </div>
                         </li>
-                        <!-- <ul v-for="one in item.child">
-                            <li>
-                                <div class="see_uu_one">
-                                    <h4>{{one.nickname}}回复{{item.nickname}}</h4>
-                                    <span>{{one.create_at | filterTime}}</span>
-                                </div>
-                                <p v-html="one.content"></p>
-                                <div class="see_uu_three">
-                                    <div class="see_uu_btn">
-                                        <img src="img/icon-06.png" alt="">
-                                        <img src="img/icon-07.png" alt="">
-                                        <span>12赞</span>
-                                    </div>
-                                    <span @click="gospeak1(index)">回复</span>
-                                </div>
-                                <div class="see_inp" v-show="oneIndex == index">
-                                    <input type="text">
-                                    <span></span>
-                                    <span>发布</span>
-                                </div>
-                            </li>
-                            <ul v-for="two in one.child">
-                                <li>
-                                    <div class="see_uu_one">
-                                        <h4>{{two.nickname}}回复{{one.nickname}}</h4>
-                                        <span>{{two.create_at | filterTime}}</span>
-                                    </div>
-                                    <p v-html="two.content"></p>
-                                    <div class="see_uu_three">
-                                        <div class="see_uu_btn">
-                                            <img src="img/icon-06.png" alt="">
-                                            <span>12赞</span>
-                                        </div>
-                                        <span @click="gospeak1(index)">回复</span>
-                                    </div>
-                                    <div class="see_inp" v-show="oneIndex == index">
-                                        <input type="text">
-                                        <span></span>
-                                        <span>发布</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </ul> -->
                     </ul>
                 </div>
             </div>
