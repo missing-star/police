@@ -8,14 +8,13 @@ html {
     height: 100vh;
     background: url(../img/背景.png)no-repeat;
     background-size: 100% 100%;
-    /* width:expression_r(document.body.clientWidth < 1000 ? "1000px": "auto" ); */
 }
 
-@media screen and (min-width:1200px) {
+/* @media screen and (max-width:1200px) {
     body{
         width: 1200px;
     }
-}
+} */
 
 .login_top {
     text-align: center;
