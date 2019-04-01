@@ -794,8 +794,9 @@
 
 .forum_tag {
     width: 384px;
-    display: flex;
+    display: inline-flex;
     flex-wrap: wrap;
+    padding: 0 10px;
 }
 
 .forum_text {
@@ -2118,4 +2119,7 @@ td {
 img.icon-like {
     width: 18px !important;
     height: 18px !important;
+}
+.ke-container{
+    width: 385px !important;
 }
