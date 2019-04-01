@@ -328,3 +328,51 @@
     align-items: center;
     margin-right: 23px;
 }
+
+
+
+
+
+
+.pagination {
+    overflow: hidden;
+    display: table;
+    margin: 0 auto;
+    height: 50px;
+}
+
+.pagination li {
+    float: left;
+    height: 30px;
+    border-radius: 5px;
+    margin: 3px;
+    color: #666;
+}
+
+.pagination li a {
+    display: block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 14px;
+    border-radius: 5px;
+    text-decoration: none;
+    /* color: black; */
+}
+
+
+.active {
+    background: #1D5598 !important;
+    color: white !important;
+}
+
+.pagination ul {
+    display: flex;
+    list-style: none;
+}
+
+.pagination .one a {
+    width: 60px;
+    height: 30px;
+}
