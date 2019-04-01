@@ -54,7 +54,9 @@ var xm = new Vue({
         currentPostId: '',
         currentCommentId: '',
         selectedCatId: '',
-        postIndex: -1
+        postIndex:-1,
+        isCreated:false,//是否创建了富文本
+        KindEditor:''
     },
     methods: {
         goClose() { //关闭遮罩
@@ -104,7 +106,19 @@ var xm = new Vue({
         writeReply() { //写论坛
             this.isshade = true
             this.isforum = true
-            $("body").addClass("bod")
+            $("body").addClass("bod");
+            if(this.isCreated) {
+                return false;
+            }
+            this.isCreated = true;
+            window.editor = this.KindEditor.create('#Ftext',{
+                allowImageRemote:false,
+                resizeType:0,
+                uploadJson:'./kindeditor/php/upload_json.php',
+                fileManagerJson:'./kindeditor/php/file_manager_json.php',
+                allowFileManager : true,
+                items : ['bold','italic','underline','fontsize','image']
+            });
             // $.ajax({
             //     type: "post",
             //     url: `${api}/index/api/infoList`,
@@ -450,7 +464,7 @@ var xm = new Vue({
             if (this.Ptitle.trim() == '') {
                 alert('请输入标题!');
                 return false;
-            } else if (this.Pcontent.trim() == '') {
+            } else if (editor.html().trim() == '') {
                 alert('请输入内容!');
                 return false;
             } else if (this.selectedCatId == '') {
@@ -463,7 +477,7 @@ var xm = new Vue({
                 data: {
                     info_id: this.selectedCatId,
                     title: this.Ptitle,
-                    content: this.Ptitle
+                    content: editor.html()
                 },
                 dataType: 'json',
                 success: (res) => {
@@ -598,8 +612,17 @@ var xm = new Vue({
                 }
             })
         },
+        getCharaLength(str) {
+            return str.replace(/[\u0391-\uFFE5]/g,"aa").length > 239;
+        },
+        filterImg(content) {
+            return content.replace('作者','啊啊啊啊===作者'); 
+        }
     },
     created() {
+        KindEditor.ready((K) => {
+            this.KindEditor = K;
+        });
         // 获取论坛分类
         $.ajax({
             type: "post",
@@ -668,7 +691,7 @@ var xm = new Vue({
             }
             return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
         }
-    },
+    }
 })
 
 
