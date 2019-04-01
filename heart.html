@@ -7,8 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>浦口公安局</title>
     <link rel="stylesheet" href="css/reset.css?v=1.0.0">
-    <link rel="stylesheet" href="css/heart.css?v=1.0.0">
     <link rel="stylesheet" href="css/header.css?v=1.0.0">
+    <link rel="stylesheet" href="css/heart.css?v=1.0.0">
+ 
     <link rel="stylesheet" type="text/css" href="css/page/zxf_page.css?v=1.0.0" />
 </head>
 
@@ -19,7 +20,7 @@
         <cp-banner @go-answer="goAnswer" @go-name="goname"></cp-banner>
         <!-- 通知 -->
         <div class="heart_banner container">
-            <div class="answer" v-show="isanswer">
+            <div class="answer">
                 <span></span>
                 <ul class="answer_uu">
                     <li v-for="item in list"></li>
@@ -27,7 +28,7 @@
                 <p>查看全部回复</p>
             </div>
             <!-- 个人中心 -->
-            <div class="header_two" v-show="isUser">
+            <div class="header_two">
                 <span></span>
                 <ul class="header_two_uu">
                     <li @click="gouser">我的主页</li>
@@ -69,15 +70,14 @@
                 <p id="go2"></p>
                 <h4>音乐中心</h4>
                 <div class="music_nav">
-                    <div class="music_one"
-                    v-for="item in musicSort">
+                    <div class="music_one" v-for="item in musicSort">
                         <h5>{{item.name}}</h5>
                         <ul class="music_uu">
                             <li v-for="(item,index) in musicList[item.id]">
                                 <p>{{index+1}}.{{item.name}}</p>
                                 <div class="music_img">
                                     <span></span>
-                                    <span></span>
+                                    <span @click="musicDown(item.data_url)"></span>
                                 </div>
                             </li>
                         </ul>
@@ -135,8 +135,7 @@
                     </div>
                     <div class="book_left_tag">
                         <ul class="book_left_uu">
-                            <li v-for="(item,index) in tutorialSort" 
-                            :class="{white:index==number}"
+                            <li v-for="(item,index) in tutorialSort" :class="{white:index==number}"
                                 @click="turtorChange(index,item.id)">{{item.name}}</li>
                             <li class="Pne" @click="Ychange">研判工具</li>
                             <li class="Pne" @click="Jchange">技战法</li>
@@ -152,8 +151,7 @@
 
                     <div class="book_right_bot">
                         <ul class="book_uu">
-                            <li v-for="(item,index) in tutorialList"
-                             @click="Tdown(item.id)">
+                            <li v-for="(item,index) in tutorialList" @click="Tdown(item.id)">
                                 <span><img src="" alt=""></span>
                                 <p>{{item.name}}</p>
                             </li>

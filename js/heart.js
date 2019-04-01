@@ -46,10 +46,10 @@ var xm = new Vue({
             window.location.href = "user.html"
         },
         goname() { //个人信息
-            this.isUser = !this.isUser
+            $(".header_two").slideToggle("400");
         },
         goAnswer() { //通知
-            this.isanswer = !this.isanswer
+            $(".answer").slideToggle("400");
         },
         bookChange(book_id, index) { //书籍分类
             this.current1 = index
@@ -235,8 +235,34 @@ var xm = new Vue({
                 }
             })
         },
-        add(id) {
+        add(id) { //音乐下一页
+            this.musicList
+            var num = Math.ceil(this.musicList[1].length / 7)
             this.message++
+            if (this.message > num) {
+                this.message = num
+                return
+            }
+            $.ajax({
+                type: "post",
+                url: `${api}/index/api/muisicList`,
+                async: true,
+                data: {
+                    page: this.message,
+                    music_id: id
+                },
+                dataType: 'json',
+                success: (res) => {
+                    this.musicList[id] = res.data
+                }
+            })
+        },
+        reduce(id) { //音乐上一页
+            this.message--
+            if (this.message < 1) {
+                this.message = 1
+                return
+            }
             console.log(this.message)
             $.ajax({
                 type: "post",
@@ -253,32 +279,19 @@ var xm = new Vue({
                 }
             })
         },
-        reduce(id) {
-            this.message--
-            if (this.message < 1) {
-                this.message = 1
-            }
-            console.log(id)
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/muisicList`,
-                async: true,
-                data: {
-                    page: this.message,
-                    music_id: id
-                },
-                dataType: 'json',
-                success: (res) => {
-                    console.log(res)
-                    this.musicList[id] = res.data
-                }
-            })
+        musicDown(data_url) { //音乐下载
+            console.log(data_url)
+            //必须同源才能下载
+            var alink = document.createElement("a");
+            alink.href = this.imgs;
+            alink.download = `${api}/${data_url}`; //图片名
+            console.log(alink.download)
+            alink.click();
         }
     },
     components: {
         "cp-page": indexPage,
         "cp-banner": indexBanner,
-
     },
     created() {
         $.ajax({

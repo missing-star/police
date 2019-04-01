@@ -14,6 +14,7 @@
 
 .heart_banner {
     position: relative;
+    top: 72px;
 }
 
 .index_content img {
@@ -93,9 +94,10 @@
     box-shadow: 3px 3px 8px 1px rgba(126, 126, 126, 1);
     border-radius: 8px;
     position: absolute;
-    top: -10px;
+    top: 6px;
     right: 30px;
     display: none;
+    z-index: 111;
 }
 
 .answer span {
@@ -140,15 +142,14 @@
 }
 
 /* 个人中心 */
-
-
 .header_two {
     background: rgba(255, 255, 255, 1);
     box-shadow: 3px 3px 8px 1px rgba(126, 126, 126, 1);
     border-radius: 4px;
     position: absolute;
-    top: -10px;
-    right: 25px;
+    top: 6px;
+    right: 5px;
+    z-index: 111;
     display: none;
 }
 
@@ -328,8 +329,6 @@
     align-items: center;
     margin-right: 23px;
 }
-
-
 
 
 
