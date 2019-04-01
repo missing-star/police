@@ -8,10 +8,6 @@ var xm = new Vue({
         ismore: false, //更多
         isforum: false, //论坛
         isCase: false, //报备
-        isCreat: false, //创建
-        isChatting: false, //编辑
-        isCroom: false, //聊天室   
-        iscommonly: false, //常用聊天室
         isauditing: false, //审核中
         isall: false, //全部报备
         iscomment: false, //评论
@@ -22,41 +18,32 @@ var xm = new Vue({
         isNone: false, //未搜索到
         isstar: false, //所有报备
         ForumCate: [], //论坛分类
-        titleList: [{}, {}], //论坛列表
+        titleList: [], //论坛列表
         allList: [], //报备列表
-        infoList: [{}], //论坛关键词
         list: [], //报备列表
-        chatList: [], //聊天列表
-        roomList: [{}],
-        comlist: [{}, {}], //评论列表
         seelist: [], //查看回复
-        roomList: [], //聊天类型分类
         repairSorts: [], //保修类型
-        allRoom: [], //所有聊天室
         repairList: [], //所有报备
         current: 0,
         changeRed: -1,
         currentActive: -1,
         oneIndex: -1,
+        twoIndex:-1,
         currentIndex: 0,
-        numIndex: 0,
+        numIndex: -1,
         commentActive: -1,
         Ptitle: '', //论坛标题
         Pcontent: '', //论坛内容
         Pcomment: '', //评论内容
         keyWords: '', //搜索关键词
-        Troom: '', //聊天室标题
-        Ctitle: '', //常用聊天室标题
-        Ctopic_name: '', //常用聊天室标题
-        roomName: '', //修改聊天室名称,
         replyComment: '', //回复评论的内容,
         currentComment: {}, //当前查看的评论,
         currentPostId: '',
         currentCommentId: '',
         selectedCatId: '',
-        postIndex:-1,
-        isCreated:false,//是否创建了富文本
-        KindEditor:''
+        postIndex: -1,
+        isCreated: false, //是否创建了富文本
+        KindEditor: ''
     },
     methods: {
         goClose() { //关闭遮罩
@@ -71,7 +58,6 @@ var xm = new Vue({
             this.isChatting = false
             this.isspeak = false
             $("body").removeClass("bod")
-
         },
         gouser() { //跳转我的主页
             window.location.href = "user.html"
@@ -82,7 +68,6 @@ var xm = new Vue({
             } else {
                 this.postIndex = -1;
             }
-
         },
         comChange(index) { //查看评论
             this.commentActive = this.commentActive == index ? -1 : index
@@ -92,12 +77,28 @@ var xm = new Vue({
         },
         goAnswer() { //通知
             $(".answer").slideToggle("400");
+            $.ajax({
+                type: "post",
+                url: `${api}/index/api/allReplay`,
+                async: true,
+                data: {},
+                dataType: 'json',
+                success: (res) => {
+                    console.log(res)
+                    this.list = res.data.comment;
+                    this.replaylist = res.data.replay;
+                }
+            })
+
         },
         gospeak(index) { //回复
             this.currentActive = this.currentActive == index ? -1 : index;
         },
         gospeak1(index) { //查看回复  回复
             this.oneIndex = this.oneIndex == index ? -1 : index
+        },
+        gospeak2(index){
+            this.twoIndex = this.twoIndex == index ? -1 : index
         },
         goPass() { //修改密码
             this.isshade = true
@@ -107,29 +108,18 @@ var xm = new Vue({
             this.isshade = true
             this.isforum = true
             $("body").addClass("bod");
-            if(this.isCreated) {
+            if (this.isCreated) {
                 return false;
             }
             this.isCreated = true;
-            window.editor = this.KindEditor.create('#Ftext',{
-                allowImageRemote:false,
-                resizeType:0,
-                uploadJson:'./kindeditor/php/upload_json.php',
-                fileManagerJson:'./kindeditor/php/file_manager_json.php',
-                allowFileManager : true,
-                items : ['bold','italic','underline','fontsize','image']
+            window.editor = this.KindEditor.create('#Ftext', {
+                allowImageRemote: false,
+                resizeType: 0,
+                uploadJson: './kindeditor/php/upload_json.php',
+                fileManagerJson: './kindeditor/php/file_manager_json.php',
+                allowFileManager: true,
+                items: ['bold', 'italic', 'underline', 'fontsize', 'image']
             });
-            // $.ajax({
-            //     type: "post",
-            //     url: `${api}/index/api/infoList`,
-            //     async: true,
-            //     data: {},
-            //     dataType: 'json',
-            //     success: (res) => {
-            //         console.log(res);
-            //         this.infoList = res.data;
-            //     }
-            // })
         },
         reportChange() { //打开报备
             this.isshade = true
@@ -179,142 +169,6 @@ var xm = new Vue({
             })
 
         },
-        creatChange() { //打开创建聊天室
-            this.isshade = true
-            this.isCreat = true
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/chatroomSort`,
-                async: true,
-                data: {},
-                dataType: 'json',
-                success: (res) => {
-                    this.roomList = res.data;
-                }
-            })
-        },
-        creatRoom() { //创建聊天室
-            var myselect = document.getElementById("myselect");
-            var index = myselect.selectedIndex;
-            var list = this.roomList
-            var id = list[index].id
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/createChatroom`,
-                async: true,
-                data: {
-                    topic_id: id,
-                    title: this.Troom
-                },
-                dataType: 'json',
-                success: (res) => {
-                    this.isCreat = false
-                    this.isshade = false
-                }
-            })
-        },
-        goInchange(index) { //进入聊天室
-            var list = this.chatList
-            var id = list[index].id
-            sessionStorage.setItem('userInfo', id);
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/joinChatroom`,
-                async: true,
-                data: {
-                    chatroom_id: id
-                },
-                dataType: 'json',
-                success: (res) => {}
-            })
-            // 聊天室详情
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/chatroomDetail`,
-                async: true,
-                data: {
-                    chatroom_id: id
-                },
-                dataType: 'json',
-                success: (res) => {
-                    this.isshade = true
-                    this.iscommonly = true
-                    this.Ctitle = res.data.chat.title
-                    this.Ctopic_name = res.data.chat.topic_name
-                    this.user = res.data.user.nickname
-                }
-            })
-        },
-        JoinChange(index) {
-            var list = this.roomList
-            var id = list[index].id
-            sessionStorage.setItem('userInfo', id);
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/joinChatroom`,
-                async: true,
-                data: {
-                    chatroom_id: id
-                },
-                dataType: 'json',
-                success: (res) => {
-                    this.isshade = true
-                    this.iscommonly = true
-                }
-            })
-            // 聊天室详情
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/chatroomDetail`,
-                async: true,
-                data: {
-                    chatroom_id: id
-                },
-                dataType: 'json',
-                success: (res) => {
-                    this.Ctitle = res.data.chat.title
-                    this.Ctopic_name = res.data.chat.topic_name
-                    this.user = res.data.user.nickname
-                }
-            })
-        },
-        allChat() { //所有聊天室
-            this.isshade = true
-            this.isCroom = true
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/chatroomLists`,
-                async: true,
-                data: {
-                    topic_id: 1
-                },
-                dataType: 'json',
-                success: (res) => {
-                    console.log(res)
-                    this.allRoom = res.data.sort
-                    this.roomList = res.data.list
-                }
-            })
-        },
-        goRoom(index) { //聊天室分类
-            this.current = index;
-            var list = this.allRoom
-            var topic_id = list[index].id
-
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/chatroomLists`,
-                async: true,
-                data: {
-                    topic_id: topic_id
-                },
-                dataType: 'json',
-                success: (res) => {
-                    console.log(res)
-                    this.roomList = res.data.list
-                }
-            })
-        },
         lookchange(post_id, comment_id) { //查看回复
             this.currentPostId = post_id;
             this.currentCommentId = comment_id;
@@ -337,20 +191,6 @@ var xm = new Vue({
                 success: (res) => {
                     console.log(res);
                     this.seelist = res.data;
-                }
-            })
-        },
-        editChange() { //编辑聊天
-            this.iscommonly = false
-            this.isChatting = true
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/chatroomSort`,
-                async: true,
-                data: {},
-                dataType: 'json',
-                success: (res) => {
-                    this.roomList = res.data;
                 }
             })
         },
@@ -422,6 +262,7 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
+                    console.log(res)
                     this.titleList = res.result
                     if (this.titleList.length == 0) {
                         this.isNone = true;
@@ -560,6 +401,7 @@ var xm = new Vue({
         },
         //文章点赞
         likePostOrComment(post_id, comment_id, type) {
+            console.log(post_id)
             var data = {};
             $.ajax({
                 url: `${api}/index/api/phraisePost`,
@@ -570,6 +412,7 @@ var xm = new Vue({
                     comment_id: comment_id
                 },
                 success: (res) => {
+                    console.log(res)
                     if (type == 1) {
                         //弹窗评论点赞
                         this.lookchange(this.currentPostId, this.currentCommentId);
@@ -613,11 +456,12 @@ var xm = new Vue({
             })
         },
         getCharaLength(str) {
-            return str.replace(/[\u0391-\uFFE5]/g,"aa").length > 239;
+            return str.replace(/[\u0391-\uFFE5]/g, "aa").length > 239;
         },
         filterImg(content) {
-            return content.replace('作者','啊啊啊啊===作者'); 
-        }
+            return content.replace('作者', '啊啊啊啊===作者');
+        },
+
     },
     created() {
         KindEditor.ready((K) => {
@@ -648,7 +492,6 @@ var xm = new Vue({
             data: {},
             dataType: 'json',
             success: (res) => {
-                console.log(res)
                 this.allList = res.data
             }
         })
@@ -660,7 +503,6 @@ var xm = new Vue({
             data: {},
             dataType: 'json',
             success: (res) => {
-                console.log(res)
                 this.chatList = res.data
             }
         })
@@ -693,39 +535,6 @@ var xm = new Vue({
         }
     }
 })
-
-
-
-
-
-
-$(".icon-jiacu").click(function () {
-    $("#Ftext").toggleClass("thick");
-})
-
-$(".icon-Italic").click(function () {
-    $("#Ftext").toggleClass("skew");
-})
-
-$(".icon-Underline").click(function () {
-    $("#Ftext").toggleClass("under");
-})
-
-$("#testSelect").click(function () {
-    var id = $('#testSelect option:selected').val();
-    if (id == 1) {
-        $("#Ftext").css("font-size", "12px");
-    } else if (id == 2) {
-        $("#Ftext").css("font-size", "14px");
-    } else if (id == 3) {
-        $("#Ftext").css("font-size", "16px");
-    } else if (id == 4) {
-        $("#Ftext").css("font-size", "18px");
-    } else if (id == 5) {
-        $("#Ftext").css("font-size", "20px");
-    }
-})
-
 
 
 //封装一个限制字数方法

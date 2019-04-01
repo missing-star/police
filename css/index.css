@@ -547,116 +547,6 @@
 
 
 
-/* <!-- 聊天室 --> */
-.chatRoom {
-    width: 450px;
-    height: 385px;
-    background: rgba(255, 255, 255, 1);
-}
-
-.chat_user {
-    width: 408px;
-    height: 84px;
-    border-bottom: 5px solid #E5E5E5;
-    display: flex;
-    align-items: center;
-    padding: 0 25px 0 17px;
-}
-
-.chat_user span:nth-child(1) {
-    display: inline-block;
-    width: 56px;
-    height: 56px;
-    background: rgba(166, 166, 166, 1);
-    border-radius: 50%;
-}
-
-.chat_user span:nth-child(1) img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-}
-
-.chat_user span:nth-child(2) {
-    width: 140px;
-    font-size: 18px;
-    font-family: PingFangSC-Regular;
-    font-weight: 400;
-    color: rgba(0, 0, 0, 1);
-    line-height: 28px;
-    margin: 0 40px 0 29px;
-}
-
-.chat_user span:nth-child(3) {
-    display: inline-block;
-    width: 140px;
-    height: 39px;
-    background: url(../img/创建聊天室.png)no-repeat;
-    background-size: 100% 100%;
-    cursor: pointer;
-}
-
-
-.chat_room_uu {
-    height: 264px;
-    overflow: hidden;
-    padding: 0 23px;
-}
-
-.chat_room_uu li {
-    height: 89px;
-    border-bottom: 1px solid #C3C1C2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 16px;
-    font-family: PingFangSC-Regular;
-    font-weight: 400;
-    color: rgba(0, 0, 0, 1);
-    line-height: 28px;
-}
-
-.chat_room_uu_left span {
-    display: inline-block;
-    font-size: 16px;
-    font-family: PingFangSC-Regular;
-    font-weight: 400;
-    color: rgba(121, 121, 121, 1);
-    line-height: 28px;
-}
-
-.chat_room_uu_left span:nth-child(2) {
-    display: inline-block;
-    margin-right: 41px;
-    width: 90px;
-}
-
-.chat_room_uu_right {
-    width: 86px;
-    height: 35px;
-    background: url(../img/进入.png)no-repeat;
-    background-size: 100% 100%;
-    cursor: pointer;
-    margin-right: 10px;
-}
-
-
-.chat_room_uu li:last-child {
-    border-bottom: 0px solid #C3C1C2;
-}
-
-.chat_more {
-    padding: 0 23px;
-    text-align: right;
-    font-size: 16px;
-    font-family: PingFangSC-Regular;
-    font-weight: 400;
-    color: rgba(121, 121, 121, 1);
-    line-height: 24px;
-    cursor: pointer;
-}
-
-
 /* 应用中心 */
 .appCenter {
     width: 450px;
@@ -1108,290 +998,6 @@
 }
 
 
-/* 聊天室 */
-.Croom {
-    width: 1000px;
-    height: 730px;
-    background: rgba(255, 255, 255, 1);
-    border-radius: 20px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.Croom_text {
-    width: 100%;
-    height: 86px;
-    font-size: 20px;
-    font-family: PingFangSC-Medium;
-    font-weight: 500;
-    color: rgba(0, 0, 0, 1);
-    line-height: 86px;
-    text-align: center;
-    border-bottom: 1px solid #9F9E9F;
-}
-
-.Croom_main {
-    display: flex;
-}
-
-.Croom_main_left {
-    width: 160px;
-    height: 643px;
-    background: rgba(191, 191, 191, 1);
-}
-
-.Croom_uu {
-    padding: 23px 0 0 0;
-    height: 96%;
-    overflow-x: hidden;
-}
-
-.Croom_uu li {
-    width: 100%;
-    height: 40px;
-    font-size: 18px;
-    font-family: PingFangSC-Regular;
-    font-weight: 400;
-    color: rgba(0, 0, 0, 1);
-    line-height: 38px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.Croom_main_right {
-    padding: 47px 0 0 36px;
-}
-
-
-.Croom_main_right_title {
-    font-size: 20px;
-    font-family: PingFangSC-Medium;
-    font-weight: 500;
-    color: rgba(0, 0, 0, 1);
-    margin-bottom: 25px;
-}
-
-.Croom_main_right_title span:nth-child(2) {
-    margin: 0 72px 0 327px;
-}
-
-
-
-.Croom_uu_one li {
-    font-size: 20px;
-    font-family: PingFangSC-Medium;
-    font-weight: 500;
-    color: rgba(0, 0, 0, 1);
-    margin-bottom: 25px;
-}
-
-.Croom_uu_one li span:nth-child(1) {
-    display: inline-block;
-    width: 300px;
-}
-
-.Croom_uu_one li span:nth-child(2) {
-    display: inline-block;
-    width: 100px;
-    text-align: center;
-    margin: 0 65px;
-}
-
-.Croom_uu_one li span:nth-child(3) {
-    display: inline-block;
-    width: 100px;
-    text-align: center;
-    margin-right: 60px;
-}
-
-
-
-/* 常用聊天室 */
-.commonly {
-    width: 1000px;
-    height: 730px;
-    background: rgba(242, 242, 242, 1);
-    border-radius: 20px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.commonly_title {
-    width: 100%;
-    height: 86px;
-    border-bottom: 1px solid #9F9E9F;
-    text-align: center;
-    line-height: 86px;
-    font-size: 20px;
-    font-family: PingFangSC-Medium;
-    font-weight: 600;
-    color: rgba(0, 0, 0, 1);
-}
-
-
-
-.commonly_title span:nth-child(2) {
-    font-size: 16px;
-    font-family: PingFangSC-Medium;
-    font-weight: 500;
-    color: rgba(121, 121, 121, 1);
-    position: absolute;
-    top: 39px;
-    right: 358px;
-    line-height: 18px;
-}
-
-.commonly_title p {
-    position: absolute;
-    right: 31px;
-    top: 43px;
-    font-size: 12px;
-    font-family: PingFangSC-Medium;
-    font-weight: 500;
-    color: rgba(43, 34, 143, 1);
-    line-height: 0;
-    cursor: pointer;
-}
-
-.commonly_main {
-    display: flex;
-}
-
-.commonly_main_left {
-    width: 158px;
-    height: 643px;
-    background: rgba(255, 255, 255, 1);
-}
-
-.commonly_main_left h4 {
-    margin: 17px 0 0 8px;
-    font-size: 18px;
-    font-family: PingFangSC-Regular;
-    font-weight: 400;
-    color: rgba(0, 0, 0, 1);
-}
-
-.commonly_uu {
-    margin: 17px 0 0 7px;
-    height: 92%;
-    overflow-x: hidden;
-}
-
-.commonly_uu li {
-    font-size: 14px;
-    font-family: PingFangSC-Regular;
-    font-weight: 400;
-    color: rgba(0, 0, 0, 1);
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-
-.commonly_uu li span:nth-child(1) {
-    display: inline-block;
-    width: 21px;
-    height: 21px;
-    border-radius: 50%;
-    background: #2B228F;
-    margin-right: 6px;
-}
-
-.commonly_uu li span:nth-child(1) img {
-    width: 21px;
-    height: 21px;
-    border-radius: 50%;
-}
-
-.commomly_main_right {
-    margin: 30px 0 0 37px;
-}
-
-.commonly_content {
-    height: 80%;
-    overflow-x: hidden;
-}
-
-.commonly_people {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 33px;
-}
-
-.commonly_pic {
-    display: inline-block;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: #2B228F;
-    margin-right: 15px;
-}
-
-.commonly_pic img {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-}
-
-.name p {
-    font-size: 20px;
-    font-family: PingFangSC-Regular;
-    font-weight: 400;
-    color: rgba(0, 0, 0, 1);
-    margin-bottom: 16px;
-}
-
-.name span {
-    padding: 8px 30px 8px 13px;
-    background: rgba(255, 255, 255, 1);
-    border-radius: 10px;
-    line-height: 37px;
-}
-
-.commonly_main_bot {
-    width: 766px;
-    height: 108px;
-    background: rgba(255, 255, 255, 1);
-    border-radius: 10px;
-}
-
-.commonly_main_bot textarea {
-    width: 99%;
-    height: 72%;
-    resize: none;
-    outline: none;
-    border: 0;
-    font-size: 16px;
-    padding: 5px 0 0 5px;
-}
-
-.commonly_look {
-    text-align: right;
-    margin-right: 24px;
-}
-
-.commonly_look span:nth-child(1) {
-    display: inline-block;
-    width: 21px;
-    height: 21px;
-    background: url(../img/表情.png)no-repeat;
-    background-size: 100% 100%;
-    margin-right: 24px;
-}
-
-.commonly_look span:nth-child(2) {
-    display: inline-block;
-    width: 25px;
-    height: 21px;
-    background: url(../img/图片.png)no-repeat;
-    background-size: 100% 100%;
-}
-
-
 /*审核中 */
 
 .auditing {
@@ -1559,8 +1165,6 @@ td {
 }
 
 /* 个人中心 */
-
-
 .header_two {
     background: rgba(255, 255, 255, 1);
     box-shadow: 3px 3px 8px 1px rgba(126, 126, 126, 1);
@@ -1597,9 +1201,6 @@ td {
     cursor: pointer;
     padding: 0 14px 0 11px;
 }
-
-
-
 
 /* 查看回复 */
 .see {
@@ -1744,7 +1345,7 @@ td {
 }
 
 .see_inp input {
-    width: 558px;
+    width: 84%;
     height: 28px;
     background: rgba(242, 242, 242, 1);
     border: 1px solid rgba(203, 201, 201, 1);
@@ -1776,12 +1377,6 @@ td {
     text-align: center;
     margin-left: 12px;
 }
-
-
-
-
-
-
 
 /* 修改密码 */
 .pass {
@@ -1846,7 +1441,6 @@ td {
 
 
 /*更多 */
-
 .banner_more {
     background: rgba(255, 255, 255, 1);
     box-shadow: 3px 3px 8px 1px rgba(126, 126, 126, 1);
@@ -1889,7 +1483,6 @@ td {
 }
 
 
-
 /* 关闭 */
 .close {
     width: 30px;
@@ -1900,16 +1493,6 @@ td {
     top: 40px;
     right: 50px;
 }
-
-
-
-
-
-
-
-
-
-
 
 /* 添加样式 */
 .black {
@@ -2122,4 +1705,8 @@ img.icon-like {
 }
 .ke-container{
     width: 385px !important;
+}
+
+.list_two {
+    padding-left: 62px;
 }

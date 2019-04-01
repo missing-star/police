@@ -17,9 +17,6 @@
     top: 72px;
 }
 
-.index_content img {
-    /* margin-left: 23px; */
-}
 
 .header_mid {
     position: relative;
@@ -292,6 +289,7 @@
     padding: 15px 0px;
     position: fixed;
     top: 0;
+    z-index: 11;
 }
 
 .search {
