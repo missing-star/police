@@ -9,26 +9,69 @@
 
 </head>
 <style>
-    body,
-    html {
-        font-size: calc(100vw / 19.2);
+    .pagination {
+        overflow: hidden;
+        display: table;
+        margin: 0 auto;
+        /*width: 100%;*/
+        height: 50px;
     }
 
-    .uu {
-        width: 2rem;
-        height: 1rem;
-        background: red;
+    li {
+        float: left;
+        height: 30px;
+        border-radius: 5px;
+        margin: 3px;
+        color: #666;
     }
 
-    .uu {
-        min-width: 1rem;
+    li:hover {
+        background: #000;
+
+        /* a {
+        color: #fff;
+    } */
+
+    }
+
+    a {
+        display: block;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        line-height: 30px;
+        font-size: 12px;
+        border-radius: 5px;
+        text-decoration: none;
+        color: black;
+    }
+
+
+    .active {
+        background: red !important;
+
+        /* a {
+        color: #fff;
+    } */
+
+    }
+
+    ul {
+        display: flex;
+        list-style: none;
     }
 </style>
 
 <body>
 
-    <div class="uu">
+    <div id="app">
+        <cp-page :total="total" :current-page='current' @pagechange="pagechange"></cp-page>
 
+
+        <cp-page :total="total" :current-page='current' @pagechange="pagechange1"></cp-page>
+
+
+        <button @click="nn">点击</button>
     </div>
 
 </body>
@@ -37,6 +80,38 @@
 
 <script src="js/jquery.min.js?v=1.0.0"></script>
 <script src="js/vue.js?v=1.0.0"></script>
+<script src="js/components.js"></script>
 <script>
+    var xm = new Vue({
+        el: "#app",
+        data: {
 
+            total: '', // 记录总条数
+            display: 8, // 每页显示条数
+            current: 1, // 当前的页数
+
+        },
+        methods: {
+            pagechange: function (currentPage) {
+                console.log(currentPage);
+                // ajax请求, 向后台发送 currentPage, 来获取对应的数据
+
+            },
+            pagechange1() {
+
+            },
+            nn(){
+                this.total=3
+            }
+        },
+        components: {
+            "cp-page": index,
+        },
+        created() {
+            this.total = 10
+            
+        },
+
+
+    })
 </script>

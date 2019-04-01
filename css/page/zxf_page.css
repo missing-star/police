@@ -13,9 +13,9 @@ div.zxf_pagediv span,div.zxf_pagediv a{
 .current{
 	color: #ffffff;
 	background: #1D5598;
-	width: 40px;
-	height: 40px;
-	line-height: 40px;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
 	border-radius: 3px;
 }
 .zxfPagenum{

@@ -12,11 +12,14 @@ var xm = new Vue({
         bookList: [],
         tutorialList: [],
         musicList: [],
+        musicList1: [],
+        musicList2: [],
         list: [],
         musicSort: [], //音乐分类
         bookSort: [], //书籍分类
         tutorialSort: [], //教程分类
-        current: 0,
+        current1: 0,
+        number: 0,
         description: '',
         create_at: '',
         name: '',
@@ -27,6 +30,16 @@ var xm = new Vue({
         Tname: '',
         Tpicture: '',
         Tdata_url: '',
+
+        message: 1,
+
+
+        total: 1, // 记录总条数
+        // display: 8, // 每页显示条数
+        current: 1, // 当前的页数
+
+        totalone: 8,
+        currentone: 1,
     },
     methods: {
         gouser() { //跳转我的主页
@@ -38,10 +51,8 @@ var xm = new Vue({
         goAnswer() { //通知
             this.isanswer = !this.isanswer
         },
-        bookChange(index) { //书籍分类
-            this.current = index
-            var list = this.bookSort
-            var book_id = list[index].id
+        bookChange(book_id, index) { //书籍分类
+            this.current1 = index
             $.ajax({
                 type: "post",
                 url: `${api}/index/api/bookList`,
@@ -54,14 +65,14 @@ var xm = new Vue({
                 success: (res) => {
                     console.log(res)
                     this.bookList = res.data
+                    this.total = res.data.length
+                    sessionStorage.setItem('book_id', book_id)
                 }
             })
         },
-        turtorChange(index) { //教程分类
+        turtorChange(index, tutorial_id) { //教程分类
             $(".book_left_uu .Pne").removeClass("white")
-            this.current = index
-            var list = this.tutorialSort
-            var tutorial_id = list[index].id
+            this.number = index
             $.ajax({
                 type: "post",
                 url: `${api}/index/api/tutorialList`,
@@ -74,6 +85,8 @@ var xm = new Vue({
                 success: (res) => {
                     console.log(res)
                     this.tutorialList = res.data
+                    this.totalone = res.data.length
+                    sessionStorage.setItem('tutorial_id', tutorial_id)
                 }
             })
         },
@@ -110,14 +123,12 @@ var xm = new Vue({
             })
         },
         openChange(index) { //详情页
-            var list = this.plugList
-            var tool_id = list[index].id
             $.ajax({
                 type: "post",
                 url: `${api}/index/api/toolDetail`,
                 async: true,
                 data: {
-                    tool_id: tool_id
+                    tool_id: index
                 },
                 dataType: 'json',
                 success: (res) => {
@@ -136,15 +147,12 @@ var xm = new Vue({
             })
         },
         bookDown(index) { //书记闲情
-            var list = this.bookList
-            var tool_id = list[index].id
-            console.log(tool_id)
             $.ajax({
                 type: "post",
                 url: `${api}/index/api/toolDetail`,
                 async: true,
                 data: {
-                    tool_id: tool_id
+                    tool_id: index
                 },
                 dataType: 'json',
                 success: (res) => {
@@ -162,14 +170,12 @@ var xm = new Vue({
             })
         },
         Tdown(index) { //教程详情页 
-            var list = this.tutorialList
-            var tutorial_id = list[index].id
             $.ajax({
                 type: "post",
                 url: `${api}/index/api/tutorialDetail`,
                 async: true,
                 data: {
-                    tutorial_id: tutorial_id
+                    tutorial_id: index
                 },
                 dataType: 'json',
                 success: (res) => {
@@ -191,10 +197,88 @@ var xm = new Vue({
             console.log(url)
             var down = api + "/" + url
             window.open(down)
+        },
+        pagechange: function (currentPage) { //书籍分页
+            var book_id = sessionStorage.getItem('book_id')
+            console.log(book_id)
+            $.ajax({
+                type: "post",
+                url: `${api}/index/api/bookList`,
+                async: true,
+                data: {
+                    page: currentPage,
+                    book_id: book_id
+                },
+                dataType: 'json',
+                success: (res) => {
+                    console.log(res)
+                    this.bookList = res.data
+                    this.total = res.data.length
+                }
+            })
+        },
+        pagechangeOne: function (currentPage) { //教程
+            var tutorial_id = sessionStorage.getItem('tutorial_id')
+            $.ajax({
+                type: "post",
+                url: `${api}/index/api/tutorialList`,
+                async: true,
+                data: {
+                    page: 1,
+                    tutorial_id: tutorial_id
+                },
+                dataType: 'json',
+                success: (res) => {
+                    console.log(res)
+                    this.tutorialList = res.data
+                    this.totalone = res.data.length
+                }
+            })
+        },
+        add(id) {
+            this.message++
+            console.log(this.message)
+            $.ajax({
+                type: "post",
+                url: `${api}/index/api/muisicList`,
+                async: true,
+                data: {
+                    page: this.message,
+                    music_id: id
+                },
+                dataType: 'json',
+                success: (res) => {
+                    console.log(res)
+                    this.musicList[id] = res.data
+                }
+            })
+        },
+        reduce(id) {
+            this.message--
+            if (this.message < 1) {
+                this.message = 1
+            }
+            console.log(id)
+            $.ajax({
+                type: "post",
+                url: `${api}/index/api/muisicList`,
+                async: true,
+                data: {
+                    page: this.message,
+                    music_id: id
+                },
+                dataType: 'json',
+                success: (res) => {
+                    console.log(res)
+                    this.musicList[id] = res.data
+                }
+            })
         }
     },
     components: {
+        "cp-page": indexPage,
         "cp-banner": indexBanner,
+
     },
     created() {
         $.ajax({
@@ -209,10 +293,13 @@ var xm = new Vue({
                 this.musicList = res.data.music.list
                 this.musicSort = res.data.music.sort
                 this.bookList = res.data.book.list
-                // console.log(this.bookList.length)
                 this.bookSort = res.data.book.sort
                 this.tutorialList = res.data.tutorial.list
                 this.tutorialSort = res.data.tutorial.sort
+
+                this.total = res.data.book.list.length
+                this.totalone = res.data.tutorial.list.length
+                sessionStorage.setItem('length', JSON.stringify(res.data.plugin.length))
             }
         })
     },
@@ -252,4 +339,75 @@ $('.nav_uu').on('click', 'li', function (e) {
     $('html,body').animate({
         scrollTop: $('#' + id).offset().top
     }, 800);
+});
+
+
+
+// 插件
+var length = sessionStorage.getItem("length");
+$(".zxf").createPage({
+    pageNum: Math.ceil(length / 8),
+    current: 1,
+    backfun: function (e) {
+        var page = e.current
+        console.log(page)
+        $.ajax({
+            type: "post",
+            url: `${api}/index/api/pluginList`,
+            async: true,
+            data: {
+                page: page,
+                tool_id: 1
+            },
+            dataType: 'json',
+            success: (res) => {
+                xm.plugList = res.data
+            }
+        })
+    }
+});
+//书籍分页
+// var length = sessionStorage.getItem("book");
+// $(".zxf_pagediv").createPage({
+//     pageNum: Math.ceil(length / 8),
+//     current: 1,
+//     backfun: function (e) {
+//         var page = e.current
+//         $.ajax({
+//             type: "post",
+//             url: `${api}/index/api/bookList`,
+//             async: true,
+//             data: {
+//                 page: page,
+//                 book_id: 1
+//             },
+//             dataType: 'json',
+//             success: (res) => {
+//                 xm.bookList = res.data
+//             }
+//         })
+//     }
+// });
+// 教程
+var length = sessionStorage.getItem("tutorial");
+$(".center").createPage({
+    pageNum: Math.ceil(length / 2),
+    current: 1,
+    backfun: function (e) {
+        var page = e.current
+        $.ajax({
+            type: "post",
+            url: `${api}/index/api/tutorialList`,
+            async: true,
+            data: {
+                page: page,
+                tutorial_id: 1
+            },
+            dataType: 'json',
+            success: (res) => {
+                console.log(res)
+                xm.tutorialList = res.data
+            }
+        })
+    }
 });

@@ -22,7 +22,7 @@
             <div class="answer" v-show="isanswer">
                 <span></span>
                 <ul class="answer_uu">
-                    <li v-for="item in list">张三回复了你的《反家暴法》实施三周年，一些未成年人为自己维权。</li>
+                    <li v-for="item in list"></li>
                 </ul>
                 <p>查看全部回复</p>
             </div>
@@ -57,7 +57,7 @@
                 <p id="go1"></p>
                 <h4>插件中心</h4>
                 <ul class="plug_uu">
-                    <li v-for="(item,index) in plugList" @click="openChange(index)">
+                    <li v-for="(item,index) in plugList" @click="openChange(item.id)">
                         <span><img src="" alt=""></span>
                         <p>{{item.name}}</p>
                     </li>
@@ -69,11 +69,12 @@
                 <p id="go2"></p>
                 <h4>音乐中心</h4>
                 <div class="music_nav">
-                    <div class="music_one" v-for="item in musicSort">
+                    <div class="music_one"
+                    v-for="item in musicSort">
                         <h5>{{item.name}}</h5>
                         <ul class="music_uu">
-                            <li v-for="(item,index) in musicList">
-                                <p>{{item.name}}</p>
+                            <li v-for="(item,index) in musicList[item.id]">
+                                <p>{{index+1}}.{{item.name}}</p>
                                 <div class="music_img">
                                     <span></span>
                                     <span></span>
@@ -81,44 +82,10 @@
                             </li>
                         </ul>
                         <div class="music_btn">
-                            <button>上一页</button>
-                            <button>下一页</button>
+                            <button @click="reduce(item.id)">上一页</button>
+                            <button @click="add(item.id)">下一页</button>
                         </div>
                     </div>
-                    <!-- 流行音乐
-                    <div class="music_one">
-                        <h5>流行音乐</h5>
-                        <ul class="music_uu">
-                            <li v-for="item in musicList">
-                                <p>{{item.name}}</p>
-                                <div class="music_img">
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                            </li>
-                        </ul>
-                        <div class="music_btn">
-                            <button>上一页</button>
-                            <button>下一页</button>
-                        </div>
-                    </div>
-                    轻音乐
-                    <div class="music_one">
-                        <h5>轻音乐</h5>
-                        <ul class="music_uu">
-                            <li v-for="item in musicList">
-                                <p>{{item.name}}</p>
-                                <div class="music_img">
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                            </li>
-                        </ul>
-                        <div class="music_btn">
-                            <button>上一页</button>
-                            <button>下一页</button>
-                        </div>
-                    </div> -->
                 </div>
 
 
@@ -134,8 +101,8 @@
                     </div>
                     <div class="book_left_tag">
                         <ul class="book_left_uu">
-                            <li v-for="(item,index) in bookSort" :class="{white:index==current}"
-                                @click="bookChange(index)">{{item.name}}</li>
+                            <li v-for="(item,index) in bookSort" :class="{white:index==current1}"
+                                @click="bookChange(item.id,index)">{{item.name}}</li>
                         </ul>
                     </div>
                 </div>
@@ -147,14 +114,15 @@
 
                     <div class="book_right_bot">
                         <ul class="book_uu">
-                            <li v-for="(item,index) in bookList"
-                             @click="bookDown(index)">
+                            <li v-for="(item,index) in bookList" @click="bookDown(item.id)">
                                 <span><img src="" alt=""></span>
                                 <p>{{item.name}}</p>
                             </li>
                         </ul>
                     </div>
-                    <div class="zxf_pagediv" v-show="isPage"></div>
+                    <!-- 分页 -->
+                    <cp-page :total="total" :current-page='current' @pagechange="pagechange"></cp-page>
+
                 </div>
             </div>
 
@@ -168,8 +136,8 @@
                     <div class="book_left_tag">
                         <ul class="book_left_uu">
                             <li v-for="(item,index) in tutorialSort" 
-                                :class="{white:index==current}"
-                                @click="turtorChange(index)">{{item.name}}</li>
+                            :class="{white:index==number}"
+                                @click="turtorChange(index,item.id)">{{item.name}}</li>
                             <li class="Pne" @click="Ychange">研判工具</li>
                             <li class="Pne" @click="Jchange">技战法</li>
                         </ul>
@@ -184,13 +152,15 @@
 
                     <div class="book_right_bot">
                         <ul class="book_uu">
-                            <li v-for="(item,index) in tutorialList" @click="Tdown(index)">
+                            <li v-for="(item,index) in tutorialList"
+                             @click="Tdown(item.id)">
                                 <span><img src="" alt=""></span>
                                 <p>{{item.name}}</p>
                             </li>
                         </ul>
                     </div>
-                    <div class="center"></div>
+                    <!-- 分页 -->
+                    <cp-page :total="totalone" :current-page='currentone' @pagechange="pagechangeOne"></cp-page>
                 </div>
             </div>
         </div>
@@ -274,70 +244,5 @@
 <script src="js/heart.js?v=1.0.0"></script>
 
 <script type="text/javascript">
-    //书籍分页
-    console.log(xm.bookList)
-    $(".zxf_pagediv").createPage({
-        pageNum: parseInt(8 / 8),
-        current: 1,
-        backfun: function (e) {
-            var page = e.current
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/bookList`,
-                async: true,
-                data: {
-                    page: page,
-                    book_id: 1
-                },
-                dataType: 'json',
-                success: (res) => {
-                    xm.bookList = res.data
-                }
-            })
-        }
-    });
-    // 插件
-    $(".zxf").createPage({
-        pageNum: parseInt(16 / 8),
-        current: 1,
-        backfun: function (e) {
-            var page = e.current
-            console.log(page)
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/pluginList`,
-                async: true,
-                data: {
-                    page: page,
-                    tool_id: 1
-                },
-                dataType: 'json',
-                success: (res) => {
-                    xm.plugList = res.data
-                }
-            })
-        }
-    });
-    // 教程
-    $(".center").createPage({
-        pageNum: parseInt(8 / 8),
-        current: 1,
-        backfun: function (e) {
-            var page = e.current
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/tutorialList`,
-                async: true,
-                data: {
-                    page: page,
-                    tutorial_id: 1
-                },
-                dataType: 'json',
-                success: (res) => {
-                    console.log(res)
-                    xm.tutorialList = res.data
-                }
-            })
-        }
-    });
+
 </script>

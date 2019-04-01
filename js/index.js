@@ -54,7 +54,7 @@ var xm = new Vue({
         currentPostId: '',
         currentCommentId: '',
         selectedCatId: '',
-        postIndex:-1
+        postIndex: -1
     },
     methods: {
         goClose() { //关闭遮罩
@@ -75,10 +75,9 @@ var xm = new Vue({
             window.location.href = "user.html"
         },
         readChange(item, index, e) { //产看文章
-            if(this.postIndex != index) {
+            if (this.postIndex != index) {
                 this.postIndex = index;
-            }
-            else {
+            } else {
                 this.postIndex = -1;
             }
 
@@ -398,7 +397,7 @@ var xm = new Vue({
                 this.numIndex = index;
             }
             var num = index + 4
-            this.currentIndex =num
+            this.currentIndex = num
             var list = this.ForumCate
             var id = list[num].id
             $.ajax({
@@ -410,10 +409,9 @@ var xm = new Vue({
                 dataType: 'json',
                 success: (res) => {
                     this.titleList = res.result
-                    if(this.titleList.length == 0) {
+                    if (this.titleList.length == 0) {
                         this.isNone = true;
-                    }
-                    else {
+                    } else {
                         this.isNone = false;
                     }
                 }
@@ -424,7 +422,7 @@ var xm = new Vue({
                 this.currentIndex = index;
             }
             if (index == 3) {
-                this.ismore = !this.ismore
+                this.ismore = true
                 return
             } else {
                 this.ismore = false
@@ -440,10 +438,9 @@ var xm = new Vue({
                 dataType: 'json',
                 success: (res) => {
                     this.titleList = res.result;
-                    if(this.titleList.length == 0) {
+                    if (this.titleList.length == 0) {
                         this.isNone = true;
-                    }
-                    else {
+                    } else {
                         this.isNone = false;
                     }
                 }
