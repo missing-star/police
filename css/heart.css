@@ -458,3 +458,76 @@
     position: fixed;
     z-index: 111;
 }
+
+/* 关闭 */
+.close {
+    width: 30px;
+    height: 30px;
+    background: url(../img/错.png)no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 40px;
+    right: 50px;
+}
+
+
+/* 修改密码 */
+.pass {
+    width: 600px;
+    height: 360px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.pass_top {
+    height: 64px;
+    font-size: 24px;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 1);
+    line-height: 64px;
+    text-align: center;
+    border-bottom: 1px solid #B8B8B8;
+}
+
+.pass_uu li {
+    text-align: center;
+    font-size: 18px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 1);
+    line-height: 18px;
+    margin-top: 35px;
+}
+
+.pass_uu li span {
+    display: inline-block;
+    width: 126px;
+    text-align: right;
+}
+
+.pass_uu li input {
+    width: 256px;
+    height: 26px;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(229, 229, 229, 1);
+    outline: none;
+}
+
+.pass_bot p {
+    width: 231px;
+    height: 28px;
+    background: rgba(126, 206, 244, 1);
+    border-radius: 5px;
+    text-align: center;
+    line-height: 28px;
+    font-size: 18px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(254, 254, 254, 1);
+    margin: 46px auto;
+}

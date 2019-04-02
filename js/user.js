@@ -15,7 +15,6 @@ var xm = new Vue({
         isone: true, //发布
         isbox: false, //回复
         isnone: false, //没有回复，发布
-        isdetele: false, //删除切换
         titleList: [],
         list: [{}],
         comlist: [{}],
@@ -35,16 +34,73 @@ var xm = new Vue({
         currentCommentId: '',
         oneIndex: -1,
         twoIndex: -1,
+        isdetele: -1, //删除切换
         replyComment: '', //回复评论的内容,
-
         currentComment: {}, //当前查看的评论,
+        Opsw: '',
+        Npsw: '',
+        Tpsw: ''
     },
     methods: {
-        TagDetele() { //删除切换
-            this.isdetele = !this.isdetele
+        gouser() { //跳转我的主页
+            window.location.href = "user.html"
+        },
+        goPass() { //修改密码
+            this.isshade = true
+            this.ispass = true
+        },
+        editChange() { //修改密码
+            if (this.Npsw == this.Tpsw) {
+                $.ajax({
+                    type: "post",
+                    url: `${api}/index/api/changePwd`,
+                    async: true,
+                    data: {
+                        oldpassword: this.Opsw,
+                        newPassword: this.Npsw
+                    },
+                    dataType: 'json',
+                    success: (res) => {
+                        console.log(res)
+                        if (res.code == 1) {
+                            this.isshade = false
+                            this.ispass = false
+                        } else {
+                            alert(res.msg)
+                        }
+
+                    }
+                })
+            } else {
+                alert("两次密码输入不一致")
+            }
+        },
+        quitChange() { //退出登录
+            $.ajax({
+                type: "post",
+                url: `${api}/index/api/logout`,
+                async: true,
+                data: {},
+                dataType: 'json',
+                success: (res) => {
+                    sessionStorage.clear()
+                    if (res.code == 1) {
+                        window.location.href = 'login.html';
+                    } else {
+                        alert(res.msg);
+                    }
+                }
+            })
+        },
+        TagDetele(index) { //删除切换
+            if (this.isdetele != index) {
+                this.isdetele = index;
+            } else {
+                this.isdetele = -1;
+            }
         },
         cancel() {
-            this.isdetele = !this.isdetele
+            this.isdetele = -1;
         },
         goClose() { //关闭遮罩
             this.isshade = false
@@ -127,9 +183,6 @@ var xm = new Vue({
         userTag() { //切换
             this.isone = !this.isone
         },
-
-
-
         commentChange(post_id, comment_id, uid, type) { //发布评论
             if (comment_id) {
                 if (this.replyComment.trim() == '') {
@@ -150,6 +203,7 @@ var xm = new Vue({
                         this.replyComment = '';
                         if (type == 1) {
                             this.oneIndex = -1;
+                            this.twoIndex = -1;
                             this.lookchange(this.currentPostId, this.currentCommentId);
                         } else {
                             this.currentActive = -1;

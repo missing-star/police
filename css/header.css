@@ -341,7 +341,7 @@
 .pagination li {
     float: left;
     height: 30px;
-    border-radius: 5px;
+    border-radius: 3px;
     margin: 3px;
     color: #666;
 }
@@ -372,4 +372,12 @@
 .pagination .one a {
     width: 60px;
     height: 30px;
+}
+
+.page_test {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
 }

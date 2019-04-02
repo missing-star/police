@@ -31,9 +31,9 @@
                 <div class="header_two">
                     <span></span>
                     <ul class="header_two_uu">
-                        <li>我的主页</li>
-                        <li>退出登录</li>
-                        <li @click="">修改密码</li>
+                        <li @click="gouser">我的主页</li>
+                        <li @click="quitChange">退出登录</li>
+                        <li @click="goPass">修改密码</li>
                     </ul>
                 </div>
             </div>
@@ -48,21 +48,7 @@
                 </div>
                 <div class="user_content_text">
                     <p>{{userName}}</p>
-                    <!-- <div class="user_content_name" v-show="isname">
-                        <div class="user_edit">
-                            聊天室昵称：<span id="up_text">哈哈哈</span>
-                        </div>
-                        <span class="user_content_btn" @click="editName">修改</span>
-                    </div>
-
-                    <div class="user_content_one" v-show="!isname">
-                        <input type="text" id="editor">
-                        <span @click="confire">确认修改</span>
-                        <span @click="editName">取消</span>
-                    </div> -->
                 </div>
-
-
             </div>
             <div class="user_content_right">
                 <p>总积分</p>
@@ -83,8 +69,8 @@
                     <div class="content_list" v-for="(item,index) in titleList">
                         <div class="user_delete">
                             <h4>{{item.title}}</h4>
-                            <span class="user-btn" v-show="!isdetele" @click="TagDetele">删除</span>
-                            <div class="user-delete" v-show="isdetele">
+                            <span class="user-btn" v-if="isdetele !=index" @click="TagDetele(index)">删除</span>
+                            <div class="user-delete" v-else>
                                 <span>确认删除</span>
                                 <span @click="cancel"></span>
                                 <span @click="deteleChange(item.id)"></span>
@@ -161,7 +147,7 @@
                             <ul class="agree_uu">
                                 <li>
                                     <img src="img/icon-06.png" alt="">
-                                    <span>点赞</span>
+                                    <span>{{item.records}}赞</span>
                                 </li>
                                 <li @click="agreeChange(index)">
                                     <img src="img/评论.png" alt="">
@@ -173,7 +159,7 @@
                         <!-- 回复 -->
                         <div class="agree_inp" v-if="currentActive==index">
                             <input type="text">
-                            <span @click="send()">发送</span>
+                            <span @click="commentChange('',comment.id,item.uid)">发送</span>
                         </div>
                     </div>
                     <div class="agree_one" v-for="(item,index) in replayList">
@@ -295,18 +281,18 @@
                     <ul class="pass_uu">
                         <li>
                             <span>原密码：</span>
-                            <input type="password">
+                            <input type="password" v-model="Opsw">
                         </li>
                         <li>
                             <span>新密码：</span>
-                            <input type="password">
+                            <input type="password" v-model="Npsw">
                         </li>
                         <li>
                             <span>重新输入密码：</span>
-                            <input type="password">
+                            <input type="password" v-model="Tpsw">
                         </li>
                     </ul>
-                    <p>确认</p>
+                    <p @click="editChange">确认</p>
                 </div>
             </div>
             <div class="close pointer" @click="goClose">

@@ -71,7 +71,7 @@ var xm = new Vue({
             if (this.Npsw == this.Tpsw) {
                 $.ajax({
                     type: "post",
-                    url: `${api}/index/api/logout`,
+                    url: `${api}/index/api/changePwd`,
                     async: true,
                     data: {
                         oldpassword: this.Opsw,
@@ -80,8 +80,12 @@ var xm = new Vue({
                     dataType: 'json',
                     success: (res) => {
                         console.log(res)
-                        this.isshade=false
-                        this.ispass =false
+                        if (res.code == 1) {
+                            this.isshade = false
+                            this.ispass = false
+                        } else {
+                            alert(res.msg)
+                        }
                     }
                 })
             } else {
@@ -393,6 +397,7 @@ var xm = new Vue({
                         this.replyComment = '';
                         if (type == 1) {
                             this.oneIndex = -1;
+                            this.twoIndex = -1;
                             this.lookchange(this.currentPostId, this.currentCommentId);
                         } else {
                             this.currentActive = -1;
@@ -547,7 +552,12 @@ var xm = new Vue({
             }
         })
 
+
+
         this.userName = sessionStorage.getItem("username")
+        if (this.userName == null) {
+            window.location.href = "login.html"
+        }
     },
     filters: {
         filterTime(time) {

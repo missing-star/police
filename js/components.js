@@ -1,7 +1,7 @@
 //首页banner
 const indexBanner = {
     name: 'cp-banner',
-    prop:['userName'],
+    prop: ['userName'],
     template: `
     <div class="index_header">
         <div class="index_content container">
@@ -23,7 +23,7 @@ const indexBanner = {
 
     methods: {
         data() {
-           userName:''
+            userName: ''
         },
         goAnswer() {
             this.$emit("go-answer")
@@ -32,7 +32,7 @@ const indexBanner = {
             this.$emit("go-name")
         }
     },
-    created(){
+    created() {
         this.userName = sessionStorage.getItem("username")
     }
 };
@@ -46,11 +46,11 @@ const indexPage = {
     <nav>
     <ul class="pagination">
       <li class="one" :class="{'disabled': current == 1}"><a href="javascript:;" @click="setCurrent(current - 1)">上一页</a></li>
-      <li :class="{'disabled': current == 1}"><a href="javascript:;" @click="setCurrent(1)"> 首页 </a></li>
-      <li v-for="p in grouplist" :class="{'active': current == p.val}"><a href="javascript:;"
-        @click="setCurrent(p.val)"> {{ p.text }} </a>
+    
+      <li v-for="p in grouplist" :class="{'active': current == p.val}" >
+         <span class="page_test" @click="setCurrent(p.val)">{{ p.text }}</span>   
       </li>
-      <li :class="{'disabled': current == page}"><a href="javascript:;" @click="setCurrent(page)"> 尾页 </a></li>
+   
       <li class="one" :class="{'disabled': current == page}"><a href="javascript:;" @click="setCurrent(current + 1)">下一页</a></li>
     </ul>
   </nav>

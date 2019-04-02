@@ -1,6 +1,7 @@
 var xm = new Vue({
     el: "#app",
     data: {
+        userName: '',
         isbook: false,
         isplug: false,
         isshade: false,
@@ -8,6 +9,7 @@ var xm = new Vue({
         isUser: false,
         isPage: true,
         istotur: false,
+        ispass: false,
         plugList: [],
         bookList: [],
         tutorialList: [],
@@ -30,9 +32,7 @@ var xm = new Vue({
         Tname: '',
         Tpicture: '',
         Tdata_url: '',
-
         message: 1,
-
 
         total: 1, // 记录总条数
         // display: 8, // 每页显示条数
@@ -40,10 +40,69 @@ var xm = new Vue({
 
         totalone: 8,
         currentone: 1,
+
+        Opsw: '',
+        Npsw: '',
+        Tpsw: ''
     },
     methods: {
+        goClose() { //关闭遮罩
+            this.isshade = false
+            this.ispass = false
+            this.istotur = false
+            this.isplug = false
+            this.isbook = false
+            $("body").removeClass("bod")
+        },
+        editChange() { //修改密码
+            if (this.Npsw == this.Tpsw) {
+                $.ajax({
+                    type: "post",
+                    url: `${api}/index/api/changePwd`,
+                    async: true,
+                    data: {
+                        oldpassword: this.Opsw,
+                        newPassword: this.Npsw
+                    },
+                    dataType: 'json',
+                    success: (res) => {
+                        console.log(res)
+                        if (res.code == 1) {
+                            this.isshade = false
+                            this.ispass = false
+                        } else {
+                            alert(res.msg)
+                        }
+
+                    }
+                })
+            } else {
+                alert("两次密码输入不一致")
+            }
+        },
+        goPass() { //修改密码
+            this.isshade = true
+            this.ispass = true
+        },
         gouser() { //跳转我的主页
             window.location.href = "user.html"
+        },
+        quitChange() { //退出登录
+            $.ajax({
+                type: "post",
+                url: `${api}/index/api/logout`,
+                async: true,
+                data: {},
+                dataType: 'json',
+                success: (res) => {
+                    sessionStorage.clear()
+                    if (res.code == 1) {
+                        window.location.href = 'login.html';
+                    } else {
+                        alert(res.msg);
+                    }
+                }
+            })
         },
         goname() { //个人信息
             $(".header_two").slideToggle("400");
@@ -196,7 +255,11 @@ var xm = new Vue({
             url = url.replace("\"", "").replace("\"", "");;
             console.log(url)
             var down = api + "/" + url
-            window.open(down)
+            console.log(down)
+            var $form = $('<form></form>');
+            $form.attr('action', down);
+            $form.appendTo($('body'));
+            $form.submit();
         },
         pagechange: function (currentPage) { //书籍分页
             var book_id = sessionStorage.getItem('book_id')
