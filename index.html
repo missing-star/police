@@ -31,7 +31,7 @@
                 </div>
                 <div class="header_name">
                     <span><img src="" alt=""></span>
-                    <span @click="goname">张三</span>
+                    <span @click="goname">{{userName}}</span>
                 </div>
                 <!-- 通知 -->
                 <div class="answer">
@@ -47,7 +47,7 @@
                     <span></span>
                     <ul class="header_two_uu">
                         <li @click="gouser">我的主页</li>
-                        <li>退出登录</li>
+                        <li @click="quitChange">退出登录</li>
                         <li @click="goPass">修改密码</li>
                     </ul>
                 </div>
@@ -367,7 +367,7 @@
                             </div>
                             <p v-html="item.content"></p>
                             <div class="see_uu_three">
-                                <div @click="likePostOrComment('',item.comment_id,1)" class="see_uu_btn pointer">
+                                <div @click="likePostOrComment('',item.id,1)" class="see_uu_btn pointer">
                                     <img v-if="item.status == 0" src="img/icon-06.png" alt="">
                                     <img v-else src="img/icon-07.png" alt="">
                                     <span>{{item.phraise}}赞</span>
@@ -413,18 +413,18 @@
                     <ul class="pass_uu">
                         <li>
                             <span>原密码：</span>
-                            <input type="password">
+                            <input type="password" v-model="Opsw">
                         </li>
                         <li>
                             <span>新密码：</span>
-                            <input type="password">
+                            <input type="password" v-model="Npsw">
                         </li>
                         <li>
                             <span>重新输入密码：</span>
-                            <input type="password">
+                            <input type="password" v-model="Tpsw">
                         </li>
                     </ul>
-                    <p>确认</p>
+                    <p @click="editChange">确认</p>
                 </div>
             </div>
 

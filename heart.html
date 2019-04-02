@@ -9,34 +9,37 @@
     <link rel="stylesheet" href="css/reset.css?v=1.0.0">
     <link rel="stylesheet" href="css/header.css?v=1.0.0">
     <link rel="stylesheet" href="css/heart.css?v=1.0.0">
- 
+
     <link rel="stylesheet" type="text/css" href="css/page/zxf_page.css?v=1.0.0" />
 </head>
 
 <body>
 
     <div id="app" v-cloak>
-        <!-- 头部 -->
-        <cp-banner @go-answer="goAnswer" @go-name="goname"></cp-banner>
-        <!-- 通知 -->
-        <div class="heart_banner container">
-            <div class="answer">
-                <span></span>
-                <ul class="answer_uu">
-                    <li v-for="item in list"></li>
-                </ul>
-                <p>查看全部回复</p>
-            </div>
-            <!-- 个人中心 -->
-            <div class="header_two">
-                <span></span>
-                <ul class="header_two_uu">
-                    <li @click="gouser">我的主页</li>
-                    <li>退出登录</li>
-                    <li @click="">修改密码</li>
-                </ul>
+        <div class="heart_top">
+            <!-- 头部 -->
+            <cp-banner @go-answer="goAnswer" @go-name="goname"></cp-banner>
+            <!-- 通知 -->
+            <div class="heart_banner container">
+                <div class="answer">
+                    <!-- <span></span> -->
+                    <ul class="answer_uu">
+                        <li v-for="item in list"></li>
+                    </ul>
+                    <p>查看全部回复</p>
+                </div>
+                <!-- 个人中心 -->
+                <div class="header_two">
+                    <span></span>
+                    <ul class="header_two_uu">
+                        <li @click="gouser">我的主页</li>
+                        <li>退出登录</li>
+                        <li @click="">修改密码</li>
+                    </ul>
+                </div>
             </div>
         </div>
+
 
 
         <!-- 内容 -->

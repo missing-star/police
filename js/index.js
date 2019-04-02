@@ -28,7 +28,7 @@ var xm = new Vue({
         changeRed: -1,
         currentActive: -1,
         oneIndex: -1,
-        twoIndex:-1,
+        twoIndex: -1,
         currentIndex: 0,
         numIndex: -1,
         commentActive: -1,
@@ -43,9 +43,52 @@ var xm = new Vue({
         selectedCatId: '',
         postIndex: -1,
         isCreated: false, //是否创建了富文本
-        KindEditor: ''
+        KindEditor: '',
+        userName: '',
+        Opsw: '',
+        Npsw: '',
+        Tpsw: '',
     },
     methods: {
+        quitChange() { //退出登录
+            $.ajax({
+                type: "post",
+                url: `${api}/index/api/logout`,
+                async: true,
+                data: {},
+                dataType: 'json',
+                success: (res) => {
+                    sessionStorage.clear()
+                    if (res.code == 1) {
+                        window.location.href = 'login.html';
+                    } else {
+                        alert(res.msg);
+                    }
+                }
+            })
+        },
+        editChange() { //修改密码
+            if (this.Npsw == this.Tpsw) {
+                $.ajax({
+                    type: "post",
+                    url: `${api}/index/api/logout`,
+                    async: true,
+                    data: {
+                        oldpassword: this.Opsw,
+                        newPassword: this.Npsw
+                    },
+                    dataType: 'json',
+                    success: (res) => {
+                        console.log(res)
+                        this.isshade=false
+                        this.ispass =false
+                    }
+                })
+            } else {
+                alert("两次密码输入不一致")
+            }
+
+        },
         goClose() { //关闭遮罩
             this.isshade = false
             this.isforum = false
@@ -89,7 +132,6 @@ var xm = new Vue({
                     this.replaylist = res.data.replay;
                 }
             })
-
         },
         gospeak(index) { //回复
             this.currentActive = this.currentActive == index ? -1 : index;
@@ -97,7 +139,7 @@ var xm = new Vue({
         gospeak1(index) { //查看回复  回复
             this.oneIndex = this.oneIndex == index ? -1 : index
         },
-        gospeak2(index){
+        gospeak2(index) {
             this.twoIndex = this.twoIndex == index ? -1 : index
         },
         goPass() { //修改密码
@@ -401,7 +443,6 @@ var xm = new Vue({
         },
         //文章点赞
         likePostOrComment(post_id, comment_id, type) {
-            console.log(post_id)
             var data = {};
             $.ajax({
                 url: `${api}/index/api/phraisePost`,
@@ -412,7 +453,6 @@ var xm = new Vue({
                     comment_id: comment_id
                 },
                 success: (res) => {
-                    console.log(res)
                     if (type == 1) {
                         //弹窗评论点赞
                         this.lookchange(this.currentPostId, this.currentCommentId);
@@ -506,6 +546,8 @@ var xm = new Vue({
                 this.chatList = res.data
             }
         })
+
+        this.userName = sessionStorage.getItem("username")
     },
     filters: {
         filterTime(time) {

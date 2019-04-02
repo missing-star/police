@@ -1,6 +1,7 @@
 //首页banner
 const indexBanner = {
     name: 'cp-banner',
+    prop:['userName'],
     template: `
     <div class="index_header">
         <div class="index_content container">
@@ -13,7 +14,7 @@ const indexBanner = {
                 </div>
                 <div class="header_name">
                     <span><img src="" alt=""></span>
-                    <span @click="goname">张三</span>
+                    <span @click="goname">{{userName}}</span>
                 </div>
             </div>
         </div>
@@ -21,12 +22,18 @@ const indexBanner = {
     `,
 
     methods: {
+        data() {
+           userName:''
+        },
         goAnswer() {
             this.$emit("go-answer")
         },
         goname() {
             this.$emit("go-name")
         }
+    },
+    created(){
+        this.userName = sessionStorage.getItem("username")
     }
 };
 

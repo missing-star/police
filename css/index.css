@@ -1118,7 +1118,7 @@ td {
     box-shadow: 3px 3px 8px 1px rgba(126, 126, 126, 1);
     border-radius: 8px;
     position: absolute;
-    top: 80px;
+    top: 50px;
     right: 50px;
     display: none;
 }
@@ -1170,7 +1170,7 @@ td {
     box-shadow: 3px 3px 8px 1px rgba(126, 126, 126, 1);
     border-radius: 4px;
     position: absolute;
-    top: 75px;
+    top: 58px;
     right: 25px;
     display: none;
 }

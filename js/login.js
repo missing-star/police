@@ -7,7 +7,7 @@ var xm = new Vue({
         isorder: false, //接单员登录
         Oname: '',
         Opsw: '',
-        ip: '',
+        ip: '127.0.0.1',
         Pname: '',
         Ppsw: '',
     },
@@ -51,6 +51,7 @@ var xm = new Vue({
             })
         },
         policeEnter: function () { //警员登录
+            var that =this
             $.ajax({
                 type: "post",
                 url: `${api}/index/api/policeLogin`,
@@ -62,6 +63,7 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: function (res) {
+                    sessionStorage.setItem("username",that.Pname)
                     if(res.code == 1) {
                         window.location.href = 'index.html';
                     }
@@ -73,8 +75,9 @@ var xm = new Vue({
         }
     },
     created() {
-        getIpAdd((ip) => {
-            this.ip = ip;
-        });
+        // getIpAdd((ip) => {
+        //     this.ip = ip;
+        //     console.log(ip)
+        // });
     }
 })

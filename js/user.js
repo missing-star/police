@@ -1,6 +1,7 @@
 var xm = new Vue({
     el: "#app",
     data: {
+        userName: '',
         isshade: false,
         ispass: false,
         isname: true,
@@ -14,6 +15,7 @@ var xm = new Vue({
         isone: true, //发布
         isbox: false, //回复
         isnone: false, //没有回复，发布
+        isdetele: false, //删除切换
         titleList: [],
         list: [{}],
         comlist: [{}],
@@ -32,11 +34,18 @@ var xm = new Vue({
         currentPostId: '',
         currentCommentId: '',
         oneIndex: -1,
+        twoIndex: -1,
         replyComment: '', //回复评论的内容,
 
         currentComment: {}, //当前查看的评论,
     },
     methods: {
+        TagDetele() { //删除切换
+            this.isdetele = !this.isdetele
+        },
+        cancel() {
+            this.isdetele = !this.isdetele
+        },
         goClose() { //关闭遮罩
             this.isshade = false
             this.ispass = false
@@ -67,6 +76,9 @@ var xm = new Vue({
         },
         gospeak1(index) { //查看回复  回复
             this.oneIndex = this.oneIndex == index ? -1 : index
+        },
+        gospeak2(index) {
+            this.twoIndex = this.twoIndex == index ? -1 : index
         },
         lookchange(post_id, comment_id) { //查看回复
             this.currentPostId = post_id;
@@ -170,9 +182,6 @@ var xm = new Vue({
         },
         //文章点赞
         likePostOrComment(post_id, comment_id, type) {
-            console.log(post_id)
-            console.log(comment_id)
-            console.log(type)
             var data = {};
             $.ajax({
                 url: `${api}/index/api/phraisePost`,
@@ -183,15 +192,21 @@ var xm = new Vue({
                     comment_id: comment_id
                 },
                 success: (res) => {
-                    console.log(res)
-                    console.log(post_id)
-                    console.log(comment_id)
-                    console.log(type)
                     if (type == 1) {
                         //弹窗评论点赞
                         this.lookchange(this.currentPostId, this.currentCommentId);
                     } else {
-                        this.bannerChange(this.currentIndex);
+                        // this.bannerChange(this.currentIndex);
+                        $.ajax({
+                            type: "post",
+                            url: `${api}/index/api/myPage`,
+                            async: true,
+                            data: {},
+                            dataType: 'json',
+                            success: (res) => {
+                                this.titleList = res.data.post
+                            }
+                        })
                     }
                 },
                 error: (err) => {
@@ -205,8 +220,29 @@ var xm = new Vue({
         filterImg(content) {
             return content.replace('作者', '啊啊啊啊===作者');
         },
-        bannerChange(){
-
+        deteleChange(index) { //删除
+            $.ajax({
+                type: "post",
+                url: `${api}/index/api/deletePost`,
+                data: {
+                    post_id: index,
+                },
+                dataType: 'json',
+                success: (res) => {
+                    this.isdetele = false
+                    $.ajax({
+                        type: "post",
+                        url: `${api}/index/api/myPage`,
+                        async: true,
+                        data: {},
+                        dataType: 'json',
+                        success: (res) => {
+                            console.log(res)
+                            this.titleList = res.data.post
+                        }
+                    })
+                }
+            })
         }
     },
     components: {
@@ -226,9 +262,10 @@ var xm = new Vue({
                 this.userlist = res.data.intergrals
                 this.commentList = res.data.comments.comment
                 this.replayList = res.data.comments.replay
-                this.bannerChange(0);
             }
         })
+
+        this.userName = sessionStorage.getItem("username")
     },
     filters: {
         filterTime(time) {

@@ -1,5 +1,6 @@
 .user_header {
     width: 100%;
+    position: fixed;
 }
 
 .user_banner {
@@ -871,4 +872,48 @@ img.icon-like {
     top: 40px;
     right: 50px;
     cursor: pointer;
+}
+
+.user_delete {
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-btn {
+    font-size: 16px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(121, 121, 121, 1);
+    line-height: 24px;
+    cursor: pointer;
+}
+
+.user-delete {
+    font-size: 16px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(121, 121, 121, 1);
+    line-height: 24px;
+    cursor: pointer;
+}
+
+.user-delete span:nth-child(2) {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background: url(../img/cha@2x.png)no-repeat;
+    background-size: 100% 100%;
+    margin: 0 9px 0 11px;
+}
+
+.user-delete span:nth-child(3) {
+    display: inline-block;
+    width: 17px;
+    height: 14px;
+    background: url(../img/gou@2x.png)no-repeat;
+    background-size: 100% 100%;
+}
+
+.list_two {
+    padding-left: 62px;
 }

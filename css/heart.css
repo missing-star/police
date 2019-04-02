@@ -38,7 +38,7 @@
     height: 456px;
     background: rgba(255, 255, 255, 1);
     padding-top: 32px;
-    margin-top: 60px;
+    margin-top: 62px;
     position: relative;
 }
 
@@ -451,4 +451,10 @@
     text-align: center;
     line-height: 32px;
     margin: 0 auto;
+}
+
+.heart_top {
+    width: 100%;
+    position: fixed;
+    z-index: 111;
 }
