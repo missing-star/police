@@ -204,7 +204,19 @@ var xm = new Vue({
                         if (type == 1) {
                             this.oneIndex = -1;
                             this.twoIndex = -1;
+                            this.currentActive = -1
                             this.lookchange(this.currentPostId, this.currentCommentId);
+                            $.ajax({
+                                type: "post",
+                                url: `${api}/index/api/myPage`,
+                                async: true,
+                                data: {},
+                                dataType: 'json',
+                                success: (res) => {
+                                    this.commentList = res.data.comments.comment
+                                    this.replayList = res.data.comments.replay
+                                }
+                            })
                         } else {
                             this.currentActive = -1;
                         }

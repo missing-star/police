@@ -20,6 +20,7 @@ var xm = new Vue({
         musicSort: [], //音乐分类
         bookSort: [], //书籍分类
         tutorialSort: [], //教程分类
+        tutorialList1: [], //研判工具
         current1: 0,
         number: 0,
         description: '',
@@ -43,7 +44,8 @@ var xm = new Vue({
 
         Opsw: '',
         Npsw: '',
-        Tpsw: ''
+        Tpsw: '',
+        hide: false,
     },
     methods: {
         goClose() { //关闭遮罩
@@ -130,58 +132,46 @@ var xm = new Vue({
             })
         },
         turtorChange(index, tutorial_id) { //教程分类
-            $(".book_left_uu .Pne").removeClass("white")
             this.number = index
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/tutorialList`,
-                async: true,
-                data: {
-                    page: 1,
-                    tutorial_id: tutorial_id
-                },
-                dataType: 'json',
-                success: (res) => {
-                    console.log(res)
-                    this.tutorialList = res.data
-                    this.totalone = res.data.length
-                    sessionStorage.setItem('tutorial_id', tutorial_id)
-                }
-            })
+            if (tutorial_id) {
+                console.log(111)
+
+                $.ajax({
+                    type: "post",
+                    url: `${api}/index/api/tutorialList`,
+                    async: true,
+                    data: {
+                        page: 1,
+                        tutorial_id: tutorial_id
+                    },
+                    dataType: 'json',
+                    success: (res) => {
+                        console.log(res)
+                        this.hide = true
+                        this.tutorialList = res.data
+                        this.totalone = res.data.length
+                        sessionStorage.setItem('tutorial_id', tutorial_id)
+                    }
+                })
+            } else {
+                $.ajax({
+                    type: "post",
+                    url: `${api}/index/api/pluginList`,
+                    async: true,
+                    data: {
+                        page: 1,
+                        tool_id: index + 4
+                    },
+                    dataType: 'json',
+                    success: (res) => {
+                        this.hide = false
+                        this.tutorialList1 = res.data
+                    }
+                })
+            }
+
         },
-        Ychange() { //研判工具
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/pluginList`,
-                async: true,
-                data: {
-                    page: 1,
-                    tool_id: 4
-                },
-                dataType: 'json',
-                success: (res) => {
-                    console.log(res)
-                    this.tutorialList = res.data
-                }
-            })
-        },
-        Jchange() { //技战法
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/pluginList`,
-                async: true,
-                data: {
-                    page: 1,
-                    tool_id: 5
-                },
-                dataType: 'json',
-                success: (res) => {
-                    console.log(res)
-                    this.tutorialList = res.data
-                }
-            })
-        },
-        openChange(index) { //详情页
+        openChange(index) { //插件详情页
             $.ajax({
                 type: "post",
                 url: `${api}/index/api/toolDetail`,
@@ -347,7 +337,7 @@ var xm = new Vue({
             //必须同源才能下载
             var alink = document.createElement("a");
             alink.href = this.imgs;
-            alink.download = `${api}/${data_url}`; //图片名
+            alink.download = `${api}/${data_url}`;
             console.log(alink.download)
             alink.click();
         }
@@ -371,11 +361,32 @@ var xm = new Vue({
                 this.bookList = res.data.book.list
                 this.bookSort = res.data.book.sort
                 this.tutorialList = res.data.tutorial.list
-                this.tutorialSort = res.data.tutorial.sort
+                var temp = res.data.tutorial.sort
+                temp.splice(0, 0, {
+                    name: "研判工具"
+                }, {
+                    name: '技战法'
+                })
+                this.tutorialSort = temp;
 
                 this.total = res.data.book.list.length
                 this.totalone = res.data.tutorial.list.length
                 sessionStorage.setItem('length', JSON.stringify(res.data.plugin.length))
+            }
+        })
+
+        $.ajax({
+            type: "post",
+            url: `${api}/index/api/pluginList`,
+            async: true,
+            data: {
+                page: 1,
+                tool_id: 4
+            },
+            dataType: 'json',
+            success: (res) => {
+                this.hide = false
+                this.tutorialList1 = res.data
             }
         })
     },

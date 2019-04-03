@@ -161,6 +161,7 @@
     height: 22px;
     background: url(../img/播放.png)no-repeat;
     background-size: 100% 100%;
+    cursor: pointer;
 }
 
 .music_img span:nth-child(2) {
@@ -170,6 +171,7 @@
     background: url(../img/xiazai.png)no-repeat;
     background-size: 100% 100%;
     margin: 0 15px 0 14px;
+    cursor: pointer;
 }
 
 .music_btn {

@@ -770,7 +770,7 @@ img.icon-like {
 }
 
 .see_inp input {
-    width: 558px;
+    width: 82%;
     height: 28px;
     background: rgba(242, 242, 242, 1);
     border: 1px solid rgba(203, 201, 201, 1);
@@ -785,7 +785,7 @@ img.icon-like {
     background: url(../img/表情.png)no-repeat;
     background-size: 100% 100%;
     position: absolute;
-    right: 92px;
+    right: 16%;
     top: 5px;
 }
 

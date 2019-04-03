@@ -140,8 +140,8 @@
                         <ul class="book_left_uu">
                             <li v-for="(item,index) in tutorialSort" :class="{white:index==number}"
                                 @click="turtorChange(index,item.id)">{{item.name}}</li>
-                            <li class="Pne" @click="Ychange">研判工具</li>
-                            <li class="Pne" @click="Jchange">技战法</li>
+                            <!-- <li class="Pne" @click="Ychange">研判工具</li> -->
+                            <!-- <li class="Pne" @click="Jchange">技战法</li> -->
                         </ul>
                     </div>
                 </div>
@@ -152,14 +152,22 @@
                         <span></span>
                     </div>
 
-                    <div class="book_right_bot">
+                    <div class="book_right_bot" v-if="!hide">
                         <ul class="book_uu">
-                            <li v-for="(item,index) in tutorialList" @click="Tdown(item.id)">
+                            <li v-for="(item,index) in tutorialList1" @click="openChange(item.id)">
                                 <span><img src="" alt=""></span>
                                 <p>{{item.name}}</p>
                             </li>
                         </ul>
                     </div>
+                    <div class="book_right_bot" v-if="hide">
+                            <ul class="book_uu">
+                                <li v-for="(item,index) in tutorialList" @click="Tdown(item.id)">
+                                    <span><img src="" alt=""></span>
+                                    <p>{{item.name}}</p>
+                                </li>
+                            </ul>
+                        </div>
                     <!-- 分页 -->
                     <cp-page :total="totalone" :current-page='currentone' @pagechange="pagechangeOne"></cp-page>
                 </div>

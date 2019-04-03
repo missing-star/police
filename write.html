@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>浦口公安局</title>
+    <link rel="stylesheet" href="css/reset.css?v=1.0.0">
+    <link rel="stylesheet" href="css/index.css?v=1.0.2">
+    <link rel="stylesheet" type="text/css" href="css/page/zxf_page.css?v=1.0.0" />
+    <link rel="stylesheet" href="css/page/iconfont.css?v=1.0.1">
+</head>
+
+<body>
+
+    <div id="app" v-cloak>
+
+
+
+        <div class="content">
+            <div class="content_main container">
+                <div class="content_right">
+                    <!-- 论坛报备 -->
+                    <div class="content_make">
+                        <ul class="make_uu">
+                            <li @click="writeReply">
+                                <img src="img/论坛.png" alt="">
+                                <p>写论坛</p>
+                            </li>
+                            <li @click="reportChange">
+                                <img src="img/报备.png" alt="">
+                                <p>去报备</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 论谈 -->
+        <div class="forum" >
+            <h3>写论坛</h3>
+            <div class="forum_main">
+                <ul class="forum_main_uu">
+                    <li>
+                        <label class="">论坛标题：</label>
+                        <input type="text" v-model="Ptitle">
+                    </li>
+                    <li>
+                        <label for="">论坛内容：</label>
+                        <div class="forum_content">
+                            <textarea v-model="Pcontent" id="Ftext" cols="30" rows="10">
+                                </textarea>
+                        </div>
+                    </li>
+                    <li>
+                        <label class="forum_text">关键词：</label>
+                        <div class="forum_tag">
+                            <span v-for="(item,index) in ForumCate" :class="{sky:changeRed == index,pointer:true}"
+                                @click="btnChange(item.id,index)">{{item.title}}</span>
+                        </div>
+                    </li>
+                </ul>
+                <span class="forum_btn" @click="pulishChange"></span>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
+<script src="js/jquery.min.js?v=1.0.0"></script>
+<script src="js/vue.js?v=1.0.0"></script>
+<script src="js/components.js?v=1.0.0"></script>
+<script type="text/javascript" src="js/pagejs/zxf_page.js?v=1.0.0"></script>
+<script src="js/api.js?v=1.0.0"></script>
+<script src="kindeditor/kindeditor-all-min.js"></script>
+<script src="kindeditor/zh-CN.js"></script>
+<script src="js/write.js?v=1.0.0"></script>
