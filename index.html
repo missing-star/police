@@ -37,7 +37,11 @@
                 <div class="answer">
                     <ul class="answer_uu">
                         <li v-for="item in list">
-                            {{item.nickname}}回复你{{item.content}}
+                            {{item.nickname}} <span>评论了你的</span> {{item.title}}
+                            {{item.content}}
+                        </li>
+                        <li v-for="item in replaylist">
+                            {{item.nickname}} <span>回复你</span>{{item.title}}
                         </li>
                     </ul>
                     <p>查看全部回复</p>

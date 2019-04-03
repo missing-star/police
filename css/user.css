@@ -918,3 +918,20 @@ img.icon-like {
 .list_two {
     padding-left: 62px;
 }
+
+.user_push {
+    display: inline-block;
+    width: 153px;
+    height: 159px;
+    background: url(../img/没有发布.png)no-repeat;
+    background-size: 100% 100%;
+    margin: 94px 0 0 227px;
+}
+
+.user_img {
+    display: inline-block;
+    width: 153px;
+    height: 159px;
+    background: url(../img/没有回复.png)no-repeat;
+    background-size: 100% 100%;
+}

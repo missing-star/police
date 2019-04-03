@@ -15,12 +15,15 @@ var xm = new Vue({
         isone: true, //发布
         isbox: false, //回复
         isnone: false, //没有回复，发布
+        istwo: false, //没有回复，发布
+        ispush: false, //
         titleList: [],
-        list: [{}],
-        comlist: [{}],
+        list: [],
+        comlist: [],
         userlist: [],
         seelist: [], //查看回复
         replayList: [], //回复
+        replaylist: [],
         commentList: [], //回复
         msg: "阅读全文",
         num: "123",
@@ -120,6 +123,18 @@ var xm = new Vue({
         },
         goAnswer() { //通知
             $(".answer").slideToggle("400");
+            $.ajax({
+                type: "post",
+                url: `${api}/index/api/allReplay`,
+                async: true,
+                data: {},
+                dataType: 'json',
+                success: (res) => {
+                    console.log(res)
+                    this.list = res.data.comment;
+                    this.replaylist = res.data.replay;
+                }
+            })
         },
         editName() {
             this.isname = !this.isname
@@ -328,6 +343,20 @@ var xm = new Vue({
                 this.userlist = res.data.intergrals
                 this.commentList = res.data.comments.comment
                 this.replayList = res.data.comments.replay
+
+                if (res.data.post == 0) {
+                    this.isone = true
+                } else {
+                    this.isone = false
+                }
+                if (res.data.comments.comment == 0 &&
+                    res.data.comments.replay == 0
+                ) {
+                    this.istwo = true
+                } else {
+                    this.istwo = false
+                }
+
             }
         })
 

@@ -3,27 +3,10 @@ var xm = new Vue({
     data: {
         show: false,
         isshade: false,
-        isent: -1, //查看文章
-        isnum: false, //通知显示数字
-        ismore: false, //更多
         isforum: false, //论坛
-        isCase: false, //报备
-        isauditing: false, //审核中
-        isall: false, //全部报备
         iscomment: false, //评论
-        isreply: false, //回复
-        isspeak: false, //查看回复
-        ispass: false, //修改密码
-        isshow: false, //报备TAG
-        isNone: false, //未搜索到
-        isstar: false, //所有报备
         ForumCate: [], //论坛分类
         titleList: [], //论坛列表
-        allList: [], //报备列表
-        list: [], //报备列表
-        seelist: [], //查看回复
-        repairSorts: [], //保修类型
-        repairList: [], //所有报备
         current: 0,
         changeRed: -1,
         currentActive: -1,
@@ -53,6 +36,7 @@ var xm = new Vue({
                 return false;
             }
             this.isCreated = true;
+            console.log(window.editor)
             window.editor = this.KindEditor.create('#Ftext', {
                 allowImageRemote: false,
                 resizeType: 0,
@@ -96,34 +80,21 @@ var xm = new Vue({
                 }
             })
         },
-
-
-
-        getCharaLength(str) {
-            return str.replace(/[\u0391-\uFFE5]/g, "aa").length > 239;
-        },
-        filterImg(content) {
-            return content.replace('作者', '啊啊啊啊===作者');
-        },
-
     },
     created() {
         KindEditor.ready((K) => {
             this.KindEditor = K;
         });
 
-        // if (this.isCreated) {
-        //     return false;
-        // }
-        // this.isCreated = true;
-        // window.editor = this.KindEditor.create('#Ftext', {
-        //     allowImageRemote: false,
-        //     resizeType: 0,
-        //     uploadJson: './kindeditor/php/upload_json.php',
-        //     fileManagerJson: './kindeditor/php/file_manager_json.php',
-        //     allowFileManager: true,
-        //     items: ['bold', 'italic', 'underline', 'fontsize', 'image']
-        // });
+
+        window.editor = this.KindEditor.create('#Ftext', {
+            allowImageRemote: false,
+            resizeType: 0,
+            uploadJson: './kindeditor/php/upload_json.php',
+            fileManagerJson: './kindeditor/php/file_manager_json.php',
+            allowFileManager: true,
+            items: ['bold', 'italic', 'underline', 'fontsize', 'image']
+        });
     },
 
 })

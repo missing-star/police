@@ -97,7 +97,7 @@
     z-index: 111;
 }
 
-.answer span {
+.answer .cricle {
     position: absolute;
     top: -14px;
     right: 142px;
@@ -107,6 +107,11 @@
     border-width: 0 9px 15px;
     border-style: solid;
     border-color: transparent transparent white;
+}
+
+.answer_uu li span {
+    color: black;
+    font-size: 14px;
 }
 
 .answer_uu {
@@ -125,6 +130,12 @@
     border-bottom: 1px solid #B8B8B8;
     margin-bottom: 7px;
     cursor: pointer;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
 }
 
 .answer p {
