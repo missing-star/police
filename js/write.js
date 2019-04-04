@@ -2,19 +2,10 @@ var xm = new Vue({
     el: "#app",
     data: {
         show: false,
-        isshade: false,
-        isforum: false, //论坛
-        iscomment: false, //评论
+        show1: true,
+        show2: false,
         ForumCate: [], //论坛分类
-        titleList: [], //论坛列表
-        current: 0,
         changeRed: -1,
-        currentActive: -1,
-        oneIndex: -1,
-        twoIndex: -1,
-        currentIndex: 0,
-        numIndex: -1,
-        commentActive: -1,
         Ptitle: '', //论坛标题
         Pcontent: '', //论坛内容
         Pcomment: '', //评论内容
@@ -27,24 +18,11 @@ var xm = new Vue({
         postIndex: -1,
         isCreated: false, //是否创建了富文本
         KindEditor: '',
+        avtar: '',
     },
     methods: {
-        writeReply() { //写论坛
-            this.isshade = true
-            this.isforum = true
-            if (this.isCreated) {
-                return false;
-            }
-            this.isCreated = true;
-            console.log(window.editor)
-            window.editor = this.KindEditor.create('#Ftext', {
-                allowImageRemote: false,
-                resizeType: 0,
-                uploadJson: './kindeditor/php/upload_json.php',
-                fileManagerJson: './kindeditor/php/file_manager_json.php',
-                allowFileManager: true,
-                items: ['bold', 'italic', 'underline', 'fontsize', 'image']
-            });
+        fromShow() {
+            this.show = !this.show
         },
         btnChange(selectedCatId, index) { //写论坛 点击添加颜色
             this.changeRed = index;
@@ -61,39 +39,84 @@ var xm = new Vue({
                 alert('请选择分类标签');
                 return false;
             }
+            var imgUrl = sessionStorage.getItem("img");
+            console.log(imgUrl)
             $.ajax({
                 type: "post",
                 url: `${api}/index/api/publishPost`,
                 data: {
                     info_id: this.selectedCatId,
                     title: this.Ptitle,
-                    content: editor.html()
+                    content: editor.html(),
+                    picture: imgUrl
                 },
                 dataType: 'json',
                 success: (res) => {
                     this.allList = res.data;
-                    this.bannerChange(this.currentIndex);
                     this.selectedCatId = '';
                     this.Ptitle = '';
-                    this.Pcontent = '';
-                    this.goClose();
+                    this.Pcontent = ''; 
+                    window.location.href = "index.html"
                 }
             })
         },
+        upChange: function upChange(event) {
+            $(event.target).find('input.invisible').click();
+        },
+        downImg() {
+            var that = this
+            var img1 = event.target.files[0];
+            console.log(img1);
+            var formData = new FormData();
+            formData.append('file', img1);
+            $.ajax({
+                type: "post",
+                url: `${api}/index/api/postImage`,
+                data: formData,
+                processData: false,
+                async: false,
+                contentType: false,
+                dataType: "json",
+                success: function success(res) {
+                    if (res.code == 1) {
+                        that.show1 = false
+                        that.show2 = true
+                    }
+                    sessionStorage.setItem("img", res.res);
+                    var image = res.res
+                    image = image.replace(".", "");
+                    var avtar = `${api}${image}`
+                    $('.backimg').attr('src', avtar);
+                },
+            });
+        }
     },
     created() {
-        KindEditor.ready((K) => {
-            this.KindEditor = K;
-        });
+        this.$nextTick(() => {
+            KindEditor.ready((K) => {
+                this.KindEditor = K;
+                window.editor = this.KindEditor.create('#Ftext', {
+                    allowImageRemote: false,
+                    resizeType: 0,
+                    uploadJson: './kindeditor/php/upload_json.php',
+                    fileManagerJson: './kindeditor/php/file_manager_json.php',
+                    allowFileManager: true,
+                    items: ['bold', 'italic', 'underline', 'fontsize', 'image']
+                });
+            });
+        })
 
-
-        window.editor = this.KindEditor.create('#Ftext', {
-            allowImageRemote: false,
-            resizeType: 0,
-            uploadJson: './kindeditor/php/upload_json.php',
-            fileManagerJson: './kindeditor/php/file_manager_json.php',
-            allowFileManager: true,
-            items: ['bold', 'italic', 'underline', 'fontsize', 'image']
+        // 获取论坛分类
+        $.ajax({
+            type: "post",
+            url: `${api}/index/api/getForumCate`,
+            async: true,
+            data: {},
+            dataType: 'json',
+            success: (res) => {
+                console.log(res)
+                this.ForumCate = res.result;
+            }
         });
     },
 

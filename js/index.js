@@ -1,7 +1,10 @@
 var xm = new Vue({
     el: "#app",
     data: {
+        pIndex:-1,
         show: false,
+        isshow1:true,
+        hide: false,
         isshade: false,
         isent: -1, //查看文章
         isnum: false, //通知显示数字
@@ -24,6 +27,7 @@ var xm = new Vue({
         seelist: [], //查看回复
         repairSorts: [], //保修类型
         repairList: [], //所有报备
+        replaylist: [],
         current: 0,
         changeRed: -1,
         currentActive: -1,
@@ -112,9 +116,12 @@ var xm = new Vue({
         readChange(item, index, e) { //产看文章
             if (this.postIndex != index) {
                 this.postIndex = index;
+               
             } else {
                 this.postIndex = -1;
+                // this.hide = false
             }
+            this.pIndex = this.pIndex == index ? -1 : index
         },
         comChange(index) { //查看评论
             this.commentActive = this.commentActive == index ? -1 : index
@@ -151,21 +158,22 @@ var xm = new Vue({
             this.ispass = true
         },
         writeReply() { //写论坛
-            this.isshade = true
-            this.isforum = true
-            $("body").addClass("bod");
-            if (this.isCreated) {
-                return false;
-            }
-            this.isCreated = true;
-            window.editor = this.KindEditor.create('#Ftext', {
-                allowImageRemote: false,
-                resizeType: 0,
-                uploadJson: './kindeditor/php/upload_json.php',
-                fileManagerJson: './kindeditor/php/file_manager_json.php',
-                allowFileManager: true,
-                items: ['bold', 'italic', 'underline', 'fontsize', 'image']
-            });
+            window.location.href = "write.html"
+            // this.isshade = true
+            // this.isforum = true
+            // $("body").addClass("bod");
+            // if (this.isCreated) {
+            //     return false;
+            // }
+            // this.isCreated = true;
+            // window.editor = this.KindEditor.create('#Ftext', {
+            //     allowImageRemote: false,
+            //     resizeType: 0,
+            //     uploadJson: './kindeditor/php/upload_json.php',
+            //     fileManagerJson: './kindeditor/php/file_manager_json.php',
+            //     allowFileManager: true,
+            //     items: ['bold', 'italic', 'underline', 'fontsize', 'image']
+            // });
         },
         reportChange() { //打开报备
             this.isshade = true
@@ -237,27 +245,6 @@ var xm = new Vue({
                 success: (res) => {
                     console.log(res);
                     this.seelist = res.data;
-                }
-            })
-        },
-        confirm() { //确认修改
-            var myselect = document.getElementById("myselect");
-            var index = myselect.selectedIndex;
-            var list = this.roomList
-            var id = list[index].id
-            var chatId = sessionStorage.getItem('userInfo', id);
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/editChatroom`,
-                data: {
-                    topic_id: id,
-                    title: this.roomName,
-                    chat_id: chatId
-                },
-                dataType: 'json',
-                success: (res) => {
-                    this.isChatting = false
-                    this.isshade = false
                 }
             })
         },
@@ -338,6 +325,7 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
+                    console.log(res)
                     this.titleList = res.result;
                     if (this.titleList.length == 0) {
                         this.isNone = true;

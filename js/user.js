@@ -17,6 +17,7 @@ var xm = new Vue({
         isnone: false, //没有回复，发布
         istwo: false, //没有回复，发布
         ispush: false, //
+        isthree: false,
         titleList: [],
         list: [],
         comlist: [],
@@ -320,6 +321,7 @@ var xm = new Vue({
                         success: (res) => {
                             console.log(res)
                             this.titleList = res.data.post
+                            this.isdetele = -1
                         }
                     })
                 }
@@ -345,9 +347,9 @@ var xm = new Vue({
                 this.replayList = res.data.comments.replay
 
                 if (res.data.post == 0) {
-                    this.isone = true
+                    this.isthree = true
                 } else {
-                    this.isone = false
+                    this.isthree = false
                 }
                 if (res.data.comments.comment == 0 &&
                     res.data.comments.replay == 0

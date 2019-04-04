@@ -83,8 +83,14 @@
                     <div class="content_scroll">
                         <div class="content_list" v-for="(item,index) in titleList">
                             <h4>{{item.title}}</h4>
-                            <p class="content_text" @click="readChange(item,index)"
-                                :class="{entable:postIndex == index}" v-html="filterImg(item.content)"></p>
+
+                            <div class="content_mid">
+                                <img :src="'http://police.pzhkj.cn'+item.picture.replace('.','')" alt="" class="mid_img"
+                                    v-if="item.picture==null?hide:!hide" v-show="pIndex !==index">
+                                <p class="content_text" @click="readChange(item,index)"
+                                    :class="{entable:postIndex == index}" v-html="filterImg(item.content)"></p>
+                            </div>
+
                             <div class="comment">
                                 <p>发布于{{item.create_at}}</p>
                                 <ul>
@@ -242,7 +248,7 @@
         <!-- 遮罩 -->
         <div class="shade" v-cloak v-show="isshade">
             <!-- 论谈 -->
-            <div class="forum" v-show="isforum">
+            <!-- <div class="forum" v-show="isforum">
                 <h3>写论坛</h3>
                 <div class="forum_main">
                     <ul class="forum_main_uu">
@@ -267,7 +273,7 @@
                     </ul>
                     <span class="forum_btn" @click="pulishChange"></span>
                 </div>
-            </div>
+            </div> -->
 
             <!-- 报备 -->
             <div class="case" v-show="isCase">
