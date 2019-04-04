@@ -292,6 +292,7 @@ td {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1000000 !important;
     overflow: hidden;
+    max-height: auto!important;
 }
 
 .comment {

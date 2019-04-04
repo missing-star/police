@@ -163,7 +163,7 @@
 .content_list h4 {
     font-size: 24px;
     font-family: PingFangSC-Medium;
-    font-weight: 500;
+    font-weight: 600;
     color: rgba(0, 0, 0, 1);
     line-height: 23px;
     margin-bottom: 21px;
@@ -185,6 +185,7 @@
 }
 
 .entable {
+    height: auto!important;
     word-break: break-all;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -491,14 +492,23 @@
     height: 21px;
 }
 
+.report_list {
+    overflow: hidden;
+}
+
 .report_list_uu {
+    width: 106%;
     font-size: 18px;
     font-family: PingFangSC-Regular;
     font-weight: 400;
     color: rgba(0, 0, 0, 1);
     line-height: 28px;
-    height: 340px;
+    padding-bottom: 10px;
+    margin-top: 16px;
+    max-height: 340px;
     overflow: hidden;
+    /* overflow-x: hidden; */
+    overflow-y: scroll;
 }
 
 .report_list_uu li {
@@ -507,7 +517,7 @@
 }
 
 .report_list_uu li:nth-child(1) {
-    margin: 16px 0;
+    margin-bottom: 16px;
 }
 
 .report_list_uu li p:nth-child(2) {
@@ -1113,14 +1123,15 @@ td {
 /* 通知 */
 .answer {
     width: 322px;
-    height: 330px;
     background: rgba(255, 255, 255, 1);
     box-shadow: 3px 3px 8px 1px rgba(126, 126, 126, 1);
     border-radius: 8px;
     position: absolute;
     top: 50px;
     right: 50px;
+    height: auto;
     display: none;
+    overflow: hidden;
 }
 
 /* .answer span {
@@ -1141,9 +1152,11 @@ td {
 }
 
 .answer_uu {
+    width: 100%;
     padding: 11px 26px 0 16px;
-    height: 294px;
-    overflow: hidden;
+    max-height: 294px;
+    overflow-y: scroll;
+
 }
 
 .answer_uu li {
@@ -1688,7 +1701,7 @@ td {
 .content_list .content_text {
     line-height: 1.67;
     cursor: pointer;
-    /* width: 74%; */
+    max-height: 75px;
 }
 
 .comment {

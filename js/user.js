@@ -363,6 +363,10 @@ var xm = new Vue({
         })
 
         this.userName = sessionStorage.getItem("username")
+        if (getUrlKey("id") == 1) {
+            this.isone = false
+        }
+
     },
     filters: {
         filterTime(time) {

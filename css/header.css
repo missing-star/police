@@ -310,6 +310,7 @@
 .content_list .content_text {
     line-height: 1.67;
     cursor: pointer;
+    height: 75px;
 }
 
 .comment {

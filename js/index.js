@@ -1,9 +1,9 @@
 var xm = new Vue({
     el: "#app",
     data: {
-        pIndex:-1,
+        pIndex: -1,
         show: false,
-        isshow1:true,
+        isshow1: true,
         hide: false,
         isshade: false,
         isent: -1, //查看文章
@@ -116,10 +116,8 @@ var xm = new Vue({
         readChange(item, index, e) { //产看文章
             if (this.postIndex != index) {
                 this.postIndex = index;
-               
             } else {
                 this.postIndex = -1;
-                // this.hide = false
             }
             this.pIndex = this.pIndex == index ? -1 : index
         },
@@ -127,10 +125,10 @@ var xm = new Vue({
             this.commentActive = this.commentActive == index ? -1 : index
         },
         goname() { //个人信息
-            $(".header_two").slideToggle("400");
+            $(".header_two").slideToggle("500");
         },
         goAnswer() { //通知
-            $(".answer").slideToggle("400");
+            $(".answer").slideToggle("500");
             $.ajax({
                 type: "post",
                 url: `${api}/index/api/allReplay`,
@@ -159,21 +157,6 @@ var xm = new Vue({
         },
         writeReply() { //写论坛
             window.location.href = "write.html"
-            // this.isshade = true
-            // this.isforum = true
-            // $("body").addClass("bod");
-            // if (this.isCreated) {
-            //     return false;
-            // }
-            // this.isCreated = true;
-            // window.editor = this.KindEditor.create('#Ftext', {
-            //     allowImageRemote: false,
-            //     resizeType: 0,
-            //     uploadJson: './kindeditor/php/upload_json.php',
-            //     fileManagerJson: './kindeditor/php/file_manager_json.php',
-            //     allowFileManager: true,
-            //     items: ['bold', 'italic', 'underline', 'fontsize', 'image']
-            // });
         },
         reportChange() { //打开报备
             this.isshade = true
@@ -297,6 +280,9 @@ var xm = new Vue({
                 success: (res) => {
                     console.log(res)
                     this.titleList = res.result
+                    this.postIndex = -1
+                    this.commentActive = -1
+                    // this.numIndex = -1
                     if (this.titleList.length == 0) {
                         this.isNone = true;
                     } else {
@@ -326,6 +312,9 @@ var xm = new Vue({
                 dataType: 'json',
                 success: (res) => {
                     console.log(res)
+                    this.postIndex = -1
+                    this.commentActive = -1
+                    this.numIndex = -1
                     this.titleList = res.result;
                     if (this.titleList.length == 0) {
                         this.isNone = true;
@@ -493,6 +482,9 @@ var xm = new Vue({
         },
         filterImg(content) {
             return content.replace('作者', '啊啊啊啊===作者');
+        },
+        goUser(){ //通知跳转
+            window.location.href ="user.html?id=1"
         },
 
     },
