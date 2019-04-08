@@ -110,7 +110,11 @@ var xm = new Vue({
             this.isspeak = false
             $("body").removeClass("bod")
         },
+        appChange() {
+            sessionStorage.setItem('id', 1)
+        },
         gouser() { //跳转我的主页
+            sessionStorage.setItem('id', 2)
             window.location.href = "user.html"
         },
         readChange(item, index, e) { //产看文章

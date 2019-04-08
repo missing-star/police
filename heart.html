@@ -61,12 +61,16 @@
                     <h4>音乐中心</h4>
                     <div class="music_nav">
                         <div class="music_one" v-for="item in musicSort">
-                            <h5>{{item.name}}</h5>
+                            <div class="music_wrap clearfix">
+                                <h5>{{item.name}}</h5>
+                                <img src="img/播放1.png" alt="">
+                            </div>
+                            
                             <ul class="music_uu">
                                 <li v-for="(arr,index) in musicList[item.id]" 
-                                :class="{musicColor: Color=='item.id'}"
-                                    @click="ColorChange(item.id,index)">
-                                    <p>{{index+1}}.{{item.name}}</p>
+                                :class="{musicColor: Color==arr.id}"
+                                    @click="ColorChange(arr.id)">
+                                    <p>{{item.name}}</p>
                                     <div class="music_img">
                                         <span></span>
                                         <span @click="musicDown(arr.data_url)"></span>

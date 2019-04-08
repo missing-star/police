@@ -132,14 +132,37 @@
     margin-right: 0;
 }
 
+.clearfix {
+    zoom: 1;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    visibility: hidden;
+    height: 0;
+    clear: both;
+}
+
 .music_nav h5 {
     font-size: 24px;
     font-family: PingFangSC-Regular;
     font-weight: 400;
     color: rgba(0, 0, 0, 1);
     line-height: 23px;
-    margin: 29px 0 20px 21px;
+    float: left;
 }
+
+.music_wrap {
+    margin: 29px 7px 20px 21px;
+}
+
+.music_wrap img {
+    width: 90px;
+    height: 26px;
+    float: right;
+}
+
 
 .music_uu {
     height: 325px;
@@ -226,6 +249,7 @@
 .book_left {
     /* width: 25%; */
 }
+
 .book_left_text {
     font-size: 30px;
     font-family: PingFangSC-Regular;

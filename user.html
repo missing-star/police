@@ -22,16 +22,27 @@
         <!-- 内容 -->
         <div class="user_content container">
             <div class="user_content_left">
-                <div class="user_content_img">
-                    <img src="" alt="">
-                </div>
-                <div class="user_content_text">
-                    <p>{{userName}}</p>
-                </div>
+                <p>{{userName}}</p>
             </div>
             <div class="user_content_right">
-                <p>总积分</p>
-                <p>{{intergral}} <span>分</span></p>
+                <ul class="user_ul">
+                    <li>
+                        <p>登录积分</p>
+                        <p>{{login}}</p>
+                    </li>
+                    <li>
+                        <p>发布积分</p>
+                        <p>{{post}}</p>
+                    </li>
+                    <li>
+                        <p>获赞积分</p>
+                        <p>{{phraise}}</p>
+                    </li>
+                    <li>
+                        <p>总积分</p>
+                        <p>{{score}}</p>
+                    </li>
+                </ul>
             </div>
         </div>
 
@@ -59,8 +70,8 @@
                             <img :src="'http://police.pzhkj.cn'+item.picture" alt="" class="mid_img"
                                 v-if="item.picture==null?hide:!hide" v-show="pIndex !==index">
                             <div>
-                                <p class="content_text"
-                                    :class="{entable:postIndex == index}" v-html="filterImg(item.content)"></p>
+                                <p class="content_text" :class="{entable:postIndex == index}"
+                                    v-html="filterImg(item.content)"></p>
                             </div>
                             <div class="clear"></div>
                         </div>
@@ -179,7 +190,23 @@
             </div>
             <!-- 右边 -->
             <div class="user_title_right">
-                <h4>积分排行</h4>
+                <div class="user_right_wrap clearfix">
+                     <h4>积分排行</h4>
+                     <div class="wrap_tab" @click="wrapChange">
+                         <span></span>
+                         <span class="tab">{{tgp}}</span>
+                     </div>
+
+                     <div class="wrap_box" v-show="isWrap">
+                         <ul class="wrap_ul">
+                             <li class="Wrap_active">按总积分排序</li>
+                             <li>按登录积分排序</li>
+                             <li>按发布积分排序</li>
+                             <li>按获赞积分排序</li>
+                         </ul>
+                     </div>
+                </div>
+               
                 <div class="user_table">
                     <table>
                         <tr>

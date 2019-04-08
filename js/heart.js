@@ -341,10 +341,11 @@ var xm = new Vue({
             console.log(alink.download)
             alink.click();
         },
-        ColorChange(id,index) {
-            console.log(id)
+        ColorChange(index) {
+            // console.log(id)
             console.log(index)
             this.Color = index
+            // this.Color = this.Color == index ? -1 : index
         },
         Osearch() {
             $.ajax({
@@ -454,10 +455,10 @@ $(function () {
 });
 
 
-$(".book_left_uu li").each(function (index) {
+$(".index_right span").each(function (index) {
     $(this).click(function () {
-        $("li.white").removeClass("white");
-        $(this).addClass("white");
+        $("span.BannerImg").removeClass("BannerImg");
+        $(this).addClass("BannerImg");
     });
 })
 

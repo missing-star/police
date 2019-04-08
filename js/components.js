@@ -1,7 +1,6 @@
 //首页banner
 const indexBanner = {
     name: 'cp-banner',
-    prop: ['userName'],
     template: `
     <div class="index_header">
         <div class="index_content container">
@@ -10,34 +9,39 @@ const indexBanner = {
                 <span></span>
                 <span></span>
             </div>
-            <div class=" index_right">
-                <span @click="goIndex">首页</span>
-                <span class="BannerImg" @click="goHeart">应用中心</span>
-                <span @click="goUser">我的主页</span>
+            <div class="index_right">
+                <span  v-for="(item,index) in showList" @click="goIndex(index)"
+                :class="{BannerImg:index == currentIndex}">
+                {{item}}
+                </span>
             </div>
         </div>
     </div>
     `,
-
-    methods: {
-        data() {
-            userName: ''
-        },
-        goIndex() {
-            window.location.href = "index.html"
-        },
-        goHeart() {
-            window.location.href = "heart.html"
-        },
-        goUser() {
-            window.location.href = "user.html"
+    data() {
+        return {
+            showList: ['首页', '应用中心', '我的主页'],
+            currentIndex: 1,
         }
     },
+    methods: {
+        goIndex(index) {
+            console.log(index)
+            sessionStorage.setItem('id', index)
+            if (index == 0) {
+                window.location.href = "index.html"
+            } else if (index == 1) {
+                window.location.href = "heart.html"
+            } else if (index == 2) {
+                window.location.href = "user.html"
+            }
+
+        },
+    },
     created() {
+        this.currentIndex = sessionStorage.getItem('id')
     }
 };
-
-
 
 //分页
 const indexPage = {

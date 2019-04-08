@@ -28,6 +28,7 @@ var xm = new Vue({
         istwo: false, //没有回复，发布
         ispush: false, //
         isthree: false,
+        isWrap: false, //排名切换
         titleList: [],
         list: [],
         comlist: [],
@@ -54,7 +55,12 @@ var xm = new Vue({
         currentComment: {}, //当前查看的评论,
         Opsw: '',
         Npsw: '',
-        Tpsw: ''
+        Tpsw: '',
+        login: '', //积分
+        phraise: '',
+        post: '',
+        score: '', //积分
+        tgp:'按总积分排序'
     },
     // filters: {
     //     ellipsis(value) {
@@ -65,8 +71,10 @@ var xm = new Vue({
     //         return value
     //     }
     // }, 
-
     methods: {
+        wrapChange() { //排名切换
+            this.isWrap = !this.isWrap
+        },
         gouser() { //跳转我的主页
             window.location.href = "user.html"
         },
@@ -370,11 +378,13 @@ var xm = new Vue({
             success: (res) => {
                 console.log(res)
                 this.titleList = res.data.post
-                this.intergral = res.data.intergral
+                this.login = res.data.intergral.login
+                this.phraise = res.data.intergral.phraise
+                this.post = res.data.intergral.post
+                this.score = res.data.intergral.score
                 this.userlist = res.data.intergrals
                 this.commentList = res.data.comments.comment
                 this.replayList = res.data.comments.replay
-
                 if (res.data.post == 0) {
                     this.isthree = true
                 } else {
@@ -431,4 +441,15 @@ var xm = new Vue({
 
 $(".read").click(function () {
     $(".content_text").toggleClass("entable");
+})
+
+
+$(".wrap_ul li").each(function (index) {
+    $(this).click(function () {
+        $("li.Wrap_active").removeClass("Wrap_active");
+        $(this).addClass("Wrap_active");
+        xm.tgp =$(this).text()
+        xm.isWrap = false
+       
+    });
 })
