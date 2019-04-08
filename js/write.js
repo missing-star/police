@@ -40,7 +40,7 @@ var xm = new Vue({
                 return false;
             }
             var imgUrl = sessionStorage.getItem("img");
-            console.log(imgUrl)
+            imgUrl =imgUrl.replace('.','')
             $.ajax({
                 type: "post",
                 url: `${api}/index/api/publishPost`,
@@ -119,6 +119,9 @@ var xm = new Vue({
                 this.ForumCate = res.result;
             }
         });
+    },
+    components: {
+        "cp-case": indexCase,
     },
 
 })

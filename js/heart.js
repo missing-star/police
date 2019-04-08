@@ -34,18 +34,18 @@ var xm = new Vue({
         Tpicture: '',
         Tdata_url: '',
         message: 1,
-
-        total: 1, // 记录总条数
+        Color: -1,
+        total: 8, // 记录总条数
         // display: 8, // 每页显示条数
         current: 1, // 当前的页数
-
-        totalone: 8,
-        currentone: 1,
-
+        totalone: 8, // 记录总条数
+        currentone: 1, // 当前的页数
         Opsw: '',
         Npsw: '',
         Tpsw: '',
         hide: false,
+        text: '',
+        text1: '',
     },
     methods: {
         goClose() { //关闭遮罩
@@ -340,6 +340,43 @@ var xm = new Vue({
             alink.download = `${api}/${data_url}`;
             console.log(alink.download)
             alink.click();
+        },
+        ColorChange(id,index) {
+            console.log(id)
+            console.log(index)
+            this.Color = index
+        },
+        Osearch() {
+            $.ajax({
+                type: "post",
+                url: `${api}/index/api/toolSearch`,
+                async: true,
+                data: {
+                    type: 1,
+                    keyWords: this.text
+                },
+                dataType: 'json',
+                success: (res) => {
+                    console.log(res)
+                    this.bookList = res.data
+                }
+            })
+        },
+        Tsearch() {
+            $.ajax({
+                type: "post",
+                url: `${api}/index/api/toolSearch`,
+                async: true,
+                data: {
+                    type: 2,
+                    keyWords: this.text1
+                },
+                dataType: 'json',
+                success: (res) => {
+                    console.log(res)
+                    this.tutorialList1 = res.data
+                }
+            })
         }
     },
     components: {
@@ -370,7 +407,13 @@ var xm = new Vue({
                 this.tutorialSort = temp;
 
                 this.total = res.data.book.list.length
+                if (this.total < 8) {
+                    this.total = 8
+                }
                 this.totalone = res.data.tutorial.list.length
+                if (this.totalone < 8) {
+                    this.totalone = 8
+                }
                 sessionStorage.setItem('length', JSON.stringify(res.data.plugin.length))
             }
         })
@@ -449,51 +492,6 @@ $(".zxf").createPage({
             dataType: 'json',
             success: (res) => {
                 xm.plugList = res.data
-            }
-        })
-    }
-});
-//书籍分页
-// var length = sessionStorage.getItem("book");
-// $(".zxf_pagediv").createPage({
-//     pageNum: Math.ceil(length / 8),
-//     current: 1,
-//     backfun: function (e) {
-//         var page = e.current
-//         $.ajax({
-//             type: "post",
-//             url: `${api}/index/api/bookList`,
-//             async: true,
-//             data: {
-//                 page: page,
-//                 book_id: 1
-//             },
-//             dataType: 'json',
-//             success: (res) => {
-//                 xm.bookList = res.data
-//             }
-//         })
-//     }
-// });
-// 教程
-var length = sessionStorage.getItem("tutorial");
-$(".center").createPage({
-    pageNum: Math.ceil(length / 2),
-    current: 1,
-    backfun: function (e) {
-        var page = e.current
-        $.ajax({
-            type: "post",
-            url: `${api}/index/api/tutorialList`,
-            async: true,
-            data: {
-                page: page,
-                tutorial_id: 1
-            },
-            dataType: 'json',
-            success: (res) => {
-                console.log(res)
-                xm.tutorialList = res.data
             }
         })
     }

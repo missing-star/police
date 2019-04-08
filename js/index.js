@@ -483,8 +483,8 @@ var xm = new Vue({
         filterImg(content) {
             return content.replace('作者', '啊啊啊啊===作者');
         },
-        goUser(){ //通知跳转
-            window.location.href ="user.html?id=1"
+        goUser() { //通知跳转
+            window.location.href = "user.html?id=1"
         },
 
     },

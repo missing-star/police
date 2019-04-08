@@ -5,17 +5,15 @@ const indexBanner = {
     template: `
     <div class="index_header">
         <div class="index_content container">
-            <a href="index.html">
-                <img src="img/首页logo.png" alt="">
-            </a>
-            <div class="index_right">
-                <div class="header_img" @click="goAnswer">
-                    <img src="img/信息.png" alt="">
-                </div>
-                <div class="header_name">
-                    <span><img src="" alt=""></span>
-                    <span @click="goname">{{userName}}</span>
-                </div>
+            <div class="index_left">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class=" index_right">
+                <span @click="goIndex">首页</span>
+                <span class="BannerImg" @click="goHeart">应用中心</span>
+                <span @click="goUser">我的主页</span>
             </div>
         </div>
     </div>
@@ -25,15 +23,17 @@ const indexBanner = {
         data() {
             userName: ''
         },
-        goAnswer() {
-            this.$emit("go-answer")
+        goIndex() {
+            window.location.href = "index.html"
         },
-        goname() {
-            this.$emit("go-name")
+        goHeart() {
+            window.location.href = "heart.html"
+        },
+        goUser() {
+            window.location.href = "user.html"
         }
     },
     created() {
-        this.userName = sessionStorage.getItem("username")
     }
 };
 
@@ -136,4 +136,37 @@ const indexPage = {
             }
         }
     }
+};
+
+
+
+
+
+//警告
+const indexCase = {
+    name: 'cp-case',
+    prop: ['Tmsg'],
+    template: `
+    <div class="pBox">
+        <div class="tBox">
+            <span>警告</span>
+        </div>
+        <div class="mBox">
+            <span>{{Tmsg}}</span>
+        </div>
+        <div class="bBox">
+            <span @click="back">确认</span>
+        </div>
+    </div>
+    `,
+
+    methods: {
+        data() {
+
+        },
+        back() {
+            this.$emit("back")
+        }
+    },
+    created() {}
 };

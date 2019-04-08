@@ -84,14 +84,14 @@
                         <div class="content_list" v-for="(item,index) in titleList">
                             <h4>{{item.title}}</h4>
 
-                            <div class="content_mid">
-                                <img :src="'http://police.pzhkj.cn'+item.picture.replace('.','')" alt="" class="mid_img"
+                            <div class="content_mid" >
+                                <img :src="'http://police.pzhkj.cn'+item.picture" alt="" class="mid_img"
                                     v-if="item.picture==null?hide:!hide" v-show="pIndex !==index">
-                                <div >
+                                <div>
                                     <p class="content_text" @click="readChange(item,index)"
                                         :class="{entable:postIndex == index}" v-html="filterImg(item.content)"></p>
                                 </div>
-
+                                <div class="clear"></div>
                             </div>
 
                             <div class="comment">
@@ -235,7 +235,7 @@
                                 <li v-for="(item,index) in allList">
                                     <span>{{item.title}}-{{item.user}}于{{item.create_at}}提交了报备</span>
                                     <span :class="{red:item.status==0,blue:item.status==null}">
-                                        {{item.status==0?"未处理":(item.status == 1 ? "已处理":"未结单")}}
+                                        {{item.status==0?"正在处理":(item.status == 1 ? "已处理":"未处理")}}
                                     </span>
                                     <span>{{item.name}}</span>
                                 </li>

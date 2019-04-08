@@ -1,7 +1,17 @@
+Vue.filter('ellipsis', function (value) {
+    if (!value) return ''
+    if (value.length > 10) {
+        return value.slice(0, 1000) + '...'
+    }
+    return value
+})
+
+
 var xm = new Vue({
     el: "#app",
     data: {
         userName: '',
+        hide: '',
         isshade: false,
         ispass: false,
         isname: true,
@@ -38,6 +48,7 @@ var xm = new Vue({
         currentCommentId: '',
         oneIndex: -1,
         twoIndex: -1,
+        pIndex: -1,
         isdetele: -1, //删除切换
         replyComment: '', //回复评论的内容,
         currentComment: {}, //当前查看的评论,
@@ -45,6 +56,16 @@ var xm = new Vue({
         Npsw: '',
         Tpsw: ''
     },
+    // filters: {
+    //     ellipsis(value) {
+    //         if (!value) return ''
+    //         if (value.length > 10) {
+    //             return value.slice(0, 4) + '...'
+    //         }
+    //         return value
+    //     }
+    // }, 
+
     methods: {
         gouser() { //跳转我的主页
             window.location.href = "user.html"
@@ -118,6 +139,7 @@ var xm = new Vue({
             } else {
                 this.postIndex = -1;
             }
+            this.pIndex = this.pIndex == index ? -1 : index
         },
         goname() { //个人信息
             $(".header_two").slideToggle("400");
@@ -326,7 +348,14 @@ var xm = new Vue({
                     })
                 }
             })
-        }
+        },
+        filterImg(value) {
+            if (!value) return ''
+            if (value.length > 300) {
+                return value.slice(0, 300) + '...'
+            }
+            return value
+        },
     },
     components: {
         "cp-banner": indexBanner,
@@ -394,7 +423,7 @@ var xm = new Vue({
             }
             return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
         }
-    }
+    },
 
 })
 

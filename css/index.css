@@ -1701,7 +1701,7 @@ td {
 .content_list .content_text {
     line-height: 1.67;
     cursor: pointer;
-    max-height: 75px;
+    height: 75px;
 }
 
 .comment {
@@ -1744,4 +1744,8 @@ img.icon-like {
     border-radius: 4px;
     margin-right: 10px;
     float: left;
+}
+
+.clear {
+    clear: both;
 }

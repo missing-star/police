@@ -1,10 +1,13 @@
-.nav {
-    width: 1200px;
-    height: 60px;
+.nav_out {
+    width: 100%;
     background: rgba(255, 255, 255, 1);
-    margin: 0 0 5px 0;
     position: fixed;
     z-index: 11;
+}
+
+.nav {
+    height: 60px;
+
 }
 
 .nav_uu {
@@ -33,10 +36,13 @@
 
 
 /* 插件中心 */
-.plug {
-    width: 1200px;
-    height: 456px;
+.plug_out {
+    width: 100%;
     background: rgba(255, 255, 255, 1);
+}
+
+.plug {
+    height: 456px;
     padding-top: 32px;
     margin-top: 62px;
     position: relative;
@@ -67,7 +73,7 @@
     font-weight: 400;
     color: rgba(0, 0, 0, 1);
     line-height: 23px;
-    margin: 0 96px 0 0;
+    margin: 0 92px 0 0;
 }
 
 .plug_uu li:nth-child(-n+6) {
@@ -98,12 +104,13 @@
 
 
 /* 音乐中心 */
+.music_out {
+    width: 100%;
+}
+
 .music {
-    width: 1200px;
-    height: 534px;
-    background: rgba(255, 255, 255, 1);
-    margin: 10px 0 22px 0;
-    padding-top: 32px;
+    height: 546px;
+    padding-top: 40px;
     position: relative;
 }
 
@@ -113,10 +120,12 @@
 }
 
 .music_one {
-    width: 260px;
-    height: 399px;
-    border: 2px solid rgba(0, 0, 0, 1);
-    margin-right: 110px;
+    width: 300px;
+    height: 430px;
+    margin-right: 66px;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.35);
+    border-radius: 4px;
 }
 
 .music_one:last-child {
@@ -129,11 +138,11 @@
     font-weight: 400;
     color: rgba(0, 0, 0, 1);
     line-height: 23px;
-    margin: 25px 0 30px 21px;
+    margin: 29px 0 20px 21px;
 }
 
 .music_uu {
-    height: 282px;
+    height: 325px;
     overflow: hidden;
 }
 
@@ -145,30 +154,37 @@
 }
 
 .music_uu li {
+    height: 40px;
     font-size: 20px;
     font-family: PingFangSC-Regular;
     font-weight: 400;
     color: rgba(0, 0, 0, 1);
     line-height: 20px;
-    margin: 0 0 18px 15px;
+    padding-left: 14px;
     display: flex;
     justify-content: space-between;
+    line-height: 40px;
+}
+
+.musicColor {
+    background: #F7F7F7 !important;
+    color: #84A4FE !important;
 }
 
 .music_img span:nth-child(1) {
     display: inline-block;
-    width: 22px;
-    height: 22px;
-    background: url(../img/播放.png)no-repeat;
+    width: 12px;
+    height: 13px;
+    background: url(../img/开始1.png)no-repeat;
     background-size: 100% 100%;
     cursor: pointer;
 }
 
 .music_img span:nth-child(2) {
     display: inline-block;
-    width: 20px;
-    height: 21px;
-    background: url(../img/xiazai.png)no-repeat;
+    width: 15px;
+    height: 14px;
+    background: url(../img/xiazai1.png)no-repeat;
     background-size: 100% 100%;
     margin: 0 15px 0 14px;
     cursor: pointer;
@@ -184,46 +200,52 @@
     font-size: 16px;
     font-family: PingFangSC-Regular;
     font-weight: 400;
-    color: rgba(0, 0, 0, 1);
-    line-height: 38px;
+    color: rgba(121, 121, 121, 1);
     border: 0;
     outline: none;
+    line-height: 23px;
     background: white;
 }
 
-
-
-
 /* 书籍中心 */
-.book {
-    width: 1200px;
-    height: 648px;
+.book_out {
+    width: 100%;
     background: rgba(255, 255, 255, 1);
-    padding-top: 32px;
-    margin-bottom: 30px;
+}
+
+.toutor_out {
+    width: 100%;
+}
+
+.book {
+    height: 690px;
     display: flex;
     position: relative;
 }
 
+.book_left {
+    /* width: 25%; */
+}
 .book_left_text {
-    width: 129px;
-    height: 108px;
-    font-size: 24px;
+    font-size: 30px;
     font-family: PingFangSC-Regular;
     font-weight: 400;
     color: rgba(0, 0, 0, 1);
-    line-height: 24px;
-    margin-left: 21px;
+    line-height: 23px;
+
+    margin: 59px 0 40px 21px;
 }
 
 .book_left_tag {
-    width: 150px;
-    height: 540px;
-    background: rgba(210, 210, 210, 1);
+    width: 100%;
+    overflow: hidden;
 }
 
 .book_left_uu {
-    padding: 30px 0 0 0;
+    width: 112%;
+    height: 500px;
+    overflow-y: scroll;
+
 }
 
 .book_left_uu li {
@@ -231,26 +253,27 @@
     font-size: 22px;
     font-family: PingFangSC-Regular;
     font-weight: 400;
-    color: rgba(0, 0, 0, 1);
+    color: #797979;
     line-height: 40px;
-    /* margin-bottom: 15px; */
     cursor: pointer;
     text-align: center;
+    margin-bottom: 10px;
 }
 
 .book_right_top {
     position: relative;
-    margin: 33px 177px 58px 91px;
+    margin: 59px 177px 58px 105px;
 }
 
 .book_right_top input {
-    width: 770px;
+    width: 580px;
     height: 36px;
-    background: rgba(239, 239, 239, 1);
-    border: 1px solid rgba(220, 220, 220, 1);
-    border-radius: 18px;
+    font-size: 18px;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid #9B9B9B;
     outline: none;
-    padding-left: 10px;
+    padding-left: 30px;
 }
 
 .book_right_top span {
@@ -260,7 +283,7 @@
     background: url(../img/sousuo.png)no-repeat;
     background-size: 100% 100%;
     position: absolute;
-    right: 18px;
+    left: 0;
     top: 6px;
 }
 
@@ -269,6 +292,7 @@
     flex-wrap: wrap;
     margin: 0 0 15px 94px;
     height: 442px;
+    overflow: hidden;
 }
 
 .book_uu li {
@@ -390,12 +414,12 @@
     height: 32px;
     background: url(../img/下载1.png)no-repeat;
     background-size: 100% 100%;
-
 }
 
 
 .book_right {
     position: relative;
+    width: 75%;
 }
 
 #btn {
@@ -412,7 +436,7 @@
 }
 
 .heart_main {
-    padding-top: 72px;
+    padding-top: 100px;
 }
 
 #go1 {
@@ -438,7 +462,7 @@
 
 
 .white {
-    background: white;
+    color: black !important;
 }
 
 .totur_btn {
