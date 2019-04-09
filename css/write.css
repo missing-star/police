@@ -60,6 +60,16 @@
     font-family: PingFangSC-Regular;
     font-weight: 400;
     color: rgba(0, 0, 0, 1);
+    position: relative;
+}
+
+.Ttest {
+    position: absolute;
+    top: 36px;
+    font-size: 24px;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    color: rgba(187, 187, 187, 1);
 }
 
 .forum_main input {
@@ -238,7 +248,7 @@ input::-webkit-input-placeholder {
     margin-left: 18px;
 }
 
-.form_more_uu li  {
+.form_more_uu li {
     width: 100px;
     height: 23px;
     font-size: 0;

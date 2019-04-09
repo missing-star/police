@@ -59,16 +59,18 @@
                             <input type="text" v-model="Ptitle" placeholder="请输入标题">
                         </li>
                         <li>
-                            <div class="forum_content">
+                            <div class="forum_content" @click="showChange">
                                 <textarea placeholder="请输入标题" v-model="Pcontent" id="Ftext" cols="30" rows="10">
                                 </textarea>
                             </div>
+                            <!-- <span class="Ttest" v-if="tshow">请输入正文</span> -->
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
 
+        <cp-case :text="哈哈哈哈" v-if="ishide"></cp-case>
     </div>
 
 

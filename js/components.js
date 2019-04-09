@@ -149,14 +149,14 @@ const indexPage = {
 //警告
 const indexCase = {
     name: 'cp-case',
-    prop: ['Tmsg'],
+    prop: ['text'],
     template: `
     <div class="pBox">
         <div class="tBox">
             <span>警告</span>
         </div>
         <div class="mBox">
-            <span>{{Tmsg}}</span>
+            <span>{{text}}</span>
         </div>
         <div class="bBox">
             <span @click="back">确认</span>

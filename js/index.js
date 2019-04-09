@@ -7,7 +7,7 @@ var xm = new Vue({
         hide: false,
         isshade: false,
         isent: -1, //查看文章
-        isnum: false, //通知显示数字
+        isnum: true, //通知显示数字
         ismore: false, //更多
         isforum: false, //论坛
         isCase: false, //报备
@@ -52,6 +52,7 @@ var xm = new Vue({
         Opsw: '',
         Npsw: '',
         Tpsw: '',
+        length: '', // 回复评论条数
     },
     methods: {
         quitChange() { //退出登录
@@ -72,6 +73,7 @@ var xm = new Vue({
             })
         },
         editChange() { //修改密码
+            
             if (this.Npsw == this.Tpsw) {
                 $.ajax({
                     type: "post",
@@ -533,6 +535,18 @@ var xm = new Vue({
             dataType: 'json',
             success: (res) => {
                 this.chatList = res.data
+            }
+        })
+
+        // 通知
+        $.ajax({
+            type: "post",
+            url: `${api}/index/api/allReplay`,
+            async: true,
+            data: {},
+            dataType: 'json',
+            success: (res) => {
+                this.length = res.data.comment.length + res.data.replay.length
             }
         })
 

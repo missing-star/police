@@ -17,9 +17,12 @@
     <div id="app" v-cloak>
         <div class="index_header">
             <div class="index_content container">
-                <a href="index.html">
-                    <img src="img/首页logo.png" alt="">
-                </a>
+                <div class="index_left">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <!-- <img src="img/首页logo.png" alt=""> -->
+                </div>
                 <div class="header_mid">
                     <input @keydown.enter="searchChange" class="search" type="text" v-model="keyWords"
                         placeholder="搜索关键词">
@@ -27,14 +30,14 @@
                 </div>
                 <div class="header_img" @click="goAnswer">
                     <img src="img/信息.png" alt="">
-                    <span v-show="isnum">9</span>
+                    <span v-if="length>0?isnum:!isnum">{{length}}</span>
                 </div>
                 <div class="header_name">
-                    <span><img src="" alt=""></span>
                     <span @click="goname">{{userName}}</span>
                 </div>
                 <!-- 通知 -->
                 <div class="answer">
+                    <!-- <span class="answer_sp"></span> -->
                     <ul class="answer_uu" @click="goUser">
                         <li v-for="item in list">
                             {{item.nickname}} <span>评论了你的</span> {{item.title}}
@@ -84,7 +87,7 @@
                         <div class="content_list" v-for="(item,index) in titleList">
                             <h4>{{item.title}}</h4>
 
-                            <div class="content_mid" >
+                            <div class="content_mid">
                                 <img :src="'http://police.pzhkj.cn'+item.picture" alt="" class="mid_img"
                                     v-if="item.picture==null?hide:!hide" v-show="pIndex !==index">
                                 <div>
@@ -121,9 +124,7 @@
                             <div class="comment_main" v-cloak v-show="commentActive ==index">
                                 <div class="comment_list" v-for="(comment,index) in item.comment_list">
                                     <h5>{{comment.nickname}}</h5>
-                                    <p>
-                                        {{comment.content}}
-                                    </p>
+                                    <p v-html="comment.content"></p>
                                     <div class="reply">
                                         <span class="pointer" @click="likePostOrComment('',comment.id,0)">
                                             <img v-if="comment.status == 0" src="img/icon-06.png" alt="">
