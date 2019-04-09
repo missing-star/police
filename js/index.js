@@ -101,6 +101,7 @@ var xm = new Vue({
         },
         goClose() { //关闭遮罩
             this.isshade = false
+            this.ispass = false
             this.isforum = false
             this.isCase = false
             this.isCreat = false
@@ -154,7 +155,7 @@ var xm = new Vue({
             this.ispass = true
         },
         writeReply() { //写论坛
-            window.location.href = "write.html"
+            window.open("write.html");
         },
         reportChange() { //打开报备
             this.isshade = true

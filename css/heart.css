@@ -73,10 +73,11 @@
     font-weight: 400;
     color: rgba(0, 0, 0, 1);
     line-height: 23px;
-    margin: 0 92px 0 0;
+    width: 20%;
+    margin-bottom: 10px;
 }
 
-.plug_uu li:nth-child(-n+6) {
+/* .plug_uu li:nth-child(-n+6) {
     margin-bottom: 34px;
 }
 
@@ -86,14 +87,14 @@
 
 .plug_uu li:nth-child(12) {
     margin-right: 0;
-}
+} */
 
 .plug_uu li span {
     display: inline-block;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     background: rgba(29, 85, 152, 1);
-    margin-bottom: 19px;
+    margin-bottom: 10px;
 }
 
 .plug_uu li span img {
@@ -101,7 +102,9 @@
     height: 100%;
 }
 
-
+ul.plug_uu p {
+    font-size: 14px;
+}
 
 /* 音乐中心 */
 .music_out {

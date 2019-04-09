@@ -76,11 +76,11 @@
     height: 80px;
     border: 0;
     outline: none;
-    font-size: 48px;
+    font-size: 40px;
 }
 
 input::-webkit-input-placeholder {
-    font-size: 48px;
+    font-size: 40px;
     font-family: PingFangSC-Medium;
     font-weight: 500;
     color: rgba(187, 187, 187, 1);

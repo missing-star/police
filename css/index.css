@@ -827,7 +827,7 @@
 }
 
 .case_main textarea {
-    width: 362px;
+    width: 360px;
     height: 100px;
     background: rgba(242, 242, 242, 1);
     border: 1px solid rgba(229, 229, 229, 1);
@@ -1791,4 +1791,9 @@ span.answer_sp {
     position: absolute;
     left: 50%;
     top: -10px;
+}
+p.no-notice {
+    text-align: center;
+    margin: 0 auto;
+    margin-left: 30px;
 }

@@ -112,7 +112,7 @@ var xm = new Vue({
                     uploadJson: './kindeditor/php/upload_json.php',
                     fileManagerJson: './kindeditor/php/file_manager_json.php',
                     allowFileManager: true,
-                    items: ['bold', 'italic', 'underline', 'fontsize', 'image'],
+                    items: ['bold', 'italic', 'underline', 'image'],
                     afterFocus:function(e) {
                         if(editor.html() == '请输入正文') {
                             editor.html('');

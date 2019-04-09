@@ -38,7 +38,7 @@
                 <!-- 通知 -->
                 <div class="answer">
                     <span class="answer_sp"></span>
-                    <ul class="answer_uu" @click="goUser">
+                    <ul v-if="list.length != 0" class="answer_uu" @click="goUser">
                         <li v-for="item in list">
                             {{item.nickname}} <span>评论了你的</span> {{item.title}}
                             {{item.content}}
@@ -46,6 +46,9 @@
                         <li v-for="item in replaylist">
                             {{item.nickname}} <span>回复你</span>{{item.title}}
                         </li>
+                    </ul>
+                    <ul v-else class="answer_uu">
+                        <p class="no-notice">暂无通知</p>
                     </ul>
                 </div>
                 <!-- 个人中心 -->

@@ -232,3 +232,11 @@ button.alert-close {
 	cursor: pointer;
 	outline: 0;
 }
+
+@font-face {
+	font-family: 'myFont';
+	src: url(../font/PingFangSC-Regular.ttf)
+}
+*{
+	font-family: myFont !important;
+}
