@@ -59,8 +59,8 @@ var xm = new Vue({
         login: '', //积分
         phraise: '',
         post: '',
-        score: '', //积分
-        tgp:'按总积分排序'
+        intergrals: '', //积分
+        tgp: '按总积分排序'
     },
     // filters: {
     //     ellipsis(value) {
@@ -377,11 +377,20 @@ var xm = new Vue({
             dataType: 'json',
             success: (res) => {
                 console.log(res)
+                if (res.data.intergral.login == null ||
+                    res.data.intergral.phraise == null ||
+                    res.data.intergral.post == null ||
+                    res.data.intergral.intergrals == null) {
+                    res.data.intergral.login = 0
+                    res.data.intergral.phraise = 0
+                    res.data.intergral.post = 0
+                    res.data.intergral.intergrals = 0
+                }
                 this.titleList = res.data.post
                 this.login = res.data.intergral.login
                 this.phraise = res.data.intergral.phraise
                 this.post = res.data.intergral.post
-                this.score = res.data.intergral.score
+                this.intergrals = res.data.intergral.intergrals
                 this.userlist = res.data.intergrals
                 this.commentList = res.data.comments.comment
                 this.replayList = res.data.comments.replay
@@ -397,6 +406,8 @@ var xm = new Vue({
                 } else {
                     this.istwo = false
                 }
+
+
 
             }
         })
@@ -448,8 +459,8 @@ $(".wrap_ul li").each(function (index) {
     $(this).click(function () {
         $("li.Wrap_active").removeClass("Wrap_active");
         $(this).addClass("Wrap_active");
-        xm.tgp =$(this).text()
+        xm.tgp = $(this).text()
         xm.isWrap = false
-       
+
     });
 })

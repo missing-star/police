@@ -73,12 +73,23 @@
 
 .user_content_right {
     margin-right: 43px;
+    height: 100%;
+}
+
+.user_ul {
+    padding: 11px 0 10px 0;
 }
 
 .user_ul li {
     float: left;
-    margin-left: 26px;
     text-align: center;
+    width: 95px;
+    border-left: 1px solid #F4F4F4;
+
+}
+
+.user_ul li:nth-child(1) {
+    border-left: 0;
 }
 
 .user_ul li p {
@@ -242,7 +253,7 @@ td {
 .content_list {
     width: 679px;
     background: rgba(255, 255, 255, 1);
-    padding: 30px 21px 5px 20px;
+    padding: 30px 31px 5px 20px;
     margin-bottom: 9px;
 }
 

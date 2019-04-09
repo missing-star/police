@@ -4,6 +4,7 @@ var xm = new Vue({
         show: false,
         show1: true,
         show2: false,
+        tshow: true,
         ForumCate: [], //论坛分类
         changeRed: -1,
         Ptitle: '', //论坛标题
@@ -19,6 +20,8 @@ var xm = new Vue({
         isCreated: false, //是否创建了富文本
         KindEditor: '',
         avtar: '',
+        // text: '哈哈哈',
+        ishide: false
     },
     methods: {
         fromShow() {
@@ -31,6 +34,10 @@ var xm = new Vue({
         pulishChange() { //发布论坛
             if (this.Ptitle.trim() == '') {
                 alert('请输入标题!');
+
+                // this.text = "请输入标题"
+                // this.ishide = true
+                // console.log(this.percentList)
                 return false;
             } else if (editor.html().trim() == '') {
                 alert('请输入内容!');
@@ -40,7 +47,7 @@ var xm = new Vue({
                 return false;
             }
             var imgUrl = sessionStorage.getItem("img");
-            imgUrl =imgUrl.replace('.','')
+            imgUrl = imgUrl.replace('.', '')
             $.ajax({
                 type: "post",
                 url: `${api}/index/api/publishPost`,
@@ -55,7 +62,7 @@ var xm = new Vue({
                     this.allList = res.data;
                     this.selectedCatId = '';
                     this.Ptitle = '';
-                    this.Pcontent = ''; 
+                    this.Pcontent = '';
                     sessionStorage.clear()
                     window.location.href = "index.html"
                 }
@@ -90,6 +97,9 @@ var xm = new Vue({
                     $('.backimg').attr('src', avtar);
                 },
             });
+        },
+        showChange() {
+            this.tshow = false
         }
     },
     created() {
