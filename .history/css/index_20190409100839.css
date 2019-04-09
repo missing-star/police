@@ -476,7 +476,6 @@
     font-size: 20px;
     font-weight: 400;
     color: rgba(121, 121, 121, 1);
-    margin-bottom: 2px;
 }
 
 .report_banner ul li {
@@ -1746,16 +1745,4 @@ img.icon-like {
 
 .clear {
     clear: both;
-}
-li.repari-title{
-    font-size: 17px;
-}
-a.title-blue {
-    color: #2b54be;
-}
-.report_list_uu li:first-child {
-    margin-bottom: 5px;
-}
-.report_banner ul{
-    margin-bottom: 5px;
 }

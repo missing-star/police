@@ -1759,3 +1759,9 @@ a.title-blue {
 .report_banner ul{
     margin-bottom: 5px;
 }
+p.read-all {
+    color: #797979;
+    text-align: right;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
