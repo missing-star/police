@@ -481,7 +481,8 @@ function sortByCat(key) {
             key = 'phraise';
         break;
     }
-    xm.userlist.sort(function(a,b) {
-        return b[key] - a[key];
-    });
+    console.log(xm.intergrals);
+    // xm.intergrals.sort(function(a,b) {
+    //     return a[key] - b[key];
+    // });
 }

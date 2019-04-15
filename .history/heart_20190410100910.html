@@ -8,7 +8,7 @@
     <title>浦口公安局</title>
     <link rel="stylesheet" href="css/reset.css?v=1.0.2">
     <link rel="stylesheet" href="css/header.css?v=1.0.2">
-    <link rel="stylesheet" href="css/heart.css?v=1.0.4">
+    <link rel="stylesheet" href="css/heart.css?v=1.0.2">
 
     <link rel="stylesheet" type="text/css" href="css/page/zxf_page.css?v=1.0.2" />
 </head>
@@ -33,6 +33,8 @@
                         <li data-to="go2">音乐中心</li>
                         <li data-to="go3">书籍中心</li>
                         <li data-to="go4">教程中心</li>
+                        <li data-to="go4">研判工具</li>
+                        <li data-to="go4">技战法</li>
                     </ul>
                 </div>
             </div>
@@ -61,7 +63,7 @@
                         <div class="music_one" v-for="item in musicSort">
                             <div class="music_wrap clearfix">
                                 <h5>{{item.name}}</h5>
-                                <!-- <img src="img/播放1.png" alt=""> -->
+                                <img src="img/播放1.png" alt="">
                             </div>
                             
                             <ul class="music_uu">
@@ -75,7 +77,7 @@
                                     </div>
                                 </li>
                             </ul>
-                            <div v-if="musicSort.length > 8" class="music_btn">
+                            <div class="music_btn">
                                 <button @click="reduce(item.id)">上一页</button>
                                 <button @click="add(item.id)">下一页</button>
                             </div>
@@ -107,20 +109,21 @@
                     </div>
                     <div class="book_right">
                         <div class="book_right_top">
-                            <input placeholder="输入书籍关键字" type="text" v-model="text" @keydown.enter="Osearch">
+                            <input type="text" v-model="text" @keydown.enter="Osearch">
                             <span @click="Osearch(index)"></span>
                         </div>
 
                         <div class="book_right_bot">
                             <ul class="book_uu">
                                 <li v-for="(item,index) in bookList" @click="bookDown(item.id)">
-                                    <span><img :src="item.picture | filterImg" alt=""></span>
+                                    <span><img src="" alt=""></span>
                                     <p>{{item.name}}</p>
                                 </li>
                             </ul>
                         </div>
                         <!-- 分页 -->
-                        <cp-page v-if="bookList.length > 8" :total="total" :current-page='current' @pagechange="pagechange"></cp-page>
+                        <cp-page :total="total" :current-page='current' @pagechange="pagechange"></cp-page>
+
                     </div>
                 </div>
             </div>
@@ -144,14 +147,14 @@
 
                     <div class="book_right">
                         <div class="book_right_top">
-                            <input placeholder="输入教程关键字" type="text" v-model="text1" @keydown.enter="Tsearch">
+                            <input type="text" v-model="text1" @keydown.enter="Tsearch">
                             <span @click="Tsearch"></span>
                         </div>
 
                         <div class="book_right_bot" v-if="!hide">
                             <ul class="book_uu">
                                 <li v-for="(item,index) in tutorialList1" @click="openChange(item.id)">
-                                    <span><img :src="item.picture | filterImg" alt=""></span>
+                                    <span><img src="" alt=""></span>
                                     <p>{{item.name}}</p>
                                 </li>
                             </ul>
@@ -165,7 +168,7 @@
                             </ul>
                         </div>
                         <!-- 分页 -->
-                        <cp-page v-if="tutorialList.length > 8" :total="totalone" :current-page='currentone' @pagechange="pagechangeOne"></cp-page>
+                        <cp-page :total="totalone" :current-page='currentone' @pagechange="pagechangeOne"></cp-page>
                     </div>
                 </div>
             </div>
@@ -179,7 +182,7 @@
             <div class="book_shade" v-show="isbook">
                 <div class="book_name">
                     <span>
-                        <img :src="picture | filterImg" >
+                        <img src="" alt="">
                     </span>
                     <div class="book_name_right">
                         <p>{{name}}</p>
@@ -188,7 +191,7 @@
 
                 </div>
                 <p class="book_shade_content">
-                        简介：{{description}}
+                    {{description}}
                 </p>
 
                 <div class="book_btn">
@@ -201,7 +204,7 @@
             <div class="book_shade" v-show="isplug">
                 <div class="book_name">
                     <span>
-                            <img :src="picture | filterImg" >
+                        <img src="" alt="">
                     </span>
                     <div class="book_name_right">
                         <p>{{name}}</p>
@@ -210,7 +213,7 @@
 
                 </div>
                 <p class="book_shade_content">
-                    简介：{{description}}
+                    {{description}}
                 </p>
                 <div class="plug_btn" @click="upDown()">
                     <span></span>
@@ -220,7 +223,7 @@
             <div class="book_shade" v-show="istotur">
                 <div class="book_name">
                     <span>
-                            <img :src="picture | filterImg" >
+                        <img src="" alt="">
                     </span>
                     <div class="book_name_right">
                         <p>{{Tname}}</p>
@@ -274,7 +277,7 @@
 <script src="js/components.js?v=1.0.0"></script>
 <script src="js/api.js?v=1.0.0"></script>
 <script type="text/javascript" src="js/pagejs/zxf_page.js?v=1.0.0"></script>
-<script src="js/heart.js?v=1.0.1"></script>
+<script src="js/heart.js?v=1.0.0"></script>
 
 <script type="text/javascript">
 

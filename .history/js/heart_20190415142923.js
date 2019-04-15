@@ -181,6 +181,7 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
+                    console.log(res)
                     this.isshade = true
                     this.isplug = true
                     this.create_at = res.data.create_at
@@ -190,6 +191,7 @@ var xm = new Vue({
                     this.data_url = res.data.data_url
                     this.download_status = res.data.download_status
                     sessionStorage.setItem('url', JSON.stringify(res.data.data_url))
+                    // console.log(res.data.data_url)
                 }
             })
         },
@@ -390,6 +392,8 @@ var xm = new Vue({
             data: {},
             dataType: 'json',
             success: (res) => {
+                console.log(res)
+                console.log('pluginlist='+this.plugList);
                 this.plugList = res.data.plugin
                 this.musicList = res.data.music.list
                 this.musicSort = res.data.music.sort
@@ -437,9 +441,6 @@ var xm = new Vue({
             return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
         },
         filterImg(img) {
-            if(img == null) {
-                return 'img/logo.png';
-            }
             return `${api}${img}`;
         }  
     },

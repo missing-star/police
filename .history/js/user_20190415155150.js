@@ -460,28 +460,14 @@ $(".wrap_ul li").each(function (index) {
         $("li.Wrap_active").removeClass("Wrap_active");
         $(this).addClass("Wrap_active");
         xm.tgp = $(this).text()
-        sortByCat($(this).attr('data-type'));
+        sortByCat($(this).attr('data-id'));
         xm.isWrap = false
 
     });
 })
 
 function sortByCat(key) {
-    switch(key) {
-        case '0':
-            key = 'intergral';
-            break;
-        case '1':
-            key = 'login';
-            break;
-        case '2':
-            key = 'post';
-            break;
-        case '3':
-            key = 'phraise';
-        break;
-    }
-    xm.userlist.sort(function(a,b) {
-        return b[key] - a[key];
+    xm.intergrals.sort(function(a,b) {
+        return a[key] - b[key];
     });
 }

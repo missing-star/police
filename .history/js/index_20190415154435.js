@@ -409,7 +409,7 @@ var xm = new Vue({
 
         },
         goHome() {
-            window.location.href="index.html";
+            window.location.href="inex.html";
         },
         searchChange() { //搜素
             $.ajax({

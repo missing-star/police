@@ -190,6 +190,7 @@ var xm = new Vue({
                     this.data_url = res.data.data_url
                     this.download_status = res.data.download_status
                     sessionStorage.setItem('url', JSON.stringify(res.data.data_url))
+                    console.log(xm.picture);
                 }
             })
         },

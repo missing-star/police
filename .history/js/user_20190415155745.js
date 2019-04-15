@@ -482,6 +482,6 @@ function sortByCat(key) {
         break;
     }
     xm.userlist.sort(function(a,b) {
-        return b[key] - a[key];
+        return a[key] - b[key];
     });
 }

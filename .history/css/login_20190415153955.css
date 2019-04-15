@@ -197,5 +197,5 @@ html {
     padding-left: 0.1rem;
 }
 .police_uu li input{
-    z-index: 5;
+    z-index: inherit;5
 }

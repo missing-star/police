@@ -38,7 +38,7 @@ const indexBanner = {
 
         },
         goHome() {
-            window.location.href="index.html";
+
         }
     },
     created() {

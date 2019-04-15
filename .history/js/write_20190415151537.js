@@ -63,6 +63,7 @@ var xm = new Vue({
                     this.selectedCatId = '';
                     this.Ptitle = '';
                     this.Pcontent = '';
+                    sessionStorage.clear()
                     window.location.href = "index.html"
                 }
             })

@@ -187,6 +187,7 @@ var xm = new Vue({
                     this.description = res.data.description
                     this.name = res.data.name
                     this.picture = res.data.picture
+                    console.log(this.picture);
                     this.data_url = res.data.data_url
                     this.download_status = res.data.download_status
                     sessionStorage.setItem('url', JSON.stringify(res.data.data_url))

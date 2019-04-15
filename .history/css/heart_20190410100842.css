@@ -50,7 +50,7 @@
 
 .plug h4,
 .music h4 {
-    font-size: 18px;
+    font-size: 24px;
     font-family: PingFangSC-Regular;
     font-weight: 400;
     color: rgba(0, 0, 0, 1);
@@ -148,7 +148,7 @@ ul.plug_uu p {
 }
 
 .music_nav h5 {
-    font-size: 18px;
+    font-size: 24px;
     font-family: PingFangSC-Regular;
     font-weight: 400;
     color: rgba(0, 0, 0, 1);
@@ -177,12 +177,11 @@ ul.plug_uu p {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    font-size: 14px;
 }
 
 .music_uu li {
     height: 40px;
-    font-size: 14px;
+    font-size: 20px;
     font-family: PingFangSC-Regular;
     font-weight: 400;
     color: rgba(0, 0, 0, 1);
@@ -255,7 +254,7 @@ ul.plug_uu p {
 }
 
 .book_left_text {
-    font-size: 18px;
+    font-size: 30px;
     font-family: PingFangSC-Regular;
     font-weight: 400;
     color: rgba(0, 0, 0, 1);
@@ -278,7 +277,7 @@ ul.plug_uu p {
 
 .book_left_uu li {
     height: 40px;
-    font-size: 16px;
+    font-size: 22px;
     font-family: PingFangSC-Regular;
     font-weight: 400;
     color: #797979;
@@ -296,7 +295,7 @@ ul.plug_uu p {
 .book_right_top input {
     width: 580px;
     height: 36px;
-    font-size: 14px;
+    font-size: 18px;
     background: transparent;
     border: 0;
     border-bottom: 1px solid #9B9B9B;
@@ -325,7 +324,7 @@ ul.plug_uu p {
 
 .book_uu li {
     text-align: center;
-    font-size: 14px;
+    font-size: 18px;
     font-family: PingFangSC-Regular;
     font-weight: 400;
     color: rgba(0, 0, 0, 1);
