@@ -832,7 +832,7 @@ img.icon-like {
     display: inline-block;
     width: 21px;
     height: 20px;
-    /* background: url(../img/表情.png)no-repeat; */
+    background: url(../img/表情.png)no-repeat;
     background-size: 100% 100%;
     position: absolute;
     right: 16%;
