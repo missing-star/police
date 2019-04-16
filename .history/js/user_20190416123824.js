@@ -61,7 +61,7 @@ var xm = new Vue({
         post: '',
         intergrals: '', //积分
         tgp: '按总积分排序',
-        currentSort:0,
+        currentSort:1,
         currentType:-1
     },
     // filters: {
@@ -250,7 +250,7 @@ var xm = new Vue({
                             this.oneIndex = -1;
                             this.twoIndex = -1;
                             this.currentActive = -1
-                            // this.lookchange(this.currentPostId, this.currentCommentId);
+                            this.lookchange(this.currentPostId, this.currentCommentId);
                             $.ajax({
                                 type: "post",
                                 url: `${api}/index/api/myPage`,
@@ -281,17 +281,8 @@ var xm = new Vue({
                         },
                         dataType: 'json',
                         success: (res) => {
-                            this.Pcomment = "";
-                            $.ajax({
-                                type: "post",
-                                url: `${api}/index/api/myPage`,
-                                async: true,
-                                data: {},
-                                dataType: 'json',
-                                success: (res) => {
-                                    this.titleList = res.data.post
-                                }
-                            })
+                            this.Pcomment = ""
+                            this.bannerChange(this.currentIndex);
                         }
                     })
                 } else {
@@ -365,21 +356,6 @@ var xm = new Vue({
                 }
             })
         },
-        //重新获取页面数据
-        getMypageData() {
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/myPage`,
-                async: true,
-                data: {},
-                dataType: 'json',
-                success: (res) => {
-                    console.log(res)
-                    this.titleList = res.data.post
-                    this.isdetele = -1
-                }
-            });
-        },
         filterImg(value) {
             if (!value) return ''
             if (value.length > 300) {
@@ -407,10 +383,6 @@ var xm = new Vue({
                 this.userlist = res.data.intergrals
                 this.commentList = res.data.comments.comment
                 this.replayList = res.data.comments.replay
-                this.currentSort = this.userlist.findIndex((item) => {
-                    console.log(item);
-                    return item.nickname == sessionStorage.getItem('username');
-                }) + 1;
                 if (res.data.post == 0) {
                     this.isthree = true
                 } else {

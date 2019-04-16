@@ -60,9 +60,7 @@ var xm = new Vue({
         phraise: '',
         post: '',
         intergrals: '', //积分
-        tgp: '按总积分排序',
-        currentSort:0,
-        currentType:-1
+        tgp: '按总积分排序'
     },
     // filters: {
     //     ellipsis(value) {
@@ -218,9 +216,12 @@ var xm = new Vue({
             up_text.innerText = editor.value;
             this.isname = true;
         },
-        agreeChange(index,type) { //回复
-            this.currentActive = index == this.currentActive && this.currentType == type ? -1 : index;
-            this.currentType = type;
+        agreeChange(index) { //回复
+            if (this.currentActive == -1) {
+                this.currentActive = index
+            } else {
+                this.currentActive = -1
+            }
         },
         send() { //发送
             this.currentActive = -1
@@ -250,7 +251,7 @@ var xm = new Vue({
                             this.oneIndex = -1;
                             this.twoIndex = -1;
                             this.currentActive = -1
-                            // this.lookchange(this.currentPostId, this.currentCommentId);
+                            this.lookchange(this.currentPostId, this.currentCommentId);
                             $.ajax({
                                 type: "post",
                                 url: `${api}/index/api/myPage`,
@@ -281,17 +282,8 @@ var xm = new Vue({
                         },
                         dataType: 'json',
                         success: (res) => {
-                            this.Pcomment = "";
-                            $.ajax({
-                                type: "post",
-                                url: `${api}/index/api/myPage`,
-                                async: true,
-                                data: {},
-                                dataType: 'json',
-                                success: (res) => {
-                                    this.titleList = res.data.post
-                                }
-                            })
+                            this.Pcomment = ""
+                            this.bannerChange(this.currentIndex);
                         }
                     })
                 } else {
@@ -365,21 +357,6 @@ var xm = new Vue({
                 }
             })
         },
-        //重新获取页面数据
-        getMypageData() {
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/myPage`,
-                async: true,
-                data: {},
-                dataType: 'json',
-                success: (res) => {
-                    console.log(res)
-                    this.titleList = res.data.post
-                    this.isdetele = -1
-                }
-            });
-        },
         filterImg(value) {
             if (!value) return ''
             if (value.length > 300) {
@@ -399,18 +376,19 @@ var xm = new Vue({
             data: {},
             dataType: 'json',
             success: (res) => {
-                this.login = res.data.intergral.login == null ? 0 : res.data.intergral.login;
-                this.phraise = res.data.intergral.phraise == null ? 0 : res.data.intergral.phraise;
-                this.post = res.data.intergral.post == null ? 0 : res.data.intergral.post;
-                this.intergrals = parseInt(this.login) + parseInt(this.phraise) + parseInt(this.post);
+                res.data.intergral.login = res.data.intergral.login;
+                res.data.intergral.phraise = res.data.intergral.phraise;
+                res.data.intergral.post = res.data.intergral.post;
+                res.data.intergral.intergrals = res.data.intergral.intergrals;
+                
                 this.titleList = res.data.post
+                this.login = res.data.intergral.login
+                this.phraise = res.data.intergral.phraise
+                this.post = res.data.intergral.post
+                this.intergrals = res.data.intergral.intergrals
                 this.userlist = res.data.intergrals
                 this.commentList = res.data.comments.comment
                 this.replayList = res.data.comments.replay
-                this.currentSort = this.userlist.findIndex((item) => {
-                    console.log(item);
-                    return item.nickname == sessionStorage.getItem('username');
-                }) + 1;
                 if (res.data.post == 0) {
                     this.isthree = true
                 } else {

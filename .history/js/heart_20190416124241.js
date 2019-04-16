@@ -147,7 +147,7 @@ var xm = new Vue({
                     dataType: 'json',
                     success: (res) => {
                         if(res.code == 0) {
-                            warn.alert(res.msg);
+                            warn.alert(data.msg);
                             return;
                         }
                         this.hide = true
