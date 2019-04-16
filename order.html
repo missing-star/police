@@ -28,8 +28,8 @@
         <div class="order_banner container">
             <div class="order_left">
                 <ul class="order_uu">
-                    <li :class="{on:isstar}" @click="onli">所有报备</li>
-                    <li :class="{on:!isstar}" @click="on">我的报备</li>
+                    <li :class="{on:isstar}" @click="onli(0)">所有报备</li>
+                    <li :class="{on:!isstar}" @click="onli(1)">我的报备</li>
                 </ul>
             </div>
             <div class="order_right">
@@ -54,13 +54,15 @@
                                     <td>
                                         <span>{{item.content}}</span>
                                     </td>
-                                    <td>{{item.user}}</td>
+                                    <td>{{item.user}}11</td>
                                     <td :class="{red:item.status==0}">
                                         {{item.status==0?"未接单":"接单"}}
                                     </td>
-                                    <td @click="Repair(index)">接单</td>
+                                    <td @click="Repair(item.id)">
+                                        <span class="receive">接单</span>
+                                    </td>
                                 </tr>
-                                <tr v-for="(item,index) in list" v-if="!show" :class="{'active':index%2==1}">
+                                <tr v-for="(item,index) in list1" v-if="!show" :class="{'active':index%2==1}">
                                     <td>{{item.create_at | filterTime}}</td>
                                     <td>{{item.name}}</td>
                                     <td>
@@ -70,7 +72,9 @@
                                     <td :class="{red:item.status==0}">
                                         {{item.status==0?"未完成":"已完成"}}
                                     </td>
-                                    <td @click="Repair(index)">完成</td>
+                                    <td @click="">
+                                        <span class="receive">完成</span>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -94,6 +98,6 @@
     $(".zxf_pagediv").createPage({
         pageNum: 5,
         current: 1,
-        backfun: function (e) {}
+        backfun: function (e) { }
     });
 </script>

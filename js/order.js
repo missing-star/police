@@ -3,13 +3,27 @@ var xm = new Vue({
     data: {
         isstar: true,
         list: [],
+        list1: [],
         msg: '',
         show: true,
     },
     methods: {
-        onli() {
+        onli(type) {
             this.isstar = !this.isstar
             this.show = !this.show
+            if (type == 1) {
+                $.ajax({
+                    type: "post",
+                    url: `${api}/index/api/myRepairs`,
+                    async: true,
+                    data: {},
+                    dataType: 'json',
+                    success: (res) => {
+                        console.log(res)
+                        this.list1 = res.data
+                    }
+                })
+            } else {
                 $.ajax({
                     type: "post",
                     url: `${api}/index/api/repairLists`,
@@ -21,51 +35,25 @@ var xm = new Vue({
                         this.list = res.data
                     }
                 })
-        },
-        on() {
-            this.isstar = !this.isstar
-            this.show = !this.show
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/myRepairs`,
-                async: true,
-                data: {},
-                dataType: 'json',
-                success: (res) => {
-                    console.log(res)
-                    this.list = res.data
-                }
-            })
+            }
         },
         Repair(index) {
-            var num = this.list
-            var id = num[index].id
             $.ajax({
                 type: "post",
                 url: `${api}/index/api/receiveRepair`,
                 async: true,
                 data: {
-                    repair_id: id
+                    repair_id: index
                 },
                 dataType: 'json',
                 success: (res) => {
-                    $.ajax({
-                        type: "post",
-                        url: `${api}/index/api/repairLists`,
-                        async: true,
-                        data: {},
-                        dataType: 'json',
-                        success: (res) => {
-                            console.log(res)
-                            this.list = res.data
-                        }
-                    })
+                    console.log(res)
+
                 }
             })
         }
     },
     created() {
-        this.msg = "接单"
         $.ajax({
             type: "post",
             url: `${api}/index/api/repairLists`,
