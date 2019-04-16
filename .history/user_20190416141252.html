@@ -167,7 +167,7 @@
                     </div>
                     <div class="agree_one" v-for="(item,index) in replayList">
                         <h4>{{item.nickname}}回复我 <span>{{item.comment_content}}</span></h4>
-                        <p class="pp" v-html="filterContent(item.content)"></p>
+                        <p class="pp" v-html="item.content"></p>
                         <div class="agree_img">
                             <ul class="agree_uu">
                                 <!-- <li>
@@ -334,4 +334,4 @@
 <script src="js/vue.js?v=1.0.6"></script>
 <script src="js/components.js?v=1.0.6"></script>
 <script src="js/api.js?v=1.0.6"></script>
-<script src="js/user.js?v=1.0.7"></script>
+<script src="js/user.js?v=1.0.6"></script>
