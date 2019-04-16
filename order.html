@@ -18,8 +18,7 @@
             <div class="order_nav container">
                 <img src="img/首页logo.png" alt="">
                 <div class="order_name">
-                    <span><img src="" alt=""></span>
-                    <span>张三</span>
+                    <!-- <span>张三</span> -->
                 </div>
             </div>
         </div>
@@ -28,13 +27,13 @@
         <div class="order_banner container">
             <div class="order_left">
                 <ul class="order_uu">
-                    <li :class="{on:isstar}" @click="onli(0)">所有报备</li>
-                    <li :class="{on:!isstar}" @click="onli(1)">我的报备</li>
+                    <li :class="{on:isstar}" @click="onli(0)">接单</li>
+                    <li :class="{on:!isstar}" @click="onli(1)">我的接单</li>
                 </ul>
             </div>
             <div class="order_right">
                 <div class="order_main">
-                    <h4>所有报备</h4>
+                    <h4>{{title}}</h4>
                     <div class="order_table">
                         <table>
                             <thead>
@@ -44,6 +43,7 @@
                                     <th width="328">报备内容</th>
                                     <th width="88">报备人</th>
                                     <th width="92">报备状态</th>
+                                    <th width="108" v-if="!isstar">接单时间</th>
                                     <th width="100">操作</th>
                                 </tr>
                             </thead>
@@ -51,10 +51,8 @@
                                 <tr v-for="(item,index) in list" v-if="show" :class="{'active':index%2==1}">
                                     <td>{{item.create_at | filterTime}}</td>
                                     <td>{{item.name}}</td>
-                                    <td>
-                                        <span>{{item.content}}</span>
-                                    </td>
-                                    <td>{{item.user}}11</td>
+                                    <td>{{item.content}}</td>
+                                    <td>{{item.user}}</td>
                                     <td :class="{red:item.status==0}">
                                         {{item.status==0?"未接单":"接单"}}
                                     </td>
@@ -65,14 +63,13 @@
                                 <tr v-for="(item,index) in list1" v-if="!show" :class="{'active':index%2==1}">
                                     <td>{{item.create_at | filterTime}}</td>
                                     <td>{{item.name}}</td>
-                                    <td>
-                                        <span>{{item.content}}</span>
-                                    </td>
+                                    <td>{{item.content}}</td>
                                     <td>{{item.user}}</td>
                                     <td :class="{red:item.status==0}">
                                         {{item.status==0?"未完成":"已完成"}}
                                     </td>
-                                    <td @click="">
+                                    <td>{{item.repair_at | filterTime}}</td>
+                                    <td @click="Service(item.id,item.one_id)">
                                         <span class="receive">完成</span>
                                     </td>
                                 </tr>

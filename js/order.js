@@ -1,29 +1,19 @@
 var xm = new Vue({
     el: "#app",
     data: {
-        isstar: true,
+        isstar: false,
         list: [],
         list1: [],
         msg: '',
-        show: true,
+        show: false,
+        title: ''
     },
     methods: {
         onli(type) {
             this.isstar = !this.isstar
             this.show = !this.show
-            if (type == 1) {
-                $.ajax({
-                    type: "post",
-                    url: `${api}/index/api/myRepairs`,
-                    async: true,
-                    data: {},
-                    dataType: 'json',
-                    success: (res) => {
-                        console.log(res)
-                        this.list1 = res.data
-                    }
-                })
-            } else {
+            if (type == 0) {
+                this.title = "接单"
                 $.ajax({
                     type: "post",
                     url: `${api}/index/api/repairLists`,
@@ -31,13 +21,24 @@ var xm = new Vue({
                     data: {},
                     dataType: 'json',
                     success: (res) => {
-                        console.log(res)
                         this.list = res.data
+                    }
+                })
+            } else {
+                this.title = "我的接单"
+                $.ajax({
+                    type: "post",
+                    url: `${api}/index/api/myRepairs`,
+                    async: true,
+                    data: {},
+                    dataType: 'json',
+                    success: (res) => {
+                        this.list1 = res.data
                     }
                 })
             }
         },
-        Repair(index) {
+        Repair(index) { //接单
             $.ajax({
                 type: "post",
                 url: `${api}/index/api/receiveRepair`,
@@ -48,23 +49,59 @@ var xm = new Vue({
                 dataType: 'json',
                 success: (res) => {
                     console.log(res)
+                    if (res.code == 1) {
+                        warn.alert(res.msg)
+                        $.ajax({
+                            type: "post",
+                            url: `${api}/index/api/repairLists`,
+                            async: true,
+                            data: {},
+                            dataType: 'json',
+                            success: (res) => {
+                                this.list = res.data
+                            }
+                        })
+                    } else {
+                        warn.alert(res.msg)
+                    }
+
+                }
+            })
+        },
+        Service(index, id) {  //维修完成
+            $.ajax({
+                type: "post",
+                url: `${api}/index/api/doneRepair`,
+                async: true,
+                data: {
+                    repair_id: index,
+                    one_id: id
+                },
+                dataType: 'json',
+                success: (res) => {
+                    console.log(res)
+                    if (res.code == 1) {
+                        warn.alert(res.msg)
+                        $.ajax({
+                            type: "post",
+                            url: `${api}/index/api/myRepairs`,
+                            async: true,
+                            data: {},
+                            dataType: 'json',
+                            success: (res) => {
+                                this.list1 = res.data
+                            }
+                        })
+                    } else {
+                        warn.alert(res.msg)
+                    }
 
                 }
             })
         }
     },
     created() {
-        $.ajax({
-            type: "post",
-            url: `${api}/index/api/repairLists`,
-            async: true,
-            data: {},
-            dataType: 'json',
-            success: (res) => {
-                console.log(res)
-                this.list = res.data
-            }
-        })
+        this.onli(0)
     },
     filters: {
         filterTime(time) {
