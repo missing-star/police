@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>浦口公安局</title>
-    <link rel="stylesheet" href="css/reset.css?v=1.0.6">
-    <link rel="stylesheet" href="css/user.css?v=1.0.6">
-    <link rel="stylesheet" href="css/header.css?v=1.0.6">
+    <link rel="stylesheet" href="css/reset.css?v=1.0.5">
+    <link rel="stylesheet" href="css/user.css?v=1.0.5">
+    <link rel="stylesheet" href="css/header.css?v=1.0.5">
 </head>
 
 <body>
@@ -145,7 +145,7 @@
                 <div class="agree" v-show="!isone">
                     <div class="agree_one" v-for="(item,index) in commentList">
                         <h4>{{item.nickname}}评论我 <span>{{item.comment_content}}</span></h4>
-                        <p class="pp" v-html="filterContent(item.content)"></p>
+                        <p class="pp" v-html="filterImg(item.content)"></p>
                         <div class="agree_img">
                             <ul class="agree_uu">
                                 <!-- <li>
@@ -243,7 +243,7 @@
                         <h4>{{currentComment.nickname}}</h4>
                         <span>{{currentComment.create_at | filterTime}}</span>
                     </div>
-                    <p v-html="currentComment.content"></p>
+                    <p v-html="filterContent(currentComment.content)"></p>
                 </div>
                 <div class="see_main">
                     <template v-if="seelist.length == 0">
@@ -256,7 +256,7 @@
                                     <h4>{{item.nickname}}<span class="replay-cha">回复</span>{{item.comment_user}}</h4>
                                     <span>{{item.create_at | filterTime}}</span>
                                 </div>
-                                <p v-html="filterContent(item.content)"></p>
+                                <p v-html="item.content"></p>
                                 <div class="see_uu_three">
                                     <div @click="likePostOrComment('',item.id,1)" class="see_uu_btn pointer">
                                         <img v-if="item.status == 0" src="img/icon-06.png" alt="">
@@ -278,7 +278,7 @@
                                     <h4>{{part.nickname}}回复{{part.comment_user}}</h4>
                                     <span>{{part.create_at | filterTime}}</span>
                                 </div>
-                                <p v-html="filterContent(part.content)"></p>
+                                <p v-html="part.content"></p>
                                 <div class="see_uu_three">
                                     <div @click="likePostOrComment('',part.id,1)" class="see_uu_btn pointer">
                                         <img v-if="part.status == 0" src="img/icon-06.png" alt="">
@@ -330,8 +330,8 @@
 
 </html>
 
-<script src="js/jquery.min.js?v=1.0.6"></script>
-<script src="js/vue.js?v=1.0.6"></script>
-<script src="js/components.js?v=1.0.6"></script>
-<script src="js/api.js?v=1.0.6"></script>
-<script src="js/user.js?v=1.0.6"></script>
+<script src="js/jquery.min.js?v=1.0.5"></script>
+<script src="js/vue.js?v=1.0.5"></script>
+<script src="js/components.js?v=1.0.5"></script>
+<script src="js/api.js?v=1.0.5"></script>
+<script src="js/user.js?v=1.0.5"></script>
