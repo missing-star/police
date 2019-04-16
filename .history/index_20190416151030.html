@@ -237,7 +237,7 @@
                                     <p class="sub-title">报备情况</p>
                                     <p class="sub-title">处理人</p>
                                 </li>
-                                <li v-for="(item,index) in allList" :title="(item.user ? item.user : item.police_name) + '于' +item.create_at.substring(0,10) +'提交' +item.title  + item.content ? ' - '+item.content : ''">
+                                <li v-for="(item,index) in allList" :title="(item.user ? item.user : item.police_name) + '于' +item.create_at.substring(0,10) +'提交' +item.title">
                                     <span><a class="title-blue report-user">·{{item.user ? item.user : item.police_name}}</a> 于
                                         <a class="title-blue">{{item.create_at.substring(0,10)}}</a> 提交
                                         <a class="title-blue">{{item.title}}</a>
