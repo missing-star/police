@@ -516,8 +516,9 @@ var xm = new Vue({
             return str.replace(/[\u0391-\uFFE5]/g, "aa").length > 239;
         },
         filterImg(content) {
-            const reg = /style="[^\"]*?"/g;
-            return content.replace(reg, '');
+            return content;
+            // const reg = /style="[^=]*?"([(\s+\w+=)|>])/g;
+            // return content.replace(reg, '');
         },
         goUser() { //通知跳转
             window.location.href = "user.html?id=1"

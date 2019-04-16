@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>浦口公安局</title>
-    <link rel="stylesheet" href="css/reset.css?v=1.0.7">
-    <link rel="stylesheet" href="css/index.css?v=1.0.7">
-    <link rel="stylesheet" type="text/css" href="css/page/zxf_page.css?v=1.0.7" />
-    <link rel="stylesheet" href="css/page/iconfont.css?v=1.0.7">
+    <link rel="stylesheet" href="css/reset.css?v=1.0.6">
+    <link rel="stylesheet" href="css/index.css?v=1.0.6">
+    <link rel="stylesheet" type="text/css" href="css/page/zxf_page.css?v=1.0.6" />
+    <link rel="stylesheet" href="css/page/iconfont.css?v=1.0.6">
     <link rel="stylesheet" href="css/common.css">
 </head>
 
@@ -95,7 +95,7 @@
                                     alt="" class="mid_img" v-if="item.picture!=null && item.picture != ''"
                                     v-show="pIndex !==index">
                                 <div>
-                                    <p class="content_text"
+                                    <p class="content_text" @click="readChange(item,index)"
                                         :class="{entable:postIndex == index}" v-html="filterImg(item.content)"></p>
                                 </div>
                                 <div class="clear"></div>
@@ -237,8 +237,8 @@
                                     <p class="sub-title">报备情况</p>
                                     <p class="sub-title">处理人</p>
                                 </li>
-                                <li v-for="(item,index) in allList" :title="(item.user ? item.user : item.police_name) + '于' +item.create_at.substring(0,10) +'提交' +item.title">
-                                    <span><a class="title-blue report-user">·{{item.user ? item.user : item.police_name}}</a> 于
+                                <li v-for="(item,index) in allList" :title="">
+                                    <span><a class="title-blue report-user">·{{item.user}}</a> 于
                                         <a class="title-blue">{{item.create_at.substring(0,10)}}</a> 提交
                                         <a class="title-blue">{{item.title}}</a>
                                     </span>
@@ -442,14 +442,14 @@
 </body>
 
 </html>
-<script src="js/jquery.min.js?v=1.0.7"></script>
-<script src="js/vue.js?v=1.0.7"></script>
-<script src="js/components.js?v=1.0.7"></script>
-<script type="text/javascript" src="js/pagejs/zxf_page.js?v=1.0.7"></script>
-<script src="js/api.js?v=1.0.7"></script>
+<script src="js/jquery.min.js?v=1.0.6"></script>
+<script src="js/vue.js?v=1.0.6"></script>
+<script src="js/components.js?v=1.0.6"></script>
+<script type="text/javascript" src="js/pagejs/zxf_page.js?v=1.0.6"></script>
+<script src="js/api.js?v=1.0.6"></script>
 <script src="kindeditor/kindeditor-all-min.js"></script>
 <script src="kindeditor/zh-CN.js"></script>
-<script src="js/index.js?v=1.0.7"></script>
+<script src="js/index.js?v=1.0.6"></script>
 <script type="text/javascript">
     //翻页
     $(".zxf_pagediv").createPage({

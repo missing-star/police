@@ -229,7 +229,7 @@ var xm = new Vue({
             this.isone = !this.isone
         },
         filterContent(content) {
-            const reg = /style="[^\"]*?"/g;
+            const reg = /style="[^\"]*?"/;
             content = content == null ? '' : content;
             return content.replace(reg, '');
         },

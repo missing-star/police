@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>浦口公安局</title>
-    <link rel="stylesheet" href="css/reset.css?v=1.0.7">
-    <link rel="stylesheet" href="css/user.css?v=1.0.7">
-    <link rel="stylesheet" href="css/header.css?v=1.0.7">
+    <link rel="stylesheet" href="css/reset.css?v=1.0.6">
+    <link rel="stylesheet" href="css/user.css?v=1.0.6">
+    <link rel="stylesheet" href="css/header.css?v=1.0.6">
 </head>
 
 <body>
@@ -72,8 +72,7 @@
                         </div>
                         <div class="content_mid">
                             <img :src="item.picture.indexOf('http') != -1 ? item.picture : 'http://police.pzhkj.cn'+item.picture"
-                                alt="" class="mid_img" v-if="item.picture != null && item.picture != ''"
-                                v-show="pIndex !==index">
+                                alt="" class="mid_img" v-if="item.picture != null && item.picture != ''">
                             <div>
                                 <p class="content_text" :class="{entable:postIndex == index}"
                                     v-html="filterContent(item.content)"></p>
@@ -330,8 +329,8 @@
 
 </html>
 
-<script src="js/jquery.min.js?v=1.0.7"></script>
-<script src="js/vue.js?v=1.0.7"></script>
-<script src="js/components.js?v=1.0.7"></script>
-<script src="js/api.js?v=1.0.7"></script>
+<script src="js/jquery.min.js?v=1.0.6"></script>
+<script src="js/vue.js?v=1.0.6"></script>
+<script src="js/components.js?v=1.0.6"></script>
+<script src="js/api.js?v=1.0.6"></script>
 <script src="js/user.js?v=1.0.7"></script>
