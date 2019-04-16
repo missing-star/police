@@ -27,8 +27,9 @@ var xm = new Vue({
             this.ispolice = true
         },
         goMatron: function () {
-            this.isrole = false
-            this.ismatron = true
+            window.location.href="http://police.pzhkj.cn/index/admin/login.html"
+            // this.isrole = false
+            // this.ismatron = true
         },
         orderEnter: function () { //接单员登录
             $.ajax({
