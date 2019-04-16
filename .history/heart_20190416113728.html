@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>浦口公安局</title>
-    <link rel="stylesheet" href="css/reset.css?v=1.0.5">
-    <link rel="stylesheet" href="css/header.css?v=1.0.5">
-    <link rel="stylesheet" href="css/heart.css?v=1.0.5">
+    <link rel="stylesheet" href="css/reset.css?v=1.0.2">
+    <link rel="stylesheet" href="css/header.css?v=1.0.2">
+    <link rel="stylesheet" href="css/heart.css?v=1.0.4">
 
-    <link rel="stylesheet" type="text/css" href="css/page/zxf_page.css?v=1.0.5" />
+    <link rel="stylesheet" type="text/css" href="css/page/zxf_page.css?v=1.0.2" />
 </head>
 
 <body>
@@ -113,7 +113,7 @@
 
                         <div class="book_right_bot">
                             <ul class="book_uu">
-                                <li class="pointer" v-for="(item,index) in bookList" @click="bookDown(item.id)">
+                                <li v-for="(item,index) in bookList" @click="bookDown(item.id)">
                                     <span><img :src="item.picture | filterImg" alt=""></span>
                                     <p>{{item.name}}</p>
                                 </li>
@@ -150,7 +150,7 @@
 
                         <div class="book_right_bot" v-if="!hide">
                             <ul class="book_uu">
-                                <li class="pointer" v-for="(item,index) in tutorialList1" @click="openChange(item.id)">
+                                <li v-for="(item,index) in tutorialList1" @click="openChange(item.id)">
                                     <span><img :src="item.picture | filterImg" alt=""></span>
                                     <p>{{item.name}}</p>
                                 </li>
@@ -158,7 +158,7 @@
                         </div>
                         <div class="book_right_bot" v-if="hide">
                             <ul class="book_uu">
-                                <li class="pointer" v-for="(item,index) in tutorialList" @click="Tdown(item.id)">
+                                <li v-for="(item,index) in tutorialList" @click="Tdown(item.id)">
                                     <span><img src="" alt=""></span>
                                     <p>{{item.name}}</p>
                                 </li>
@@ -212,7 +212,7 @@
                 <p class="book_shade_content">
                     简介：{{description}}
                 </p>
-                <div class="plug_btn pointer" @click="upDown()">
+                <div class="plug_btn" @click="upDown()">
                     <span></span>
                 </div>
             </div>
@@ -259,7 +259,7 @@
                     <p @click="editChange">确认</p>
                 </div>
             </div>
-            <div class="close pointer" @click="goClose">
+            <div class="close" @click="goClose">
             </div>
         </div>
     </div>
@@ -269,12 +269,12 @@
 
 </html>
 
-<script src="js/jquery.min.js?v=1.0.5"></script>
-<script src="js/vue.js?v=1.0.5"></script>
-<script src="js/components.js?v=1.0.5"></script>
-<script src="js/api.js?v=1.0.5"></script>
-<script type="text/javascript" src="js/pagejs/zxf_page.js?v=1.0.5"></script>
-<script src="js/heart.js?v=1.0.5"></script>
+<script src="js/jquery.min.js?v=1.0.0"></script>
+<script src="js/vue.js?v=1.0.0"></script>
+<script src="js/components.js?v=1.0.0"></script>
+<script src="js/api.js?v=1.0.0"></script>
+<script type="text/javascript" src="js/pagejs/zxf_page.js?v=1.0.0"></script>
+<script src="js/heart.js?v=1.0.1"></script>
 
 <script type="text/javascript">
 

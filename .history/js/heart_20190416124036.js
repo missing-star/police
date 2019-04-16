@@ -146,10 +146,6 @@ var xm = new Vue({
                     },
                     dataType: 'json',
                     success: (res) => {
-                        if(res.code == 0) {
-                            warn.alert(res.msg);
-                            return;
-                        }
                         this.hide = true
                         this.tutorialList = res.data
                         this.totalone = res.data.length

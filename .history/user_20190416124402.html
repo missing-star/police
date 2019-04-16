@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>浦口公安局</title>
-    <link rel="stylesheet" href="css/reset.css?v=1.0.5">
-    <link rel="stylesheet" href="css/user.css?v=1.0.5">
-    <link rel="stylesheet" href="css/header.css?v=1.0.5">
+    <link rel="stylesheet" href="css/reset.css?v=1.0.2">
+    <link rel="stylesheet" href="css/user.css?v=1.0.2">
+    <link rel="stylesheet" href="css/header.css?v=1.0.4">
 </head>
 
 <body>
@@ -183,8 +183,8 @@
 
                         <!-- 回复 -->
                         <div class="agree_inp" v-if="currentActive==index && currentType == 1">
-                            <input v-model="replyComment" :placeholder="'回复' + item.nickname + ':'" type="text">
-                            <span @click="commentChange(item.id,item.comment_id,item.uid,1)">发送</span>
+                            <input :placeholder="'回复' + item.nickname + ':'" type="text">
+                            <span @click="send()">发送</span>
                         </div>
                     </div>
 
@@ -253,7 +253,7 @@
                         <ul class="see_uu" v-for="(item,index) in seelist">
                             <li>
                                 <div class="see_uu_one">
-                                    <h4>{{item.nickname}}<span class="replay-cha">回复</span>{{item.comment_user}}</h4>
+                                    <h4>{{item.nickname}}回复{{item.comment_user}}</h4>
                                     <span>{{item.create_at | filterTime}}</span>
                                 </div>
                                 <p v-html="item.content"></p>
@@ -330,8 +330,8 @@
 
 </html>
 
-<script src="js/jquery.min.js?v=1.0.5"></script>
-<script src="js/vue.js?v=1.0.5"></script>
-<script src="js/components.js?v=1.0.5"></script>
-<script src="js/api.js?v=1.0.5"></script>
-<script src="js/user.js?v=1.0.5"></script>
+<script src="js/jquery.min.js?v=1.0.0"></script>
+<script src="js/vue.js?v=1.0.0"></script>
+<script src="js/components.js?v=1.0.0"></script>
+<script src="js/api.js?v=1.0.0"></script>
+<script src="js/user.js?v=1.0.1"></script>

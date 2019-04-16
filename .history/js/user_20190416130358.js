@@ -250,7 +250,7 @@ var xm = new Vue({
                             this.oneIndex = -1;
                             this.twoIndex = -1;
                             this.currentActive = -1
-                            // this.lookchange(this.currentPostId, this.currentCommentId);
+                            this.lookchange(this.currentPostId, this.currentCommentId);
                             $.ajax({
                                 type: "post",
                                 url: `${api}/index/api/myPage`,
@@ -378,7 +378,7 @@ var xm = new Vue({
                     this.titleList = res.data.post
                     this.isdetele = -1
                 }
-            });
+            })；
         },
         filterImg(value) {
             if (!value) return ''

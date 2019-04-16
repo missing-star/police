@@ -683,7 +683,6 @@ img.icon-like {
 /* 查看回复 */
 .see {
     width: 700px;
-    max-height: 75%;
     background: rgba(255, 255, 255, 1);
     border-radius: 10px;
     position: absolute;
