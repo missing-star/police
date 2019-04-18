@@ -142,12 +142,6 @@ var xm = new Vue({
                 }
             })
         },
-        goname() { //个人信息
-            $(".header_two").slideToggle("400");
-        },
-        goAnswer() { //通知
-            $(".answer").slideToggle("400");
-        },
         bookChange(book_id, index) { //书籍分类
             this.current1 = index
             $.ajax({
@@ -419,7 +413,7 @@ var xm = new Vue({
                     this.tutorialList1 = res.data
                 }
             })
-        }
+        },
     },
     mounted() {
         this.$refs.myPlayer.src = this.musicListSelf[this.currentMusicIndex]

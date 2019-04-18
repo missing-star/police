@@ -56,26 +56,7 @@ var xm = new Vue({
         //子级id
         subId: '',
         showDate:getNowDate(),
-        ind: -1,
-        Colorindex: -1,
-        Colorindex1: -1,
-        Colorindex2: -1,
         ip: '',
-        arr: [
-            {
-                avter: 'img/好.png',
-                title: "好"
-            },
-            {
-                avter: 'img/一般.png',
-                title: "一般"
-            },
-            {
-                avter: 'img/坏.png',
-                title: "不感兴趣",
-
-            },
-        ]
     },
     methods: {
         Resgiter() {
@@ -578,19 +559,6 @@ var xm = new Vue({
             window.location.href = "user.html?id=1"
         },
 
-        openSelect(index) {
-            this.Colorindex = this.Colorindex == index ? -1 : index
-        },
-        openSelect1(index) {
-            this.Colorindex1 = this.Colorindex1 == index ? -1 : index
-        },
-        openSelect2(index) {
-            this.Colorindex2 = this.Colorindex2 == index ? -1 : index
-        },
-        selectChange(num, id) { //点赞选择
-            num = id
-        },
-
     },
     created() {
         getNotice();
@@ -654,6 +622,7 @@ var xm = new Vue({
         getIpAdd((ip) => {
             this.ip = ip;
         });
+        console.log(this.ip)
     },
     filters: {
         filterTime(time) {

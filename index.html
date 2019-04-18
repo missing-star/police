@@ -106,7 +106,7 @@
                                 <p>发布于{{item.create_at}}</p>
                                 <ul class="commnet_uu">
 
-                                    <li @click="openSelect(index)">
+                                    <li>
                                         <div class="comment-ul">
                                             <div class="comment-one" @click="likePostOrComment(item.id,'',0,1)">
                                                 <img class="comment-img" src="img/好.png" alt="">
@@ -334,7 +334,7 @@
                                 </div>
                                 <p v-html="item.content"></p>
                                 <div class="see_uu_three">
-                                    <div @click="openSelect2(index)" class="see_uu_btn pointer">
+                                    <div class="see_uu_btn pointer">
                                         <div class="comment-ul">
                                             <div class="comment-one" @click="likePostOrComment('',item.id,1,1)">
                                                 <img class="comment-img" src="img/好.png" alt="">
