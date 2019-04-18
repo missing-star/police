@@ -698,10 +698,12 @@ img.icon-like {
 .see::-webkit-scrollbar {
     width: 0;
 }
+
 .see_main {
     min-height: 50px;
     overflow: scroll;
 }
+
 .see_text {
     width: 668px;
     border-bottom: 8px solid #D7D7D7;
@@ -788,10 +790,12 @@ img.icon-like {
     -webkit-line-clamp: 3;
     overflow: hidden;
 }
-span.replay-cha{
+
+span.replay-cha {
     color: #8590ab;
     margin: 0 5px;
 }
+
 .see_uu_three {
     display: flex;
     font-size: 16px;
@@ -995,15 +999,18 @@ span.replay-cha{
     margin-right: 10px;
     float: left;
 }
+
 p.no-replay {
     color: #8590ab;
     padding: 10px;
     text-align: center;
     font-size: 15px;
 }
+
 .no-tools-wrapper img {
     width: 100%;
 }
+
 .no-tools-wrapper {
     width: 30%;
     text-align: center;
@@ -1015,16 +1022,19 @@ p.no-replay {
     justify-content: space-around;
     padding: 30px 0;
 }
+
 p.tips-content {
     color: #ABABAB;
 }
+
 .no-replay-wrapper {
     background: #fff;
     padding: 30px 0;
 }
+
 .agree_none.no-replay {
     margin: 0 auto;
-
+}
 
 
 /* 点赞框 */
@@ -1058,7 +1068,7 @@ p.tips-content {
 }
 
 .comment-test {
-    font-size: 16px!important;
+    font-size: 16px !important;
     font-family: PingFangSC-Regular;
 }
 
@@ -1070,4 +1080,25 @@ img.icon-like {
     width: 18px !important;
     height: 18px !important;
     margin-right: 6px;
+}
+
+/* 报备 */
+.base {
+    width: 100%;
+    height: auto;
+    background: white;
+    margin-top: 1px;
+}
+
+table {
+    width: 100%;
+}
+
+.Htr {
+    height: 30px;
+    background: rgba(148, 210, 255, 1);
+}
+
+.Tcolor {
+    background: #F4F4F4;
 }

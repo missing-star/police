@@ -61,8 +61,11 @@ var xm = new Vue({
         post: '',
         intergrals: '', //积分
         tgp: '按总积分排序',
-        currentSort:0,
-        currentType:-1,
+        currentSort: 0,
+        currentType: -1,
+        baseList: [],
+        isone1: false,
+        isone2: false,
     },
     methods: {
         wrapChange(key) { //排名切换
@@ -209,15 +212,22 @@ var xm = new Vue({
             up_text.innerText = editor.value;
             this.isname = true;
         },
-        agreeChange(index,type) { //回复
+        agreeChange(index, type) { //回复
             this.currentActive = index == this.currentActive && this.currentType == type ? -1 : index;
             this.currentType = type;
         },
         send() { //发送
             this.currentActive = -1
         },
-        userTag() { //切换
-            this.isone = !this.isone
+        userTag(index) { //切换
+            if (idnex == 0) {
+                this.isone = true
+            } else if (index == 1) {
+                this.isone1 = true
+            } else if (idnex == 2) {
+                this.isone2 = true
+            }
+
         },
         filterContent(content) {
             const reg = /style="[^\"]*?"/g;
@@ -430,6 +440,18 @@ var xm = new Vue({
             this.isone = false
         }
 
+        $.ajax({
+            type: "post",
+            url: `${api}/index/api/myRepair`,
+            async: true,
+            data: {},
+            dataType: 'json',
+            success: (res) => {
+                this.baseList = res.data
+                console.log(res)
+            }
+        })
+
     },
     filters: {
         filterTime(time) {
@@ -480,7 +502,7 @@ $(".wrap_ul li").each(function (index) {
 })
 
 function sortByCat(key) {
-    switch(key) {
+    switch (key) {
         case '0':
             key = 'intergral';
             break;
@@ -492,9 +514,9 @@ function sortByCat(key) {
             break;
         case '3':
             key = 'phraise';
-        break;
+            break;
     }
-    xm.userlist.sort(function(a,b) {
+    xm.userlist.sort(function (a, b) {
         return b[key] - a[key];
     });
 }
