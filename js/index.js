@@ -55,7 +55,7 @@ var xm = new Vue({
         length: '', // 回复评论条数
         //子级id
         subId: '',
-        showDate:getNowDate(),
+        showDate: getNowDate(),
         ip: '',
     },
     methods: {
@@ -221,9 +221,9 @@ var xm = new Vue({
             })
 
         },
-        toggleCalendar(){
+        toggleCalendar() {
             $('#schedule-box').slideToggle(200);
-        },  
+        },
         lookchange(post_id, comment_id) { //查看回复
             this.currentPostId = post_id;
             this.currentCommentId = comment_id;
@@ -290,9 +290,6 @@ var xm = new Vue({
             if (index != this.numIndex) {
                 this.numIndex = index;
             }
-            // var num = index + 4;
-            // var list = this.ForumCate
-            // var id = list[num].id
             this.subId = id;
             $.ajax({
                 type: "post",
@@ -304,6 +301,8 @@ var xm = new Vue({
                 dataType: 'json',
                 success: (res) => {
                     this.titleList = res.result
+
+                    this.ForumCate[3].title=this.ForumCate[id].title
                     // this.postIndex = -1
                     // this.commentActive = -1
                     // this.numIndex = -1
@@ -348,36 +347,15 @@ var xm = new Vue({
                     // this.postIndex = -1
                     // this.commentActive = -1
                     // this.numIndex = -1
+                    this.ForumCate[3].title="更多"
                     this.titleList = res.result;
-                    // if (this.titleList.length == 0) {
-                    //     this.isNone = true;
-                    // } else {
-                    //     this.isNone = false;
-                    // }
+                    if (this.titleList.length == 0) {
+                        this.isNone = true;
+                    } else {
+                        this.isNone = false;
+                    }
                 }
             })
-        },
-        getForumList(id) {
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/getForumList`,
-                data: {
-                    cate_id: id
-                },
-                dataType: 'json',
-                success: (res) => {
-                    console.log(res)
-                    // this.postIndex = -1
-                    // this.commentActive = -1
-                    // this.numIndex = -1
-                    this.titleList = res.result;
-                    // if (this.titleList.length == 0) {
-                    //     this.isNone = true;
-                    // } else {
-                    //     this.isNone = false;
-                    // }
-                }
-            });
         },
         pulishChange() { //发布论坛
             if (this.Ptitle.trim() == '') {
@@ -464,11 +442,17 @@ var xm = new Vue({
             window.location.href = "index.html";
         },
         searchChange() { //搜素
+            if (this.userName) {
+                this.ip = ""
+            } else {
+                this.ip
+            }
             $.ajax({
                 type: "post",
                 url: `${api}/index/api/postSearch`,
                 data: {
-                    keyWords: this.keyWords
+                    keyWords: this.keyWords,
+                    ip: this.ip
                 },
                 dataType: 'json',
                 success: (res) => {
@@ -712,7 +696,7 @@ function initRepairChart(data) {
             data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
             axisTick: {
                 alignWithLabel: true,
-                show:false
+                show: false
             }
         }],
         yAxis: [{
@@ -728,8 +712,8 @@ function initRepairChart(data) {
                     color: new echarts.graphic.LinearGradient(
                         0, 0, 0, 1,
                         [
-                            {offset: 0, color: '#71baf0'},
-                            {offset: 1, color: '#2b85e9'}
+                            { offset: 0, color: '#71baf0' },
+                            { offset: 1, color: '#2b85e9' }
                         ]
                     )
                 }
@@ -746,30 +730,30 @@ function initRepairChart(data) {
 
 function initCalendar() {
     var mySchedule = new Schedule({
-		el: '#schedule-box',
-		clickCb: function (y,m,d) {
+        el: '#schedule-box',
+        clickCb: function (y, m, d) {
             //点击日期
             xm.toggleCalendar();
-            initRepairChart([10,20,300,959,10]);
-		},
-		nextMonthCb: function (y,m,d) {
+            initRepairChart([10, 20, 300, 959, 10]);
+        },
+        nextMonthCb: function (y, m, d) {
             //下个月
-			console.log(y,m,d);
-		},
-		nextYeayCb: function (y,m,d) {
+            console.log(y, m, d);
+        },
+        nextYeayCb: function (y, m, d) {
             //下年
-			console.log(y,m,d);	
-		},
-		prevMonthCb: function (y,m,d) {
+            console.log(y, m, d);
+        },
+        prevMonthCb: function (y, m, d) {
             //上一年
-			console.log(y,m,d);
-		},
-		prevYearCb: function (y,m,d) {
+            console.log(y, m, d);
+        },
+        prevYearCb: function (y, m, d) {
             //上一年
-			console.log(y,m,d);
-			
-		}
-	});
+            console.log(y, m, d);
+
+        }
+    });
 }
 /**
  * 根据日期字符串获得该周的日期范围
@@ -781,17 +765,17 @@ function getWeekByDay(str) {
     var day = date.getDay();// 0 - 6
     var start = '';
     var end = '';
-    if(day == 0) {
+    if (day == 0) {
         //周日
-        start = timeToDateStr(times - 6*24*60*60*1000);
+        start = timeToDateStr(times - 6 * 24 * 60 * 60 * 1000);
         end = timeToDateStr(times);
     }
     else {
         //非周日
-        start = timeToDateStr(times - (day-1)*24*60*60*1000);
-        end = timeToDateStr(times - (day-7)*24*60*60*1000);
+        start = timeToDateStr(times - (day - 1) * 24 * 60 * 60 * 1000);
+        end = timeToDateStr(times - (day - 7) * 24 * 60 * 60 * 1000);
     }
-    return [start,end];
+    return [start, end];
 }
 /**
  * 根据时间戳返回日期字符串
@@ -799,15 +783,15 @@ function getWeekByDay(str) {
  */
 function timeToDateStr(timeStaps) {
     const newDate = new Date(timeStaps);
-    return newDate.getFullYear()+'-'+(newDate.getMonth()+1)+'-'+newDate.getDate();
+    return newDate.getFullYear() + '-' + (newDate.getMonth() + 1) + '-' + newDate.getDate();
 }
 
 function getNowDate() {
     const date = new Date();
-    return date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+    return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 }
 
-initRepairChart([100,200,300,100,30,100]);
+initRepairChart([100, 200, 300, 100, 30, 100]);
 
 initCalendar();
 

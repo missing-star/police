@@ -79,7 +79,7 @@
                                 <span></span>
                                 <ul class="more_uu">
                                     <li v-for="(item,index) in ForumCate.slice(4)" :class="{active:index == numIndex}"
-                                        @click="banner(index)">
+                                        @click="banner(index,item.id)">
                                         {{item.title}}
                                     </li>
                                 </ul>
@@ -178,12 +178,13 @@
 
                             </div>
                         </div>
+                        <!-- 未搜索到 -->
+                        <div class="content_img" v-show="isNone">
+                            <img src="img/矢量智能对象.png" alt="">
+                            <p>没有找到符合条件的结果</p>
+                        </div>
                     </div>
-                    <!-- 未搜索到 -->
-                    <div class="content_img" v-show="isNone">
-                        <img src="img/矢量智能对象.png" alt="">
-                        <p>没有找到符合条件的结果</p>
-                    </div>
+
                 </div>
                 <div class="content_right">
                     <!-- 论坛报备 -->
