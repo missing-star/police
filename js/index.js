@@ -62,10 +62,6 @@ var xm = new Vue({
         ip: '',
         arr: [
             {
-                avter: 'img/特别好.png',
-                title: "特别好"
-            },
-            {
                 avter: 'img/好.png',
                 title: "好"
             },
@@ -74,7 +70,7 @@ var xm = new Vue({
                 title: "一般"
             },
             {
-                avter: 'img/不感兴趣.png',
+                avter: 'img/坏.png',
                 title: "不感兴趣",
 
             },
@@ -643,11 +639,6 @@ var xm = new Vue({
         })
 
         this.userName = sessionStorage.getItem("username")
-        if (this.userName == null) {
-            window.location.href = "login.html"
-        }
-
-
     },
     filters: {
         filterTime(time) {

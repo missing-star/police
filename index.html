@@ -113,12 +113,12 @@
                                         </template>
                                     </li>
                                     <li @click="openSelect(index)" class="pointer">
-                                        <img v-if="item.status == 0" src="img/空星.png" class="icon-like">
+                                        <!-- <img v-if="item.status == 0" src="img/空星.png" class="icon-like">
                                         <img v-else src="img/实星.png" class="icon-like">
                                         <span v-if="item.status == 0">点评</span>
-                                        <span v-else>已点评</span>
+                                        <span v-else>已点评</span> -->
                                         <!-- 点赞弹框 -->
-                                        <div class="comment-ul" v-show="Colorindex ==index"
+                                        <div class="comment-ul" 
                                             @click="likePostOrComment(item.id,'',0)">
                                             <div class="comment-one" @click="selectChange(num,item.type)"
                                                 v-for="(items,num) in arr" :class="{Colorone:item.type==num+1}">
