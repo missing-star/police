@@ -57,7 +57,7 @@
                 <div class="header_two">
                     <span></span>
                     <ul class="header_two_uu">
-                        <li @click="gouser">我的主页</li>
+                        <li @click="gouser">个人中心</li>
                         <li @click="quitChange">退出登录</li>
                         <li @click="goPass">修改密码</li>
                     </ul>
@@ -145,7 +145,7 @@
                             <!-- 评论 -->
                             <div class="comment_main" v-cloak v-show="commentActive ==index && currentPostId == item.id">
                                 <div class="comment_list" v-for="(comment,index) in item.comment_list">
-                                    <h5>{{comment.nickname}} 评论：</h5>
+                                    <h5>{{comment.nickname?comment.nickname:"游客"}} 评论：</h5>
                                     <p v-html="comment.content"></p>
                                     <div class="reply">
                                         <span class="pointer">

@@ -302,6 +302,8 @@ var xm = new Vue({
                 this.numIndex = index;
             }
             this.subId = id;
+            console.log(id)
+            console.log(index)
             $.ajax({
                 type: "post",
                 url: `${api}/index/api/getForumList`,
@@ -313,7 +315,7 @@ var xm = new Vue({
                 success: (res) => {
                     this.titleList = res.result
 
-                    this.ForumCate[3].title = this.ForumCate[id].title
+                    this.ForumCate[3].title = this.ForumCate[index+4].title
                     // this.postIndex = -1
                     // this.commentActive = -1
                     // this.numIndex = -1
