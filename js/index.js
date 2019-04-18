@@ -54,7 +54,30 @@ var xm = new Vue({
         Tpsw: '',
         length: '', // 回复评论条数
         //子级id
-        subId: ''
+        subId: '',
+        ind: -1,
+        Colorindex: -1,
+        Colorindex1: -1,
+        Colorindex2: -1,
+        arr: [
+            {
+                avter: 'img/不敢兴趣.png',
+                title: "不感兴趣",
+
+            },
+            {
+                avter: 'img/一般.png',
+                title: "一般"
+            },
+            {
+                avter: 'img/好.png',
+                title: "好"
+            },
+            {
+                avter: 'img/特别好.png',
+                title: "特别好"
+            },
+        ]
     },
     methods: {
         quitChange() { //退出登录
@@ -317,7 +340,6 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
-                    console.log(res)
                     // this.postIndex = -1
                     // this.commentActive = -1
                     // this.numIndex = -1
@@ -521,6 +543,19 @@ var xm = new Vue({
         },
         goUser() { //通知跳转
             window.location.href = "user.html?id=1"
+        },
+      
+        openSelect(index) {
+            this.Colorindex = this.Colorindex == index ? -1 : index
+        },
+        openSelect1(index) {
+            this.Colorindex1 = this.Colorindex1 == index ? -1 : index
+        },
+        openSelect2(index) {
+            this.Colorindex2 = this.Colorindex2 == index ? -1 : index
+        },
+        selectChange(num) { //点赞选择
+            this.ind = num
         },
 
     },

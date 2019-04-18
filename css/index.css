@@ -219,14 +219,14 @@
     line-height: 24px;
 }
 
-.comment ul {
+.comment .commnet_uu {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     margin-top: 7px;
 }
 
-.comment ul li {
+.comment .commnet_uu li {
     font-size: 16px;
     font-family: PingFangSC-Regular;
     font-weight: 400;
@@ -237,7 +237,7 @@
     cursor: pointer;
 }
 
-.comment ul li:nth-child(1) span {
+.commnet_uu .read span {
     font-size: 16px;
     font-family: PingFangSC-Regular;
     font-weight: 400;
@@ -245,23 +245,22 @@
     line-height: 24px;
 }
 
-.comment ul li img {
+.commnet_uu .read img {
     width: 13px;
     height: 11px;
     margin-left: 5px;
 }
 
-.comment ul li:nth-child(2) {
+.commnet_uu .pointer {
     margin: 0 27px 0 37px;
 }
 
-.comment ul li:nth-child(3) img {
+.commnet_uu li:nth-child(3) img {
     width: 18px;
     height: 16px;
 }
 
-.comment ul li:nth-child(3) img,
-.comment ul li:nth-child(2) img {
+.commnet_uu li:nth-child(3) img {
     margin-right: 6px;
 }
 
@@ -315,18 +314,14 @@
     /* cursor: pointer; */
 }
 
-.reply span img {
-    width: 18px;
-    height: 18px;
-    margin: 0 5px;
-}
+
 
 .reply span:nth-child(1) {
     display: flex;
     align-items: center;
 }
 
-.reply span:nth-child(2) {
+.reply .pointer:nth-child(2) {
     margin: 0 27px;
 }
 
@@ -1150,18 +1145,6 @@ td {
     display: none;
 }
 
-/* .answer .answer_sp {
-    position: absolute;
-    top: -14px;
-    right: 142px;
-    display: block;
-    width: 0;
-    height: 0;
-    border-width: 0 9px 15px;
-    border-style: solid;
-    border-color: transparent transparent white;
-} */
-
 .answer_uu li span {
     color: black;
     font-size: 14px;
@@ -1173,10 +1156,10 @@ td {
     padding: 11px 26px 0 16px;
     max-height: 294px;
     overflow-y: scroll;
-    /* scrollbar-width:none;
-    -ms-overflow-style: none; */
+
 }
-.answer_uu::-webkit-scrollbar{
+
+.answer_uu::-webkit-scrollbar {
     width: 0;
 }
 
@@ -1378,13 +1361,6 @@ td {
     margin-right: 65px;
     cursor: pointer;
 }
-
-.see_uu_btn img {
-    width: 16px;
-    height: 15px;
-    margin-right: 11px;
-}
-
 .see_inp {
     position: relative;
     margin-top: 14px;
@@ -1435,7 +1411,7 @@ td {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    
+
 }
 
 .pass_top {
@@ -1529,7 +1505,8 @@ td {
     line-height: 24px;
     padding: 10px 20px 10px;
 }
-.more_uu li.active{
+
+.more_uu li.active {
     color: #1D5598;
     border: none !important;
 }
@@ -1544,6 +1521,7 @@ td {
     position: absolute;
     top: 40px;
     right: 50px;
+    cursor: pointer;
 }
 
 /* 添加样式 */
@@ -1638,10 +1616,7 @@ td {
     font-size: 14px;
 }
 
-.comment ul li img {
-    width: 10px;
-    height: 10px;
-}
+
 
 .make_uu li img {
     width: 30px;
@@ -1759,6 +1734,7 @@ td {
 img.icon-like {
     width: 18px !important;
     height: 18px !important;
+    margin-right: 6px;
 }
 
 .ke-container {
@@ -1780,18 +1756,23 @@ img.icon-like {
 .clear {
     clear: both;
 }
-li.repari-title{
+
+li.repari-title {
     font-size: 17px;
 }
+
 a.title-blue {
     color: #2b54be;
 }
+
 .report_list_uu li:first-child {
     margin-bottom: 5px;
 }
-.report_banner ul{
+
+.report_banner ul {
     margin-bottom: 5px;
 }
+
 span.answer_sp {
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
@@ -1800,33 +1781,79 @@ span.answer_sp {
     left: 50%;
     top: -10px;
 }
+
 p.no-notice {
     text-align: center;
     margin: 0 auto;
     margin-left: 30px;
 }
-.app_uu li a{
+
+.app_uu li a {
     display: block;
-    width:100%;
+    width: 100%;
     height: 100%;
 }
-input{
+
+input {
     font-size: 14px;
 }
-span.replay-cha{
+
+span.replay-cha {
     color: #8590ab;
     margin: 0 5px;
 }
+
 p.no-replay {
     color: #8590ab;
     padding: 10px;
     text-align: center;
     font-size: 15px;
 }
-.see_main{
+
+.see_main {
     min-height: 50px;
 }
+
 .see_main {
     min-height: 50px;
     overflow: scroll;
+}
+
+/* 点赞框 */
+.pointer {
+    position: relative;
+}
+
+.comment-ul {
+    position: absolute;
+    bottom: 140%;
+    width: 99px;
+    z-index: 1;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.18);
+}
+
+.comment-ul-one {
+    bottom: -455%;
+}
+
+.comment-one {
+    width: 99px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.comment-img {
+    width: 15px;
+    height: 15px;
+    margin-left: 5px;
+}
+
+.comment-test {
+    font-size: 16px!important;
+    font-family: PingFangSC-Regular;
+}
+
+.Colorone {
+    background: #E6E6E6;
 }

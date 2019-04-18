@@ -449,17 +449,12 @@ td {
     /* cursor: pointer; */
 }
 
-.reply span img {
-    width: 16px;
-    height: 15px;
-}
-
 .reply span:nth-child(1) {
     display: flex;
     align-items: center;
 }
 
-.reply span:nth-child(2) {
+.reply .pointer:nth-child(2) {
     margin: 0 27px;
 }
 
@@ -816,12 +811,6 @@ span.replay-cha{
     cursor: pointer;
 }
 
-.see_uu_btn img {
-    width: 16px;
-    height: 15px;
-    margin-right: 11px;
-}
-
 .see_inp {
     position: relative;
     margin-top: 14px;
@@ -1008,4 +997,51 @@ p.no-replay {
     padding: 10px;
     text-align: center;
     font-size: 15px;
+}
+
+
+
+/* 点赞框 */
+.pointer {
+    position: relative;
+}
+
+.comment-ul {
+    position: absolute;
+    bottom: 140%;
+    width: 99px;
+    z-index: 1;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.18);
+}
+
+.comment-ul-one {
+    bottom: -455%;
+}
+
+.comment-one {
+    width: 99px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.comment-img {
+    width: 15px;
+    height: 15px;
+    margin-left: 5px;
+}
+
+.comment-test {
+    font-size: 16px!important;
+    font-family: PingFangSC-Regular;
+}
+
+.Colorone {
+    background: #E6E6E6;
+}
+
+img.icon-like {
+    width: 18px !important;
+    height: 18px !important;
+    margin-right: 6px;
 }

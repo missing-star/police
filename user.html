@@ -92,11 +92,11 @@
                                         <img src="img/icon-01 (1).png" alt="" v-else>
                                     </template>
                                 </li>
-                                <li @click="likePostOrComment(item.id,'',0)" class="pointer">
+                                <!-- <li @click="likePostOrComment(item.id,'',0)" class="pointer">
                                     <img v-if="item.status == 0" src="img/icon-06.png" class="icon-like">
                                     <img v-else src="img/icon-07.png" class="icon-like">
                                     <span>{{item.records}}赞</span>
-                                </li>
+                                </li> -->
                                 <li @click="comChange(index)">
                                     <img src="img/评论.png" alt="">
                                     <span v-show="!iscomment">{{item.comment_list.length}}条评论</span>
@@ -104,7 +104,7 @@
                                 </li>
                             </ul>
                         </div>
-
+                        <!-- 评论 -->
                         <div class="comment_main" v-cloak v-show="commentActive ==index">
                             <div class="comment_list" v-for="(comment,index) in item.comment_list">
                                 <h5>{{comment.nickname}} 评论：</h5>
@@ -112,28 +112,34 @@
                                     {{comment.content}}
                                 </p>
                                 <div class="reply">
-                                    <span class="pointer" @click="likePostOrComment('',comment.id,0)">
-                                        <img v-if="comment.status == 0" src="img/icon-06.png" alt="">
-                                        <img v-else src="img/icon-07.png" alt="">
-                                        {{comment.phraise}}赞
+                                    <span class="pointer" @click="openSelect1(index)">
+                                        <img v-if="comment.status == 0" src="img/空星.png" alt="" class="icon-like">
+                                        <img v-else src="img/实星.png" alt="" class="icon-like">
+                                        <span v-if="comment.status == 0">点评</span>
+                                        <span v-else>已点评</span>
+
+                                        <!-- 点赞弹框 -->
+                                        <div class="comment-ul" v-show="Colorindex1 ==index"
+                                            @click="likePostOrComment('',comment.id,0)">
+                                            <div class="comment-one" @click="selectChange(num)"
+                                                v-for="(items,num) in arr" :class="{Colorone:ind==num}">
+                                                <img class="comment-img" :src="items.avter" alt="">
+                                                <span class="comment-test">{{items.title}}</span>
+                                            </div>
+                                        </div>
                                     </span>
                                     <span @click="lookchange(item.id,comment.id)" class="pointer">查看回复</span>
                                     <span @click="gospeak(index)" class="pointer">回复</span>
                                 </div>
-
                                 <div class="reply_one" v-if="currentActive==index">
                                     <input type="text" :placeholder="'回复'+comment.nickname+':'" v-model="replyComment">
-                                    <!-- <img src="img/表情.png" alt=""> -->
                                     <span @click="commentChange(item.id,comment.id,item.uid)">发布</span>
                                 </div>
                             </div>
-
                             <div class="comment_inp">
                                 <input placeholder="想说点什么？" type="text" v-model="Pcomment">
-                                <!-- <img src="img/表情.png" alt=""> -->
                                 <span @click="commentChange(item.id)">发布</span>
                             </div>
-
                         </div>
                     </div>
 
@@ -258,10 +264,21 @@
                                 </div>
                                 <p v-html="filterContent(item.content)"></p>
                                 <div class="see_uu_three">
-                                    <div @click="likePostOrComment('',item.id,1)" class="see_uu_btn pointer">
-                                        <img v-if="item.status == 0" src="img/icon-06.png" alt="">
-                                        <img v-else src="img/icon-07.png" alt="">
-                                        <span>{{item.phraise}}赞</span>
+                                    <div @click=" openSelect(index)" class="see_uu_btn pointer">
+                                        <img v-if="item.status == 0" src="img/空星.png" alt="" class="icon-like">
+                                        <img v-else src="img/实星.png" alt="" class="icon-like">
+                                        <span v-if="item.status == 0">点评</span>
+                                        <span v-else>已点评</span>
+
+                                        <!-- 点赞弹框 -->
+                                        <div class="comment-ul comment-ul-one" v-show="Colorindex ==index"
+                                            @click="likePostOrComment('',item.id,1)">
+                                            <div class="comment-one" @click="selectChange(num)"
+                                                v-for="(items,num) in arr" :class="{Colorone:ind==num}">
+                                                <img class="comment-img" :src="items.avter" alt="">
+                                                <span class="comment-test">{{items.title}}</span>
+                                            </div>
+                                        </div>
                                     </div>
                                     <span @click="gospeak1(index)" class="pointer">回复</span>
                                 </div>
@@ -280,10 +297,21 @@
                                 </div>
                                 <p v-html="filterContent(part.content)"></p>
                                 <div class="see_uu_three">
-                                    <div @click="likePostOrComment('',part.id,1)" class="see_uu_btn pointer">
-                                        <img v-if="part.status == 0" src="img/icon-06.png" alt="">
-                                        <img v-else src="img/icon-07.png" alt="">
-                                        <span>{{part.phraise}}赞</span>
+                                    <div @click="openSelect2(index)" class="see_uu_btn pointer">
+                                        <img v-if="part.status == 0" src="img/空星.png" alt="" class="icon-like">
+                                        <img v-else src="img/实星.png" alt="" class="icon-like">
+                                        <span v-if="part.status == 0">点评</span>
+                                        <span v-else>已点评</span>
+
+                                        <!-- 点赞弹框 -->
+                                        <div class="comment-ul comment-ul-one" v-show="Colorindex2 ==index"
+                                            @click="likePostOrComment('',part.id,1)">
+                                            <div class="comment-one" @click="selectChange(num)"
+                                                v-for="(items,num) in arr" :class="{Colorone:ind==num}">
+                                                <img class="comment-img" :src="items.avter" alt="">
+                                                <span class="comment-test">{{items.title}}</span>
+                                            </div>
+                                        </div>
                                     </div>
                                     <span @click="gospeak2(index)" class="pointer">回复</span>
                                 </div>
@@ -322,7 +350,7 @@
                     <p @click="editChange">确认</p>
                 </div>
             </div>
-            <div class="close pointer" @click="goClose">
+            <div class="close" @click="goClose">
             </div>
         </div>
     </div>
