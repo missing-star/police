@@ -349,9 +349,9 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
-                    // this.postIndex = -1
+                    this.postIndex = -1
                     // this.commentActive = -1
-                    // this.numIndex = -1
+                    this.numIndex = -1
                     this.ForumCate[3].title="更多"
                     this.titleList = res.result;
                     if (this.titleList.length == 0) {
