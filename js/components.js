@@ -33,9 +33,18 @@ const indexBanner = {
             } else if (index == 1) {
                 window.location.href = "heart.html"
             } else if (index == 2) {
-                window.location.href = "user.html"
+                if(this.userName) {
+                    window.location.href = "user.html"
+                }else {
+                    warn.alert("请先登录")
+                }
+                
             }
+            
 
+        },
+        goLogin(){
+            this.$emit("go-login")
         },
         goHome() {
             window.location.href="index.html";

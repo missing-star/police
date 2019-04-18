@@ -63,28 +63,6 @@ var xm = new Vue({
         tgp: '按总积分排序',
         currentSort:0,
         currentType:-1,
-        Colorindex:-1,
-        Colorindex1:-1,
-        Colorindex2:-1,
-        arr: [
-            {
-                avter: 'img/不敢兴趣.png',
-                title: "不感兴趣",
-
-            },
-            {
-                avter: 'img/一般.png',
-                title: "一般"
-            },
-            {
-                avter: 'img/好.png',
-                title: "好"
-            },
-            {
-                avter: 'img/特别好.png',
-                title: "特别好"
-            },
-        ]
     },
     methods: {
         wrapChange(key) { //排名切换
@@ -404,15 +382,6 @@ var xm = new Vue({
                 return value.slice(0, 300) + '...'
             }
             return value
-        },
-        openSelect(index) {
-            this.Colorindex = this.Colorindex == index ? -1 : index
-        },
-        openSelect1(index) {
-            this.Colorindex1 = this.Colorindex1 == index ? -1 : index
-        },
-        openSelect2(index) {
-            this.Colorindex2 = this.Colorindex2 == index ? -1 : index
         },
     },
     components: {
