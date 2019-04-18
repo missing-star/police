@@ -17,9 +17,8 @@ const indexBanner = {
     `,
     data() {
         return {
-            showList: ['首页', '应用中心', '个人中心'],
+            showList: ['首页', '应用中心', '我的主页'],
             currentIndex: 1,
-            userName:sessionStorage.getItem('userName')
         }
     },
     methods: {
@@ -31,21 +30,21 @@ const indexBanner = {
             } else if (index == 1) {
                 window.location.href = "heart.html"
             } else if (index == 2) {
-                if (this.userName) {
+                if(this.userName) {
                     window.location.href = "user.html"
-                } else {
+                }else {
                     warn.alert("请先登录")
                 }
-
+                
             }
-
+            
 
         },
-        goLogin() {
+        goLogin(){
             this.$emit("go-login")
         },
         goHome() {
-            window.location.href = "index.html";
+            window.location.href="index.html";
         }
     },
     created() {
@@ -182,5 +181,5 @@ const indexCase = {
             this.$emit("back")
         }
     },
-    created() { }
+    created() {}
 };

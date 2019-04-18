@@ -597,8 +597,8 @@
 }
 
 .app_uu li img {
-    width: 50px;
-    height: 50px;
+    width: 58px;
+    height: 57px;
 }
 
 .app_uu li p {
@@ -1927,7 +1927,3 @@ p.show-datae {
     overflow: hidden;
     overflow-y: scroll;
 }  */
-
-.Hcolor {
-    color: #333!important;
-}

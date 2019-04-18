@@ -143,7 +143,7 @@ var xm = new Vue({
             }
             this.pIndex = this.pIndex == index ? -1 : index
         },
-        comChange(postId, index) { //查看评论
+        comChange(postId,index) { //查看评论
             this.currentPostId = postId;
             this.commentActive = this.commentActive == index ? -1 : index
         },
@@ -302,8 +302,6 @@ var xm = new Vue({
                 this.numIndex = index;
             }
             this.subId = id;
-            console.log(id)
-            console.log(index)
             $.ajax({
                 type: "post",
                 url: `${api}/index/api/getForumList`,
@@ -315,8 +313,8 @@ var xm = new Vue({
                 success: (res) => {
                     this.titleList = res.result
 
-                    this.ForumCate[3].title = this.ForumCate[index+4].title
-                    // this.postIndex = -1
+                    this.ForumCate[3].title = this.ForumCate[id].title
+                    this.postIndex = -1
                     // this.commentActive = -1
                     this.numIndex = -1
                     if (this.titleList.length == 0) {
@@ -402,11 +400,6 @@ var xm = new Vue({
             })
         },
         commentChange(post_id, comment_id, uid, type) { //发布评论
-            if (this.userName) {
-                this.ip = ""
-            } else {
-                this.ip
-            }
             if (comment_id) {
                 if (this.replyComment.trim() == '') {
                     warn.alert('请输入回复内容');
@@ -443,8 +436,7 @@ var xm = new Vue({
                         url: `${api}/index/api/publishComment`,
                         data: {
                             post_id: post_id,
-                            content: this.Pcomment,
-                            ip:this.ip
+                            content: this.Pcomment
                         },
                         dataType: 'json',
                         success: (res) => {
