@@ -19,7 +19,7 @@ const indexBanner = {
         return {
             showList: ['首页', '应用中心', '我的主页'],
             currentIndex: 1,
-            userName:sessionStorage.getItem('userName')
+            userName:sessionStorage.getItem('username')
         }
     },
     methods: {
