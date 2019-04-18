@@ -294,21 +294,27 @@ var xm = new Vue({
                 })
             }
         },
-        banner(index) {
+        banner(index, id) {
             this.currentIndex = 3;
             this.ismore = false;
+            if (this.userName) {
+                this.ip = ""
+            } else {
+                this.ip
+            }
             if (index != this.numIndex) {
                 this.numIndex = index;
             }
-            var num = index + 4;
-            var list = this.ForumCate
-            var id = list[num].id
+            // var num = index + 4;
+            // var list = this.ForumCate
+            // var id = list[num].id
             this.subId = id;
             $.ajax({
                 type: "post",
                 url: `${api}/index/api/getForumList`,
                 data: {
-                    cate_id: id
+                    cate_id: id,
+                    ip: this.ip
                 },
                 dataType: 'json',
                 success: (res) => {
@@ -338,13 +344,19 @@ var xm = new Vue({
             } else {
                 this.ismore = false
             }
+            if (this.userName) {
+                this.ip = ""
+            } else {
+                this.ip
+            }
             var list = this.ForumCate
             var id = list[index].id
             $.ajax({
                 type: "post",
                 url: `${api}/index/api/getForumList`,
                 data: {
-                    cate_id: id
+                    cate_id: id,
+                    ip: this.ip
                 },
                 dataType: 'json',
                 success: (res) => {
@@ -485,19 +497,14 @@ var xm = new Vue({
             })
         },
         //文章点赞
-        likePostOrComment(post_id, comment_id, type) {
+        likePostOrComment(post_id, comment_id, type, typeId) {
             if (this.userName) {
                 this.ip = ""
             } else {
-                getIpAdd((ip) => {
-                    this.ip = ip;
-                });
+                this.ip
             }
             console.log(this.ip)
-
-
-            // this.selectChange(num)
-            console.log(this.ind + 1)
+            console.log(typeId)
             var data = {};
             $.ajax({
                 url: `${api}/index/api/phraisePost`,
@@ -507,7 +514,7 @@ var xm = new Vue({
                     post_id: post_id,
                     comment_id: comment_id,
                     ip: this.ip,
-                    type: this.ind + 1
+                    type: typeId
                 },
                 success: (res) => {
                     if (type == 1) {
@@ -639,6 +646,10 @@ var xm = new Vue({
         })
 
         this.userName = sessionStorage.getItem("username")
+
+        getIpAdd((ip) => {
+            this.ip = ip;
+        });
     },
     filters: {
         filterTime(time) {

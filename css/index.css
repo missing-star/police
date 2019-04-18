@@ -209,11 +209,10 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    margin-top: 7px;
 }
 
 .comment .commnet_uu li {
-    font-size: 16px;
+    font-size: 14px;
     font-family: PingFangSC-Regular;
     font-weight: 400;
     color: #797979;
@@ -223,12 +222,14 @@
     cursor: pointer;
 }
 
+.comment .commnet_uu li:nth-child(2) {
+    margin: 0 26px;
+}
+
 .commnet_uu .read span {
-    font-size: 16px;
+    font-size: 14px;
     font-family: PingFangSC-Regular;
     font-weight: 400;
-    color: rgba(29, 85, 152, 1);
-    line-height: 24px;
 }
 
 .commnet_uu .read img {
@@ -241,12 +242,12 @@
     margin: 0 27px 0 37px;
 }
 
-.commnet_uu li:nth-child(3) img {
+.commnet_uu li:nth-child(2) img {
     width: 18px;
     height: 16px;
 }
 
-.commnet_uu li:nth-child(3) img {
+.commnet_uu li:nth-child(2) img {
     margin-right: 6px;
 }
 
@@ -557,7 +558,7 @@
 /* 应用中心 */
 .appCenter {
     width: 450px;
-    height: 293px;
+    height: 263px;
     background: rgba(255, 255, 255, 1);
     margin-top: 9px;
     padding-top: 18px
@@ -574,7 +575,7 @@
 
 .app_logo {
     margin-top: 28px;
-    padding: 0 60px 0 49px;
+    padding: 0 0 0 49px;
 }
 
 .app_uu {
@@ -583,7 +584,7 @@
 }
 
 .app_uu li {
-    margin: 0 70px 19px 0;
+    margin: 18px 70px 19px 0;
     cursor: pointer;
 }
 
@@ -1638,7 +1639,6 @@ td {
     font-size: 16px;
 }
 
-.appCenter,
 .chat_room_uu,
 .chat_user,
 .chatRoom,
@@ -1664,11 +1664,6 @@ td {
     width: 64px;
     height: 68px;
     text-align: center;
-}
-
-.app_uu li img {
-    width: 30px;
-    height: 30px;
 }
 
 .app_logo {
@@ -1820,20 +1815,20 @@ p.no-replay {
 }
 
 .comment-one {
- 
     line-height: 30px;
     display: flex;
     align-items: center;
+    margin: 0 6px;
 }
 
 .comment-img {
     width: 15px;
     height: 15px;
-    margin: 0 5px;
+    margin: 0 8px;
 }
 
 .comment-test {
-    font-size: 16px !important;
+    font-size: 14px !important;
     font-family: PingFangSC-Regular;
 }
 
