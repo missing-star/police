@@ -220,11 +220,17 @@ var xm = new Vue({
             this.currentActive = -1
         },
         userTag(index) { //切换
-            if (idnex == 0) {
+            if (index == 0) {
                 this.isone = true
+                this.isone1 = false
+                this.isone2 = false
             } else if (index == 1) {
+                this.isone = false
                 this.isone1 = true
-            } else if (idnex == 2) {
+                this.isone2 = false
+            } else if (index == 2) {
+                this.isone = false
+                this.isone1 = false
                 this.isone2 = true
             }
 
@@ -489,7 +495,6 @@ $(".read").click(function () {
     $(".content_text").toggleClass("entable");
 })
 
-
 $(".wrap_ul li").each(function (index) {
     $(this).click(function () {
         $("li.Wrap_active").removeClass("Wrap_active");
@@ -500,6 +505,13 @@ $(".wrap_ul li").each(function (index) {
 
     });
 })
+
+
+$(function(){
+    $(".User-uu>li").click(function(){
+        $(this).addClass('blue').siblings('li').removeClass('blue');
+    })
+  });
 
 function sortByCat(key) {
     switch (key) {
