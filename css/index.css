@@ -18,34 +18,17 @@
     margin-left: 9px;
 }
 
-.index_left span:nth-child(1) {
+.index_left {
     display: inline-block;
-    width: 45px;
-    height: 47px;
-    background: url(../img/警徽.png)no-repeat;
-    background-size: 100% 100%;
-}
-
-.index_left span:nth-child(2) {
-    display: inline-block;
-    width: 163px;
-    height: 49px;
-    background: url(../img/创意.png)no-repeat;
-    background-size: 100% 100%;
-    margin: 0 30px 0 25px;
-}
-
-.index_left span:nth-child(3) {
-    display: inline-block;
-    width: 112px;
-    height: 27px;
-    background: url(../img/首页logo.png)no-repeat;
+    width: 254px;
+    height: 35px;
+    background: url(../img/logo.png)no-repeat;
     background-size: 100% 100%;
 }
 
 .header_mid {
     position: relative;
-    margin-left: 123px;
+    margin-left: 212px;
 }
 
 .search {
@@ -72,7 +55,7 @@
 .header_img {
     width: 23px;
     height: 27px;
-    margin-right:60px;
+    margin-right: 60px;
     position: relative;
     font-size: 12px;
 }
@@ -104,7 +87,7 @@
     margin-left: 15%;
     display: flex;
     align-items: center;
-    
+
 }
 
 .header_name .name {
@@ -158,12 +141,11 @@
     border-bottom: 5px solid #1D5598 !important;
 }
 
-
-
-
 /* content_scroll */
 .content_scroll {
     margin-top: 1px;
+    height: 830px;
+    overflow-y: scroll;
 }
 
 .content_list {
@@ -1846,12 +1828,14 @@ p.no-replay {
     width: 99px;
     height: 30px;
     line-height: 30px;
+    display: flex;
+    align-items: center;
 }
 
 .comment-img {
     width: 15px;
     height: 15px;
-    margin-left: 5px;
+    margin: 0 5px;
 }
 
 .comment-test {
@@ -1873,3 +1857,9 @@ p.no-replay {
 .header_enter a {
     color: white;
 }
+
+/* .content_left {
+    height: 888px;
+    overflow: hidden;
+    overflow-y: scroll;
+}  */

@@ -19,16 +19,12 @@
         <div class="index_header">
             <div class="index_content container">
                 <div @click="goHome" class="index_left pointer">
-                    <span></span>
-                    <span></span>
-                    <span></span>
                 </div>
                 <div class="header_mid">
                     <input @keydown.enter="searchChange" class="search" type="text" v-model="keyWords"
                         placeholder="搜索关键词">
                     <span @click="searchChange"></span>
                 </div>
-
                 <div class="header_name pointer">
                     <div class="header_img" @click="goAnswer" v-if="this.userName">
                         <img src="img/信息.png" alt="">
@@ -124,8 +120,8 @@
                                         <!-- 点赞弹框 -->
                                         <div class="comment-ul" v-show="Colorindex ==index"
                                             @click="likePostOrComment(item.id,'',0)">
-                                            <div class="comment-one" @click="selectChange(num)"
-                                                v-for="(items,num) in arr" :class="{Colorone:ind==num}">
+                                            <div class="comment-one" @click="selectChange(num,item.type)"
+                                                v-for="(items,num) in arr" :class="{Colorone:item.type==num+1}">
                                                 <img class="comment-img" :src="items.avter" alt="">
                                                 <span class="comment-test">{{items.title}}</span>
                                             </div>
@@ -155,7 +151,7 @@
                                             <div class="comment-ul" v-show="Colorindex1 ==index"
                                                 @click="likePostOrComment('',comment.id,0)">
                                                 <div class="comment-one" @click="selectChange(num)"
-                                                    v-for="(items,num) in arr" :class="{Colorone:ind==num}">
+                                                    v-for="(items,num) in arr" :class="{Colorone:comment.type==num+1}">
                                                     <img class="comment-img" :src="items.avter" alt="">
                                                     <span class="comment-test">{{items.title}}</span>
                                                 </div>
@@ -344,7 +340,7 @@
                                         <div class="comment-ul comment-ul-one" v-show="Colorindex2 ==index"
                                             @click="likePostOrComment('',item.id,1)">
                                             <div class="comment-one" @click="selectChange(num)"
-                                                v-for="(items,num) in arr" :class="{Colorone:ind==num}">
+                                                v-for="(items,num) in arr" :class="{Colorone:item.type==num+1}">
                                                 <img class="comment-img" :src="items.avter" alt="">
                                                 <span class="comment-test">{{items.title}}</span>
                                             </div>
@@ -409,7 +405,9 @@
 <script src="js/api.js?v=1.0.7"></script>
 <script src="kindeditor/kindeditor-all-min.js"></script>
 <script src="kindeditor/zh-CN.js"></script>
+<script src="js/getIpAdd.js"></script>
 <script src="js/index.js?v=1.0.7"></script>
+
 <script type="text/javascript">
     //翻页
     $(".zxf_pagediv").createPage({

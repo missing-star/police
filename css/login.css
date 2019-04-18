@@ -103,6 +103,12 @@ html {
     height: 58%;
 }
 
+.Pul {
+    margin-left: 0.68rem;
+    height: 53%;
+    padding-top: 0.2rem;
+}
+
 .police_uu li {
     font-size: 0.2rem;
     font-family: PingFangSC-Regular;
@@ -141,7 +147,7 @@ html {
     outline: none;
     border: 0;
     cursor: pointer;
-    margin-left: 10%;
+    margin-left: 9%;
     font-size: 0.18rem;
     font-family: PingFangSC-Regular;
     font-weight: 400;
@@ -162,7 +168,7 @@ html {
     font-weight: 400;
     color: rgba(169, 169, 169, 1);
     line-height: 0.24rem;
-    margin-left: 0.65rem;
+    margin-left: 0.5rem;
     cursor: pointer;
 }
 

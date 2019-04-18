@@ -59,23 +59,24 @@ var xm = new Vue({
         Colorindex: -1,
         Colorindex1: -1,
         Colorindex2: -1,
+        ip: '',
         arr: [
             {
-                avter: 'img/不敢兴趣.png',
-                title: "不感兴趣",
-
-            },
-            {
-                avter: 'img/一般.png',
-                title: "一般"
+                avter: 'img/特别好.png',
+                title: "特别好"
             },
             {
                 avter: 'img/好.png',
                 title: "好"
             },
             {
-                avter: 'img/特别好.png',
-                title: "特别好"
+                avter: 'img/一般.png',
+                title: "一般"
+            },
+            {
+                avter: 'img/不感兴趣.png',
+                title: "不感兴趣",
+
             },
         ]
     },
@@ -489,6 +490,18 @@ var xm = new Vue({
         },
         //文章点赞
         likePostOrComment(post_id, comment_id, type) {
+            if (this.userName) {
+                this.ip = ""
+            } else {
+                getIpAdd((ip) => {
+                    this.ip = ip;
+                });
+            }
+            console.log(this.ip)
+
+
+            // this.selectChange(num)
+            console.log(this.ind + 1)
             var data = {};
             $.ajax({
                 url: `${api}/index/api/phraisePost`,
@@ -496,7 +509,9 @@ var xm = new Vue({
                 dataType: 'json',
                 data: {
                     post_id: post_id,
-                    comment_id: comment_id
+                    comment_id: comment_id,
+                    ip: this.ip,
+                    type: this.ind + 1
                 },
                 success: (res) => {
                     if (type == 1) {
@@ -565,8 +580,8 @@ var xm = new Vue({
         openSelect2(index) {
             this.Colorindex2 = this.Colorindex2 == index ? -1 : index
         },
-        selectChange(num) { //点赞选择
-            this.ind = num
+        selectChange(num, id) { //点赞选择
+            num = id
         },
 
     },
@@ -631,6 +646,8 @@ var xm = new Vue({
         if (this.userName == null) {
             window.location.href = "login.html"
         }
+
+
     },
     filters: {
         filterTime(time) {
