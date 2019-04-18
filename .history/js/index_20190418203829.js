@@ -55,8 +55,27 @@ var xm = new Vue({
         length: '', // 回复评论条数
         //子级id
         subId: '',
-        showDate: getNowDate(),
+        showDate:getNowDate(),
+        ind: -1,
+        Colorindex: -1,
+        Colorindex1: -1,
+        Colorindex2: -1,
         ip: '',
+        arr: [
+            {
+                avter: 'img/好.png',
+                title: "好"
+            },
+            {
+                avter: 'img/一般.png',
+                title: "一般"
+            },
+            {
+                avter: 'img/坏.png',
+                title: "不感兴趣",
+
+            },
+        ],
         //报备信息
         repairInfo:{
             today:0,
@@ -101,6 +120,7 @@ var xm = new Vue({
                     },
                     dataType: 'json',
                     success: (res) => {
+                        console.log(res)
                         if (res.code == 1) {
                             this.isshade = false
                             this.ispass = false
@@ -221,14 +241,15 @@ var xm = new Vue({
                 data: {},
                 dataType: 'json',
                 success: (res) => {
+                    console.log(res)
                     this.repairList = res.data;
                 }
             })
 
         },
-        toggleCalendar() {
+        toggleCalendar(){
             $('#schedule-box').slideToggle(200);
-        },
+        },  
         lookchange(post_id, comment_id) { //查看回复
             this.currentPostId = post_id;
             this.currentCommentId = comment_id;
@@ -249,6 +270,7 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
+                    console.log(res);
                     this.seelist = res.data;
                 }
             })
@@ -283,30 +305,25 @@ var xm = new Vue({
                 })
             }
         },
-        banner(index, id) {
+        banner(index) {
             this.currentIndex = 3;
             this.ismore = false;
-            if (this.userName) {
-                this.ip = ""
-            } else {
-                this.ip
-            }
             if (index != this.numIndex) {
                 this.numIndex = index;
             }
+            var num = index + 4;
+            var list = this.ForumCate
+            var id = list[num].id
             this.subId = id;
             $.ajax({
                 type: "post",
                 url: `${api}/index/api/getForumList`,
                 data: {
-                    cate_id: id,
-                    ip: this.ip
+                    cate_id: id
                 },
                 dataType: 'json',
                 success: (res) => {
                     this.titleList = res.result
-
-                    this.ForumCate[3].title=this.ForumCate[id].title
                     // this.postIndex = -1
                     // this.commentActive = -1
                     // this.numIndex = -1
@@ -332,34 +349,49 @@ var xm = new Vue({
             } else {
                 this.ismore = false
             }
-            if (this.userName) {
-                this.ip = ""
-            } else {
-                this.ip
-            }
             var list = this.ForumCate
             var id = list[index].id
             $.ajax({
                 type: "post",
                 url: `${api}/index/api/getForumList`,
                 data: {
-                    cate_id: id,
-                    ip: this.ip
+                    cate_id: id
                 },
                 dataType: 'json',
                 success: (res) => {
-                    this.postIndex = -1
+                    // this.postIndex = -1
                     // this.commentActive = -1
-                    this.numIndex = -1
-                    this.ForumCate[3].title="更多"
+                    // this.numIndex = -1
                     this.titleList = res.result;
-                    if (this.titleList.length == 0) {
-                        this.isNone = true;
-                    } else {
-                        this.isNone = false;
-                    }
+                    // if (this.titleList.length == 0) {
+                    //     this.isNone = true;
+                    // } else {
+                    //     this.isNone = false;
+                    // }
                 }
             })
+        },
+        getForumList(id) {
+            $.ajax({
+                type: "post",
+                url: `${api}/index/api/getForumList`,
+                data: {
+                    cate_id: id
+                },
+                dataType: 'json',
+                success: (res) => {
+                    console.log(res)
+                    // this.postIndex = -1
+                    // this.commentActive = -1
+                    // this.numIndex = -1
+                    this.titleList = res.result;
+                    // if (this.titleList.length == 0) {
+                    //     this.isNone = true;
+                    // } else {
+                    //     this.isNone = false;
+                    // }
+                }
+            });
         },
         pulishChange() { //发布论坛
             if (this.Ptitle.trim() == '') {
@@ -446,17 +478,11 @@ var xm = new Vue({
             window.location.href = "index.html";
         },
         searchChange() { //搜素
-            if (this.userName) {
-                this.ip = ""
-            } else {
-                this.ip
-            }
             $.ajax({
                 type: "post",
                 url: `${api}/index/api/postSearch`,
                 data: {
-                    keyWords: this.keyWords,
-                    ip: this.ip
+                    keyWords: this.keyWords
                 },
                 dataType: 'json',
                 success: (res) => {
@@ -470,14 +496,19 @@ var xm = new Vue({
             })
         },
         //文章点赞
-        likePostOrComment(post_id, comment_id, type, typeId) {
+        likePostOrComment(post_id, comment_id, type) {
             if (this.userName) {
                 this.ip = ""
             } else {
-                this.ip
+                getIpAdd((ip) => {
+                    this.ip = ip;
+                });
             }
             console.log(this.ip)
-            console.log(typeId)
+
+
+            // this.selectChange(num)
+            console.log(this.ind + 1)
             var data = {};
             $.ajax({
                 url: `${api}/index/api/phraisePost`,
@@ -487,7 +518,7 @@ var xm = new Vue({
                     post_id: post_id,
                     comment_id: comment_id,
                     ip: this.ip,
-                    type: typeId
+                    type: this.ind + 1
                 },
                 success: (res) => {
                     if (type == 1) {
@@ -545,6 +576,19 @@ var xm = new Vue({
         },
         goUser() { //通知跳转
             window.location.href = "user.html?id=1"
+        },
+
+        openSelect(index) {
+            this.Colorindex = this.Colorindex == index ? -1 : index
+        },
+        openSelect1(index) {
+            this.Colorindex1 = this.Colorindex1 == index ? -1 : index
+        },
+        openSelect2(index) {
+            this.Colorindex2 = this.Colorindex2 == index ? -1 : index
+        },
+        selectChange(num, id) { //点赞选择
+            num = id
         },
 
     },
@@ -606,11 +650,6 @@ var xm = new Vue({
         })
 
         this.userName = sessionStorage.getItem("username")
-
-        getIpAdd((ip) => {
-            this.ip = ip;
-        });
-        console.log(this.ip)
     },
     filters: {
         filterTime(time) {
@@ -703,7 +742,7 @@ function initRepairChart(data) {
             data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
             axisTick: {
                 alignWithLabel: true,
-                show: false
+                show:false
             }
         }],
         yAxis: [{
@@ -719,8 +758,8 @@ function initRepairChart(data) {
                     color: new echarts.graphic.LinearGradient(
                         0, 0, 0, 1,
                         [
-                            { offset: 0, color: '#71baf0' },
-                            { offset: 1, color: '#2b85e9' }
+                            {offset: 0, color: '#71baf0'},
+                            {offset: 1, color: '#2b85e9'}
                         ]
                     )
                 }
@@ -737,30 +776,30 @@ function initRepairChart(data) {
 
 function initCalendar() {
     var mySchedule = new Schedule({
-        el: '#schedule-box',
-        clickCb: function (y, m, d) {
+		el: '#schedule-box',
+		clickCb: function (y,m,d) {
             //点击日期
             xm.toggleCalendar();
             getRepairList(y+'/'+m+'/'+d);
 		},
 		nextMonthCb: function (y,m,d) {
             //下个月
-            console.log(y, m, d);
-        },
-        nextYeayCb: function (y, m, d) {
+			console.log(y,m,d);
+		},
+		nextYeayCb: function (y,m,d) {
             //下年
-            console.log(y, m, d);
-        },
-        prevMonthCb: function (y, m, d) {
+			console.log(y,m,d);	
+		},
+		prevMonthCb: function (y,m,d) {
             //上一年
-            console.log(y, m, d);
-        },
-        prevYearCb: function (y, m, d) {
+			console.log(y,m,d);
+		},
+		prevYearCb: function (y,m,d) {
             //上一年
-            console.log(y, m, d);
-
-        }
-    });
+			console.log(y,m,d);
+			
+		}
+	});
 }
 /**
  * 根据日期字符串获得该周的日期范围
@@ -772,7 +811,7 @@ function getWeekByDay(str) {
     var day = date.getDay();// 0 - 6
     var start = '';
     var end = '';
-    if (day == 0) {
+    if(day == 0) {
         //周日
         start = times - 6*24*60*60*1000;
         end = times;
@@ -793,12 +832,12 @@ function getWeekByDay(str) {
  */
 function timeToDateStr(timeStaps) {
     const newDate = new Date(timeStaps);
-    return newDate.getFullYear() + '-' + (newDate.getMonth() + 1) + '-' + newDate.getDate();
+    return newDate.getFullYear()+'-'+(newDate.getMonth()+1)+'-'+newDate.getDate();
 }
 
 function getNowDate() {
     const date = new Date();
-    return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    return date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
 }
 /**
  * 获得报备列表
@@ -817,11 +856,7 @@ function getRepairList(strDate) {
         type:'post',
         dataType:'json',
         success:function(data) {
-            initRepairChart([data.data.Monday,data.data.Tuesday,data.data.Wednesday,data.data.Thursday,data.data.Friday,data.data.Saturday,data.data.Sunday]);
-            xm.repairInfo.today = data.data.today;
-            xm.repairInfo.week = data.data.week;
-            xm.repairInfo.month = data.data.month;
-            xm.repairInfo.total = data.data.tool;
+
         },
         error:function() {
             alert('服务器异常');

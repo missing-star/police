@@ -59,6 +59,7 @@ var xm = new Vue({
     },
     methods: {
         playMusic(catId,musicId,url) {
+            console.log(catId,musicId);
             this.currentCateId = catId;
             this.Color = musicId;
             this.musicListSelf = [];
@@ -163,6 +164,12 @@ var xm = new Vue({
                 }
             })
         },
+        goname() { //个人信息
+            $(".header_two").slideToggle("400");
+        },
+        goAnswer() { //通知
+            $(".answer").slideToggle("400");
+        },
         bookChange(book_id, index) { //书籍分类
             this.current1 = index
             $.ajax({
@@ -186,6 +193,8 @@ var xm = new Vue({
         turtorChange(index, tutorial_id) { //教程分类
             this.number = index
             if (tutorial_id) {
+                console.log(111)
+
                 $.ajax({
                     type: "post",
                     url: `${api}/index/api/tutorialList`,
@@ -256,6 +265,7 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
+                    console.log(res)
                     this.isshade = true
                     this.isbook = true
                     this.create_at = res.data.create_at
@@ -278,6 +288,7 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
+                    console.log(res)
                     this.isshade = true
                     this.istotur = true
                     this.Tdescription = res.data.description
@@ -423,7 +434,7 @@ var xm = new Vue({
                     this.tutorialList1 = res.data
                 }
             })
-        },
+        }
     },
     mounted() {
         this.$refs.myPlayer.src = this.musicListSelf[this.currentMusicIndex]

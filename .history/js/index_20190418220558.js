@@ -348,9 +348,9 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
-                    this.postIndex = -1
+                    // this.postIndex = -1
                     // this.commentActive = -1
-                    this.numIndex = -1
+                    // this.numIndex = -1
                     this.ForumCate[3].title="更多"
                     this.titleList = res.result;
                     if (this.titleList.length == 0) {
@@ -741,9 +741,15 @@ function initCalendar() {
         clickCb: function (y, m, d) {
             //点击日期
             xm.toggleCalendar();
+<<<<<<< HEAD
             getRepairList(y+'/'+m+'/'+d);
 		},
 		nextMonthCb: function (y,m,d) {
+=======
+            initRepairChart([10, 20, 300, 959, 10]);
+        },
+        nextMonthCb: function (y, m, d) {
+>>>>>>> b87b43fb5f2ca6c0311ab0bc1941a176e8a39214
             //下个月
             console.log(y, m, d);
         },
@@ -774,6 +780,7 @@ function getWeekByDay(str) {
     var end = '';
     if (day == 0) {
         //周日
+<<<<<<< HEAD
         start = times - 6*24*60*60*1000;
         end = times;
     }
@@ -786,6 +793,17 @@ function getWeekByDay(str) {
         start:start/1000,
         end:end/1000
     }
+=======
+        start = timeToDateStr(times - 6 * 24 * 60 * 60 * 1000);
+        end = timeToDateStr(times);
+    }
+    else {
+        //非周日
+        start = timeToDateStr(times - (day - 1) * 24 * 60 * 60 * 1000);
+        end = timeToDateStr(times - (day - 7) * 24 * 60 * 60 * 1000);
+    }
+    return [start, end];
+>>>>>>> b87b43fb5f2ca6c0311ab0bc1941a176e8a39214
 }
 /**
  * 根据时间戳返回日期字符串
@@ -800,6 +818,7 @@ function getNowDate() {
     const date = new Date();
     return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 }
+<<<<<<< HEAD
 /**
  * 获得报备列表
  * @param {string} strDate 
@@ -829,4 +848,9 @@ function getRepairList(strDate) {
     });
 }
 getRepairList(getNowDate());
+=======
+
+initRepairChart([100, 200, 300, 100, 30, 100]);
+
+>>>>>>> b87b43fb5f2ca6c0311ab0bc1941a176e8a39214
 initCalendar();

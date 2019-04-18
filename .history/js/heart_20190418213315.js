@@ -53,15 +53,10 @@ var xm = new Vue({
         //已播放时间
         playedTime: 0,
         //音频总时长
-        totalTime: 0,
-        //当前播放列表分类
-        currentCateId:-1
+        totalTime: 0
     },
     methods: {
-        playMusic(catId,musicId,url) {
-            this.currentCateId = catId;
-            this.Color = musicId;
-            this.musicListSelf = [];
+        playMusic(url) {
             this.$refs.myPlayer.src = `${api}/${url}`;
             clearInterval(interval);
             this.playedTime = 0;
@@ -69,7 +64,6 @@ var xm = new Vue({
         },
         allPlay(key,flag) {
             if(flag) {
-                this.currentCateId = key;
                 //全部播放
                 this.musicListSelf = this.musicList[key];
                 this.currentMusicIndex = -1;
@@ -77,7 +71,6 @@ var xm = new Vue({
             }
             else {
                 // 暂停
-                this.currentCateId = -1;
                 this.$refs.myPlayer.pause();
             }
         },
@@ -87,7 +80,6 @@ var xm = new Vue({
             } else {
                 this.currentMusicIndex += 1;
             }
-            this.Color = this.musicListSelf[this.currentMusicIndex].id;
             this.$refs.myPlayer.src = `${api}/${this.musicListSelf[this.currentMusicIndex].data_url}`;
             this.countInterval();
         },
@@ -163,6 +155,12 @@ var xm = new Vue({
                 }
             })
         },
+        goname() { //个人信息
+            $(".header_two").slideToggle("400");
+        },
+        goAnswer() { //通知
+            $(".answer").slideToggle("400");
+        },
         bookChange(book_id, index) { //书籍分类
             this.current1 = index
             $.ajax({
@@ -186,6 +184,8 @@ var xm = new Vue({
         turtorChange(index, tutorial_id) { //教程分类
             this.number = index
             if (tutorial_id) {
+                console.log(111)
+
                 $.ajax({
                     type: "post",
                     url: `${api}/index/api/tutorialList`,
@@ -256,6 +256,7 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
+                    console.log(res)
                     this.isshade = true
                     this.isbook = true
                     this.create_at = res.data.create_at
@@ -278,6 +279,7 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
+                    console.log(res)
                     this.isshade = true
                     this.istotur = true
                     this.Tdescription = res.data.description
@@ -392,6 +394,12 @@ var xm = new Vue({
             console.log(alink.download)
             alink.click();
         },
+        ColorChange(index) {
+            // console.log(id)
+            console.log(index)
+            this.Color = index
+            // this.Color = this.Color == index ? -1 : index
+        },
         Osearch() {
             $.ajax({
                 type: "post",
@@ -423,7 +431,7 @@ var xm = new Vue({
                     this.tutorialList1 = res.data
                 }
             })
-        },
+        }
     },
     mounted() {
         this.$refs.myPlayer.src = this.musicListSelf[this.currentMusicIndex]
