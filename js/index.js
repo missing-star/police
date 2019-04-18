@@ -55,6 +55,7 @@ var xm = new Vue({
         length: '', // 回复评论条数
         //子级id
         subId: '',
+        showDate:getNowDate(),
         ind: -1,
         Colorindex: -1,
         Colorindex1: -1,
@@ -239,6 +240,9 @@ var xm = new Vue({
             })
 
         },
+        toggleCalendar(){
+            $('#schedule-box').slideToggle(200);
+        },  
         lookchange(post_id, comment_id) { //查看回复
             this.currentPostId = post_id;
             this.currentCommentId = comment_id;
@@ -717,3 +721,124 @@ function getNotice() {
         }
     });
 }
+
+function initRepairChart(data) {
+    const repairChart = echarts.init(document.getElementById('repair-chart'));
+    const option = {
+        // color: ['linear-gradient(#71baf0,#2b85e9)'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [{
+            type: 'category',
+            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+            axisTick: {
+                alignWithLabel: true,
+                show:false
+            }
+        }],
+        yAxis: [{
+            type: 'value'
+        }],
+        series: [{
+            name: '报备数量',
+            type: 'bar',
+            barWidth: '60%',
+            data: data,
+            itemStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(
+                        0, 0, 0, 1,
+                        [
+                            {offset: 0, color: '#71baf0'},
+                            {offset: 1, color: '#2b85e9'}
+                        ]
+                    )
+                }
+            }
+        }]
+    };
+
+    repairChart.setOption(option);
+}
+
+/**
+ * 初始化日历组件
+ */
+
+function initCalendar() {
+    var mySchedule = new Schedule({
+		el: '#schedule-box',
+		clickCb: function (y,m,d) {
+            //点击日期
+            xm.toggleCalendar();
+            initRepairChart([10,20,300,959,10]);
+		},
+		nextMonthCb: function (y,m,d) {
+            //下个月
+			console.log(y,m,d);
+		},
+		nextYeayCb: function (y,m,d) {
+            //下年
+			console.log(y,m,d);	
+		},
+		prevMonthCb: function (y,m,d) {
+            //上一年
+			console.log(y,m,d);
+		},
+		prevYearCb: function (y,m,d) {
+            //上一年
+			console.log(y,m,d);
+			
+		}
+	});
+}
+/**
+ * 根据日期字符串获得该周的日期范围
+ * @param {string} str 
+ */
+function getWeekByDay(str) {
+    var date = new Date(str);
+    var times = date.getTime();
+    var day = date.getDay();// 0 - 6
+    var start = '';
+    var end = '';
+    if(day == 0) {
+        //周日
+        start = timeToDateStr(times - 6*24*60*60*1000);
+        end = timeToDateStr(times);
+    }
+    else {
+        //非周日
+        start = timeToDateStr(times - (day-1)*24*60*60*1000);
+        end = timeToDateStr(times - (day-7)*24*60*60*1000);
+    }
+    return [start,end];
+}
+/**
+ * 根据时间戳返回日期字符串
+ * @param {number} timeStaps
+ */
+function timeToDateStr(timeStaps) {
+    const newDate = new Date(timeStaps);
+    return newDate.getFullYear()+'-'+(newDate.getMonth()+1)+'-'+newDate.getDate();
+}
+
+function getNowDate() {
+    const date = new Date();
+    return date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+}
+
+initRepairChart([100,200,300,100,30,100]);
+
+initCalendar();
+

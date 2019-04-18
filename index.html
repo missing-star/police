@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>浦口公安局</title>
     <link rel="stylesheet" href="css/reset.css?v=1.0.7">
+    <link rel="stylesheet" href="css/calendar.css">
     <link rel="stylesheet" href="css/index.css?v=1.0.7">
     <link rel="stylesheet" type="text/css" href="css/page/zxf_page.css?v=1.0.7" />
     <link rel="stylesheet" href="css/page/iconfont.css?v=1.0.7">
@@ -246,35 +247,36 @@
 
                     <!-- 所有报备列表 -->
                     <div class="report">
-                        <div class="report_banner">
-                            <ul>
-                                <li :class="{black:!isshow}" class="repari-title" @click="tagChange">所有报备</li>
-                                <li :class="{black:isshow}" class="repari-title" @click="tagChange">我的报备</li>
-                            </ul>
+                        <div class="report-title-wrapper">
+                            <p class="report-title">报备中心</p>
+                            <div @click="toggleCalendar" class="show-calendar">
+                                <img src="img/calendar.png" class="calendar-icon">
+                                <p class="show-datae">{{showDate}}</p>
+                            </div>
                         </div>
+                        <div id='schedule-box' class="boxshaw">
 
-                        <div class="report_list">
-                            <ul class="report_list_uu scrollbar">
-                                <li>
-                                    <p class="sub-title">报备内容</p>
-                                    <p class="sub-title">报备情况</p>
-                                    <p class="sub-title">处理人</p>
-                                </li>
-                                <li v-for="(item,index) in allList"
-                                    :title="(item.user ? item.user : item.police_name) + '于' +item.create_at.substring(0,10) +'提交' +item.title  + (item.content ? ' - '+item.content : '')">
-                                    <span><a
-                                            class="title-blue report-user">·{{item.user ? item.user : item.police_name}}</a>
-                                        于
-                                        <a class="title-blue">{{item.create_at.substring(0,10)}}</a> 提交
-                                        <a class="title-blue">{{item.title}}</a>
-                                        <a class="title-blue" v-if="item.content"> - {{item.content}}</a>
-                                    </span>
-                                    <span :class="{red:item.status==0,blue:item.status==null}">
-                                        {{item.status==0?"正在处理":(item.status == 1 ? "已处理":"未处理")}}
-                                    </span>
-                                    <span>{{item.name}}</span>
-                                </li>
-                            </ul>
+                        </div>
+                        <div id="repair-chart">
+
+                        </div>
+                        <div class="repair-category-wrapper">
+                            <div class="repair-category-item">
+                                <p class="title">本日报备数</p>
+                                <p class="show-counts">10</p>
+                            </div>
+                            <div class="repair-category-item">
+                                <p class="title">本周报备数</p>
+                                <p class="show-counts">10</p>
+                            </div>
+                            <div class="repair-category-item">
+                                <p class="title">本月报备数</p>
+                                <p class="show-counts">10</p>
+                            </div>
+                            <div class="repair-category-item">
+                                <p class="title">总报备数</p>
+                                <p class="show-counts">10</p>
+                            </div>
                         </div>
                     </div>
 
@@ -407,6 +409,9 @@
 <script src="js/api.js?v=1.0.7"></script>
 <script src="kindeditor/kindeditor-all-min.js"></script>
 <script src="kindeditor/zh-CN.js"></script>
+<script src="js/echarts.min.js"></script>
+<script src="js/echarts-gl.min.js"></script>
+<script src="js/calendar.js"></script>
 <script src="js/getIpAdd.js"></script>
 <script src="js/index.js?v=1.0.7"></script>
 

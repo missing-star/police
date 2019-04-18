@@ -465,6 +465,7 @@
     background: white;
     margin: 10px 0;
     padding: 25px 5px 0 15px;
+    position: relative;
 }
 
 .report_banner ul {
@@ -1799,6 +1800,79 @@ p.no-replay {
 .see_main {
     min-height: 50px;
     overflow: scroll;
+}
+div#repair-chart{
+    width: 430px;
+    height: 300px;
+}
+.repair-category-wrapper {
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.repair-category-item {
+    width: 48%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 80px;
+}
+.repair-category-item p.title {
+    margin-bottom: 10px;
+    color: #333;
+}
+.repair-category-item p.show-counts {
+    color: #333;
+    font-size: 24px;
+}
+.repair-category-item:first-child{
+    border-right: 0.01rem solid #EFEFEF;
+    border-bottom: 0.01rem solid #EFEFEF;
+}
+.repair-category-item:nth-child(2){
+    border-left: 0.01rem solid #EFEFEF;
+    border-bottom: 0.01rem solid #EFEFEF;
+}
+.repair-category-item:nth-child(3){
+    border-right: 0.01rem solid #EFEFEF;
+    border-top: 0.01rem solid #EFEFEF;
+}
+.repair-category-item:last-child{
+    border-left: 0.01rem solid #EFEFEF;
+    border-top: 0.01rem solid #EFEFEF;
+}
+.report-title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+img.calendar-icon {
+    width: 20px;
+}
+p.report-title {
+    font-size: 18px;
+}
+.show-calendar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    border: 1px solid #BFBFBF;
+    padding: 5px;
+    margin-right: 10px;
+}
+p.show-datae {
+    margin-left: 10px;
+}
+div#schedule-box{
+    display: none;
+}
+p.show-datae {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #797979;
 }
 
 /* 点赞框 */
