@@ -143,7 +143,7 @@ var xm = new Vue({
             }
             this.pIndex = this.pIndex == index ? -1 : index
         },
-        comChange(postId,index) { //查看评论
+        comChange(postId, index) { //查看评论
             this.currentPostId = postId;
             this.commentActive = this.commentActive == index ? -1 : index
         },
@@ -400,6 +400,11 @@ var xm = new Vue({
             })
         },
         commentChange(post_id, comment_id, uid, type) { //发布评论
+            if (this.userName) {
+                this.ip = ""
+            } else {
+                this.ip
+            }
             if (comment_id) {
                 if (this.replyComment.trim() == '') {
                     warn.alert('请输入回复内容');
@@ -436,7 +441,8 @@ var xm = new Vue({
                         url: `${api}/index/api/publishComment`,
                         data: {
                             post_id: post_id,
-                            content: this.Pcomment
+                            content: this.Pcomment,
+                            ip:this.ip
                         },
                         dataType: 'json',
                         success: (res) => {
