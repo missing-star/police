@@ -248,8 +248,8 @@ td {
 /* 文章  */
 .user_title_content {
     margin-top: 1px;
-    padding: 30px 0;
-    background: #fff;
+    /* padding: 30px 0;
+    background: #fff; */
 }
 
 .content_list {
@@ -1036,46 +1036,6 @@ p.tips-content {
     margin: 0 auto;
 }
 
-
-/* 点赞框 */
-.pointer {
-    position: relative;
-}
-
-.comment-ul {
-    position: absolute;
-    bottom: 140%;
-    width: 99px;
-    z-index: 1;
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.18);
-}
-
-.comment-ul-one {
-    bottom: -455%;
-}
-
-.comment-one {
-    width: 99px;
-    height: 30px;
-    line-height: 30px;
-}
-
-.comment-img {
-    width: 15px;
-    height: 15px;
-    margin-left: 5px;
-}
-
-.comment-test {
-    font-size: 16px !important;
-    font-family: PingFangSC-Regular;
-}
-
-.Colorone {
-    background: #E6E6E6;
-}
-
 img.icon-like {
     width: 18px !important;
     height: 18px !important;
@@ -1114,28 +1074,8 @@ table {
     display: flex;
 }
 
-.comment-ul-one {
-    bottom: -455%;
-}
-
-.comment-one {
-    line-height: 30px;
-    display: flex;
-    align-items: center;
-    margin: 0 6px;
-}
-
 .comment-img {
     width: 15px;
     height: 15px;
     margin: 0 8px;
-}
-
-.comment-test {
-    font-size: 14px !important;
-    font-family: PingFangSC-Regular;
-}
-
-.Colorone {
-    background: #E6E6E6;
 }

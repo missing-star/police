@@ -313,7 +313,7 @@ var xm = new Vue({
 
         },
         //文章点赞
-        likePostOrComment(post_id, comment_id, type) {
+        likePostOrComment(post_id, comment_id, type,typeId) {
             var data = {};
             $.ajax({
                 url: `${api}/index/api/phraisePost`,
@@ -321,7 +321,9 @@ var xm = new Vue({
                 dataType: 'json',
                 data: {
                     post_id: post_id,
-                    comment_id: comment_id
+                    comment_id: comment_id,
+                    ip: '',
+                    type: typeId
                 },
                 success: (res) => {
                     if (type == 1) {
