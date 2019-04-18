@@ -68,10 +68,11 @@
                             
                             <ul class="music_uu">
                                 <li v-for="(arr,index) in musicList[item.id]" 
-                                :class="{musicColor: Color==arr.id && currentCateId == item.id}">
+                                :class="{musicColor: Color==arr.id}"
+                                    @click="ColorChange(arr.id)">
                                     <p>{{arr.name}}</p>
                                     <div class="music_img">
-                                        <span @click="playMusic(item.id,arr.id,arr.data_url)"></span>
+                                        <span @click="playMusic(arr.data_url)"></span>
                                         <span @click="musicDown(arr.data_url)"></span>
                                     </div>
                                 </li>

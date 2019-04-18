@@ -75,14 +75,7 @@ var xm = new Vue({
                 title: "不感兴趣",
 
             },
-        ],
-        //报备信息
-        repairInfo:{
-            today:0,
-            week:0,
-            month:0,
-            total:0
-        }
+        ]
     },
     methods: {
         Resgiter() {
@@ -120,6 +113,7 @@ var xm = new Vue({
                     },
                     dataType: 'json',
                     success: (res) => {
+                        console.log(res)
                         if (res.code == 1) {
                             this.isshade = false
                             this.ispass = false
@@ -240,6 +234,7 @@ var xm = new Vue({
                 data: {},
                 dataType: 'json',
                 success: (res) => {
+                    console.log(res)
                     this.repairList = res.data;
                 }
             })
@@ -268,6 +263,7 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
+                    console.log(res);
                     this.seelist = res.data;
                 }
             })
@@ -714,10 +710,7 @@ function getNotice() {
         }
     });
 }
-/**
- * 初始化echarts图表
- * @param {array} data 
- */
+
 function initRepairChart(data) {
     const repairChart = echarts.init(document.getElementById('repair-chart'));
     const option = {
@@ -777,7 +770,7 @@ function initCalendar() {
 		clickCb: function (y,m,d) {
             //点击日期
             xm.toggleCalendar();
-            getRepairList(y+'/'+m+'/'+d);
+            initRepairChart([10,20,300,959,10]);
 		},
 		nextMonthCb: function (y,m,d) {
             //下个月
@@ -818,10 +811,7 @@ function getWeekByDay(str) {
         start = times - (day-1)*24*60*60*1000;
         end = times - (day-7)*24*60*60*1000;
     }
-    return {
-        start:start/1000,
-        end:end/1000
-    }
+    return [start/1000,end/1000];
 }
 /**
  * 根据时间戳返回日期字符串
@@ -836,33 +826,9 @@ function getNowDate() {
     const date = new Date();
     return date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
 }
-/**
- * 获得报备列表
- * @param {string} strDate 
- */
-function getRepairList(strDate) {
-    var dateRange = getWeekByDay(strDate);
-    var nowDate = new Date(strDate).getTime() / 1000;
-    $.ajax({
-        url:`${api}/index/api/repairCentre`,
-        data:{
-            today:nowDate,
-            begin:dateRange.start,
-            end:dateRange.end
-        },
-        type:'post',
-        dataType:'json',
-        success:function(data) {
-            initRepairChart([data.data.Monday,data.data.Tuesday,data.data.Wednesday,data.data.Thursday,data.data.Friday,data.data.Saturday,data.data.Sunday]);
-            xm.repairInfo.today = data.data.today;
-            xm.repairInfo.week = data.data.week;
-            xm.repairInfo.month = data.data.month;
-            xm.repairInfo.total = data.data.tool;
-        },
-        error:function() {
-            alert('服务器异常');
-        }
-    });
-}
-getRepairList(getNowDate());
+
+initRepairChart([100,200,300,100,30,100]);
+
 initCalendar();
+
+console.log(getWeekByDay('2019/4/18'))

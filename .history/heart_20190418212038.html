@@ -58,20 +58,20 @@
                     <p id="go2"></p>
                     <h4>音乐中心</h4>
                     <div class="music_nav">
-                        <div class="music_one" v-for="(item,key) in musicSort">
+                        <div class="music_one" v-for="item in musicSort">
                             <div class="music_wrap clearfix">
                                 <h5>{{item.name}}</h5>
-                                <div v-if="currentCateId != item.id" class="all-play" @click="allPlay(item.id,true)"></div>
-                                <div v-else class="all-play pause" @click="allPlay(item.id,false)"></div>
+                                <div class="all-play" @click="allPlay(item.id)"></div>
                                 <!-- <img src="img/播放1.png" alt=""> -->
                             </div>
                             
                             <ul class="music_uu">
                                 <li v-for="(arr,index) in musicList[item.id]" 
-                                :class="{musicColor: Color==arr.id && currentCateId == item.id}">
+                                :class="{musicColor: Color==arr.id}"
+                                    @click="ColorChange(arr.id)">
                                     <p>{{arr.name}}</p>
                                     <div class="music_img">
-                                        <span @click="playMusic(item.id,arr.id,arr.data_url)"></span>
+                                        <span @click="playMusic(arr.data_url)"></span>
                                         <span @click="musicDown(arr.data_url)"></span>
                                     </div>
                                 </li>

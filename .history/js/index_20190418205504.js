@@ -120,6 +120,7 @@ var xm = new Vue({
                     },
                     dataType: 'json',
                     success: (res) => {
+                        console.log(res)
                         if (res.code == 1) {
                             this.isshade = false
                             this.ispass = false
@@ -240,6 +241,7 @@ var xm = new Vue({
                 data: {},
                 dataType: 'json',
                 success: (res) => {
+                    console.log(res)
                     this.repairList = res.data;
                 }
             })
@@ -268,6 +270,7 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
+                    console.log(res);
                     this.seelist = res.data;
                 }
             })
@@ -719,6 +722,7 @@ function getNotice() {
  * @param {array} data 
  */
 function initRepairChart(data) {
+    console.log(data);
     const repairChart = echarts.init(document.getElementById('repair-chart'));
     const option = {
         // color: ['linear-gradient(#71baf0,#2b85e9)'],

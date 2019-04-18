@@ -59,6 +59,7 @@ var xm = new Vue({
     },
     methods: {
         playMusic(catId,musicId,url) {
+            console.log(catId,musicId);
             this.currentCateId = catId;
             this.Color = musicId;
             this.musicListSelf = [];
@@ -192,6 +193,8 @@ var xm = new Vue({
         turtorChange(index, tutorial_id) { //教程分类
             this.number = index
             if (tutorial_id) {
+                console.log(111)
+
                 $.ajax({
                     type: "post",
                     url: `${api}/index/api/tutorialList`,
@@ -262,6 +265,7 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
+                    console.log(res)
                     this.isshade = true
                     this.isbook = true
                     this.create_at = res.data.create_at
@@ -284,6 +288,7 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
+                    console.log(res)
                     this.isshade = true
                     this.istotur = true
                     this.Tdescription = res.data.description

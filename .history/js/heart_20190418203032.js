@@ -53,33 +53,13 @@ var xm = new Vue({
         //已播放时间
         playedTime: 0,
         //音频总时长
-        totalTime: 0,
-        //当前播放列表分类
-        currentCateId:-1
+        totalTime: 0
     },
     methods: {
-        playMusic(catId,musicId,url) {
-            this.currentCateId = catId;
-            this.Color = musicId;
-            this.musicListSelf = [];
-            this.$refs.myPlayer.src = `${api}/${url}`;
+        playMusic() {
             clearInterval(interval);
             this.playedTime = 0;
             this.countInterval();
-        },
-        allPlay(key,flag) {
-            if(flag) {
-                this.currentCateId = key;
-                //全部播放
-                this.musicListSelf = this.musicList[key];
-                this.currentMusicIndex = -1;
-                this.nextMusic();
-            }
-            else {
-                // 暂停
-                this.currentCateId = -1;
-                this.$refs.myPlayer.pause();
-            }
         },
         nextMusic() {
             if (this.currentMusicIndex == this.musicListSelf.length - 1) {
@@ -87,8 +67,7 @@ var xm = new Vue({
             } else {
                 this.currentMusicIndex += 1;
             }
-            this.Color = this.musicListSelf[this.currentMusicIndex].id;
-            this.$refs.myPlayer.src = `${api}/${this.musicListSelf[this.currentMusicIndex].data_url}`;
+            this.$refs.myPlayer.src = this.musicListSelf[this.currentMusicIndex];
             this.countInterval();
         },
         countInterval() {
@@ -192,6 +171,8 @@ var xm = new Vue({
         turtorChange(index, tutorial_id) { //教程分类
             this.number = index
             if (tutorial_id) {
+                console.log(111)
+
                 $.ajax({
                     type: "post",
                     url: `${api}/index/api/tutorialList`,
@@ -262,6 +243,7 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
+                    console.log(res)
                     this.isshade = true
                     this.isbook = true
                     this.create_at = res.data.create_at
@@ -284,6 +266,7 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
+                    console.log(res)
                     this.isshade = true
                     this.istotur = true
                     this.Tdescription = res.data.description
@@ -391,12 +374,19 @@ var xm = new Vue({
             })
         },
         musicDown(data_url) { //音乐下载
+            console.log(data_url)
             //必须同源才能下载
             var alink = document.createElement("a");
-            alink.href = `${api}/${data_url}`;
-            alink.download = this.imgs;
+            alink.href = this.imgs;
+            alink.download = `${api}/${data_url}`;
             console.log(alink.download)
             alink.click();
+        },
+        ColorChange(index) {
+            // console.log(id)
+            console.log(index)
+            this.Color = index
+            // this.Color = this.Color == index ? -1 : index
         },
         Osearch() {
             $.ajax({
@@ -447,6 +437,9 @@ var xm = new Vue({
             dataType: 'json',
             success: (res) => {
                 this.plugList = res.data.plugin
+                for(let key in res.data.music) {
+                    console.log(key);
+                }
                 this.musicList = res.data.music.list
                 this.musicSort = res.data.music.sort
                 this.bookChange(res.data.book.sort[0].id,0);

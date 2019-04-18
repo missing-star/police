@@ -719,6 +719,7 @@ function getNotice() {
  * @param {array} data 
  */
 function initRepairChart(data) {
+    console.log(data);
     const repairChart = echarts.init(document.getElementById('repair-chart'));
     const option = {
         // color: ['linear-gradient(#71baf0,#2b85e9)'],

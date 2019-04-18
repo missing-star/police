@@ -69,11 +69,10 @@ var xm = new Vue({
         },
         allPlay(key,flag) {
             if(flag) {
-                this.currentCateId = key;
                 //全部播放
                 this.musicListSelf = this.musicList[key];
                 this.currentMusicIndex = -1;
-                this.nextMusic();
+                this.nextMusic(key);
             }
             else {
                 // 暂停
@@ -81,12 +80,13 @@ var xm = new Vue({
                 this.$refs.myPlayer.pause();
             }
         },
-        nextMusic() {
+        nextMusic(catId) {
             if (this.currentMusicIndex == this.musicListSelf.length - 1) {
                 this.currentMusicIndex = 0;
             } else {
                 this.currentMusicIndex += 1;
             }
+            this.currentCateId = catId;
             this.Color = this.musicListSelf[this.currentMusicIndex].id;
             this.$refs.myPlayer.src = `${api}/${this.musicListSelf[this.currentMusicIndex].data_url}`;
             this.countInterval();
@@ -192,6 +192,8 @@ var xm = new Vue({
         turtorChange(index, tutorial_id) { //教程分类
             this.number = index
             if (tutorial_id) {
+                console.log(111)
+
                 $.ajax({
                     type: "post",
                     url: `${api}/index/api/tutorialList`,
@@ -262,6 +264,7 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
+                    console.log(res)
                     this.isshade = true
                     this.isbook = true
                     this.create_at = res.data.create_at
@@ -284,6 +287,7 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
+                    console.log(res)
                     this.isshade = true
                     this.istotur = true
                     this.Tdescription = res.data.description

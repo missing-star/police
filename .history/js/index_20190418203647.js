@@ -120,6 +120,7 @@ var xm = new Vue({
                     },
                     dataType: 'json',
                     success: (res) => {
+                        console.log(res)
                         if (res.code == 1) {
                             this.isshade = false
                             this.ispass = false
@@ -240,6 +241,7 @@ var xm = new Vue({
                 data: {},
                 dataType: 'json',
                 success: (res) => {
+                    console.log(res)
                     this.repairList = res.data;
                 }
             })
@@ -268,6 +270,7 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
+                    console.log(res);
                     this.seelist = res.data;
                 }
             })
@@ -846,23 +849,17 @@ function getRepairList(strDate) {
     $.ajax({
         url:`${api}/index/api/repairCentre`,
         data:{
-            today:nowDate,
-            begin:dateRange.start,
-            end:dateRange.end
+            
         },
         type:'post',
         dataType:'json',
         success:function(data) {
-            initRepairChart([data.data.Monday,data.data.Tuesday,data.data.Wednesday,data.data.Thursday,data.data.Friday,data.data.Saturday,data.data.Sunday]);
-            xm.repairInfo.today = data.data.today;
-            xm.repairInfo.week = data.data.week;
-            xm.repairInfo.month = data.data.month;
-            xm.repairInfo.total = data.data.tool;
+
         },
         error:function() {
             alert('服务器异常');
         }
     });
 }
-getRepairList(getNowDate());
+
 initCalendar();
