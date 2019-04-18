@@ -15,7 +15,7 @@
     <div id="app" v-cloak>
         <div class="login_logo">
             <div class="login_top">
-                <img src="img/logo.png" alt="">
+                <img src="img/警徽.png" alt="">
                 <p>南京市浦口区公安分局</p>
             </div>
             <!-- 登录界面 -->
@@ -43,13 +43,9 @@
                 <!-- 警员登录 -->
                 <div class="police" v-show="ispolice">
                     <h4>警员登录</h4>
-                    <ul class="police_uu">
+                    <ul class="police_uu Pul">
                         <li>
-                            <label for="">IP地址：</label>
-                            <input type="text" id="name1" disabled  v-model="ip">
-                        </li>
-                        <li>
-                            <label for="">姓名：</label>
+                            <label for="">昵称：</label>
                             <input type="text" v-model="Pname">
                         </li>
                         <li>
@@ -57,6 +53,7 @@
                             <input type="password" v-model="Ppsw">
                         </li>
                     </ul>
+                    <span class="role_register" @click="goRegister">注册</span>
                     <button class="enter" @click="policeEnter">登录</button>
                     <span class="other" @click="goBack">其他登录</span>
                 </div>
@@ -91,14 +88,35 @@
                             <input type="password" v-model="Opsw">
                         </li>
                     </ul>
-                    <button type="button" class="enter" @click="orderEnter">登录</button>
+                    <button type="button" class="enter enterone" @click="orderEnter">登录</button>
                     <span class="other" @click="goBack">其他登录</span>
+                </div>
+
+                <!-- 注册 -->
+                <div class="register police" v-show="isregister">
+                    <h4>警员注册</h4>
+                    <ul class="police_uu">
+                        <li>
+                            <label for="">昵称：</label>
+                            <input type="text" v-model="Gname">
+                        </li>
+                        <li>
+                            <label for="">密码：</label>
+                            <input type="text" v-model="Gpsw">
+                        </li>
+                        <li>
+                            <label for="">确认密码：</label>
+                            <input type="password" v-model="Ggpsw">
+                        </li>
+                    </ul>
+                    <button class="enter enterone" @click="policeEnter">注册</button>
+                    <span class="other" @click="goEnter">登录</span>
                 </div>
             </div>
         </div>
 
 
-        
+
     </div>
 </body>
 
