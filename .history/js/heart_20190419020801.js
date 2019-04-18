@@ -66,9 +66,6 @@ var xm = new Vue({
             this.musicListSelf = [];
             if (this.$refs.myPlayer.src == '' || this.$refs.myPlayer.src != `${api}/${url}`) {
                 this.$refs.myPlayer.src = `${api}/${url}`;
-                this.$refs.myPlayer.oncanplay = () => {
-                    this.totalTime = this.$refs.myPlayer.duration;
-                }
                 clearInterval(interval);
                 this.playedTime = 0;
             }
@@ -119,14 +116,14 @@ var xm = new Vue({
                     }, 1000);
                 }
             } else {
+                console.log(this.$refs.myPlayer.duration);
                 this.totalTime = this.$refs.myPlayer.duration;
                 this.$refs.myPlayer.play();
                 if (!interval) {
                     interval = setInterval(() => {
+                        console.log(this.totalTime,this.playedTime);
                         this.playedTime += 1;
                         if (this.playedTime >= this.totalTime) {
-                            clearInterval(interval);
-                            interval = '';
                             this.currentMusicIndex = -1;
                             this.currentCateId = -1; 
                         }

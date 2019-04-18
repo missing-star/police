@@ -66,9 +66,6 @@ var xm = new Vue({
             this.musicListSelf = [];
             if (this.$refs.myPlayer.src == '' || this.$refs.myPlayer.src != `${api}/${url}`) {
                 this.$refs.myPlayer.src = `${api}/${url}`;
-                this.$refs.myPlayer.oncanplay = () => {
-                    this.totalTime = this.$refs.myPlayer.duration;
-                }
                 clearInterval(interval);
                 this.playedTime = 0;
             }
@@ -125,8 +122,6 @@ var xm = new Vue({
                     interval = setInterval(() => {
                         this.playedTime += 1;
                         if (this.playedTime >= this.totalTime) {
-                            clearInterval(interval);
-                            interval = '';
                             this.currentMusicIndex = -1;
                             this.currentCateId = -1; 
                         }

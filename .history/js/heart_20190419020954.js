@@ -119,14 +119,14 @@ var xm = new Vue({
                     }, 1000);
                 }
             } else {
+                console.log(this.$refs.myPlayer.duration);
                 this.totalTime = this.$refs.myPlayer.duration;
                 this.$refs.myPlayer.play();
                 if (!interval) {
                     interval = setInterval(() => {
+                        console.log(this.totalTime,this.playedTime);
                         this.playedTime += 1;
                         if (this.playedTime >= this.totalTime) {
-                            clearInterval(interval);
-                            interval = '';
                             this.currentMusicIndex = -1;
                             this.currentCateId = -1; 
                         }
