@@ -322,7 +322,6 @@ var xm = new Vue({
         bannerChange(index) { // 获取论坛分类
             if (index != this.currentIndex && index != 3) {
                 this.currentIndex = index;
-                this.currentActive = -1;
             }
             if (index == 3) {
                 this.ismore == true ? this.ismore = false : this.ismore = true;
@@ -351,7 +350,7 @@ var xm = new Vue({
                 dataType: 'json',
                 success: (res) => {
                     this.postIndex = -1
-                    // this.commentActive = -1
+                    this.commentActive = -1
                     this.numIndex = -1
                     this.ForumCate[3].title="更多"
                     this.titleList = res.result;

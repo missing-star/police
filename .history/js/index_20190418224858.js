@@ -144,6 +144,7 @@ var xm = new Vue({
             this.pIndex = this.pIndex == index ? -1 : index
         },
         comChange(postId,index) { //查看评论
+            console.log(index);
             this.currentPostId = postId;
             this.commentActive = this.commentActive == index ? -1 : index
         },
