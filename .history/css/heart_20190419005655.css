@@ -207,6 +207,7 @@ ul.plug_uu p {
     display: inline-block;
     width: 12px;
     height: 13px;
+    background: url(../img/开始1.png)no-repeat;
     background-size: 100% 100%;
     cursor: pointer;
 }
@@ -222,11 +223,11 @@ ul.plug_uu p {
 }
 
 span.play-icon{
-    background: url(../img/开始1.png) no-repeat;
+    background: url(../img/开始1.png)no-repeat;
     background-size: 100% 100%;
 }
 span.pause-icon{
-    background: url(../img/pause.png) no-repeat;
+    background: url(../img/pause.png)no-repeat;
     background-size: 100% 100%;
 }
 

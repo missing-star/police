@@ -64,6 +64,7 @@ var xm = new Vue({
             this.currentCateId = catId;
             this.Color = musicId;
             this.musicListSelf = [];
+            console.log(this.$refs.myPlayer.src, api + '/' + url);
             if (this.$refs.myPlayer.src == '' || this.$refs.myPlayer.src != `${api}/${url}`) {
                 this.$refs.myPlayer.src = `${api}/${url}`;
                 clearInterval(interval);
@@ -74,8 +75,8 @@ var xm = new Vue({
         pauseMusic(catId, musicId, url) {
             this.$refs.myPlayer.pause();
             this.pausedId = musicId;
-            this.currentCateId = -1;
             this.Color = -1;
+            this.isPause = true;
         },
         allPlay(key, flag) {
             if (flag) {

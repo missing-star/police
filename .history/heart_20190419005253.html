@@ -71,8 +71,8 @@
                                 :class="{musicColor: Color==arr.id && currentCateId == item.id}">
                                     <p>{{arr.name}}</p>
                                     <div class="music_img">
-                                        <span class="pause-icon" v-if="Color==arr.id && currentCateId == item.id" @click="pauseMusic(item.id,arr.id,arr.data_url)"></span>
-                                        <span class="play-icon" v-else @click="playMusic(item.id,arr.id,arr.data_url)"></span>
+                                        <span v-if="Color==arr.id && currentCateId == item.id" @click="pauseMusic(item.id,arr.id,arr.data_url)"></span>
+                                        <span v-else @click="playMusic(item.id,arr.id,arr.data_url)"></span>
                                         <span @click="musicDown(arr.data_url)"></span>
                                     </div>
                                 </li>

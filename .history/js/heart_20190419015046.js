@@ -55,36 +55,39 @@ var xm = new Vue({
         //音频总时长
         totalTime: 0,
         //当前播放列表分类
-        currentCateId: -1,
+        currentCateId:-1,
         //暂停的歌曲id
-        pausedId: -1
+        pausedId:-1
     },
     methods: {
-        playMusic(catId, musicId, url) {
+        playMusic(catId,musicId,url) {
             this.currentCateId = catId;
             this.Color = musicId;
             this.musicListSelf = [];
-            if (this.$refs.myPlayer.src == '' || this.$refs.myPlayer.src != `${api}/${url}`) {
+            console.log(this.$refs.myPlayer.src,api+'/'+url);
+            if(this.$refs.myPlayer.src == '' || this.$refs.myPlayer.src != `${api}/${url}`) {
+                console.log('重新赋值');
                 this.$refs.myPlayer.src = `${api}/${url}`;
-                clearInterval(interval);
-                this.playedTime = 0;
             }
+            clearInterval(interval);
+            this.playedTime = 0;
             this.countInterval(false);
         },
-        pauseMusic(catId, musicId, url) {
+        pauseMusic(catId,musicId,url) {
             this.$refs.myPlayer.pause();
             this.pausedId = musicId;
-            this.currentCateId = -1;
             this.Color = -1;
+            this.isPause = true;
         },
-        allPlay(key, flag) {
-            if (flag) {
+        allPlay(key,flag) {
+            if(flag) {
                 this.currentCateId = key;
                 //全部播放
                 this.musicListSelf = this.musicList[key];
                 this.currentMusicIndex = -1;
                 this.nextMusic();
-            } else {
+            }
+            else {
                 // 暂停
                 this.currentCateId = -1;
                 this.$refs.myPlayer.pause();
@@ -101,36 +104,27 @@ var xm = new Vue({
             this.countInterval(true);
         },
         countInterval(flag) {
-            if (flag) {
+            if(flag) {
+                console.log('重新加载');
                 this.$refs.myPlayer.load();
-                this.$refs.myPlayer.oncanplay = () => {
-                    this.totalTime = this.$refs.myPlayer.duration;
-                    this.$refs.myPlayer.play();
-                    this.playedTime = 0;
-                    clearInterval(interval);
-                    interval = setInterval(() => {
-                        this.playedTime += 1;
-                        if (this.playedTime >= this.totalTime) {
-                            this.nextMusic();
-                        }
-                    }, 1000);
-                }
-            } else {
+            }
+            this.$refs.myPlayer.oncanplay = () =>{
                 this.totalTime = this.$refs.myPlayer.duration;
                 this.$refs.myPlayer.play();
-                if (!interval) {
-                    interval = setInterval(() => {
-                        this.playedTime += 1;
-                        if (this.playedTime >= this.totalTime) {
-                            if (flag) {
-                                this.nextMusic();
-                            } else {
-                                this.currentMusicIndex = -1;
-                                this.currentCateId = -1;
-                            }
+                this.playedTime = 0;
+                clearInterval(interval);
+                interval = setInterval(() => {
+                    this.playedTime += 1;
+                    if (this.playedTime >= this.totalTime) {
+                        if(flag) {
+                            this.nextMusic();
                         }
-                    }, 1000);
-                }
+                        else {
+                            this.currentMusicIndex = -1;
+                            this.currentCateId = -1;
+                        }
+                    }
+                }, 1000);
             }
         },
         goClose() { //关闭遮罩
@@ -202,7 +196,7 @@ var xm = new Vue({
                 },
                 dataType: 'json',
                 success: (res) => {
-                    if (res.code == 1) {
+                    if(res.code == 1) {
                         this.bookList = res.data
                         this.total = res.data.length
                         sessionStorage.setItem('book_id', book_id)
@@ -470,7 +464,7 @@ var xm = new Vue({
                 this.plugList = res.data.plugin
                 this.musicList = res.data.music.list
                 this.musicSort = res.data.music.sort
-                this.bookChange(res.data.book.sort[0].id, 0);
+                this.bookChange(res.data.book.sort[0].id,0);
                 this.bookSort = res.data.book.sort
                 this.tutorialList = res.data.tutorial.list
                 var temp = res.data.tutorial.sort

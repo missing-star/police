@@ -74,8 +74,8 @@ var xm = new Vue({
         pauseMusic(catId, musicId, url) {
             this.$refs.myPlayer.pause();
             this.pausedId = musicId;
-            this.currentCateId = -1;
             this.Color = -1;
+            this.isPause = true;
         },
         allPlay(key, flag) {
             if (flag) {
