@@ -5,11 +5,16 @@ var xm = new Vue({
         ispolice: true, //警员登录
         ismatron: false, //管理登录
         isorder: false, //接单员登录
+        isregister:false, //注册
         Oname: '',
         Opsw: '',
         ip: '127.0.0.1',
         Pname: '',
         Ppsw: '',
+        //注册
+        Gname:'',
+        Gpsw:'',
+        Ggpsw:'',
     },
     methods: {
         goBack: function () {
@@ -17,6 +22,14 @@ var xm = new Vue({
             this.ismatron = false
             this.isorder = false
             this.isrole = true
+        },
+        goEnter(){ //跳转登录
+            this.isregister =false
+            this.ispolice =true
+        },
+        goRegister(){ //跳转注册
+            this.isregister =true
+            this.ispolice =false
         },
         goOrder: function () {
             this.isrole = false

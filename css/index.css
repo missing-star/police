@@ -49,7 +49,7 @@
 }
 
 .search {
-    width: 360px;
+    width: 280px;
     height: 34px;
     border-radius: 25px;
     outline: none;
@@ -72,7 +72,7 @@
 .header_img {
     width: 23px;
     height: 27px;
-    margin: 0 48px 0 140px;
+    margin-right:60px;
     position: relative;
     font-size: 12px;
 }
@@ -101,9 +101,13 @@
 .header_name {
     height: 42px;
     line-height: 42px;
+    margin-left: 15%;
+    display: flex;
+    align-items: center;
+    
 }
 
-.header_name span:nth-child(1) {
+.header_name .name {
     font-size: 18px;
     color: white;
 }
@@ -1361,6 +1365,7 @@ td {
     margin-right: 65px;
     cursor: pointer;
 }
+
 .see_inp {
     position: relative;
     margin-top: 14px;
@@ -1850,10 +1855,21 @@ p.no-replay {
 }
 
 .comment-test {
-    font-size: 16px!important;
+    font-size: 16px !important;
     font-family: PingFangSC-Regular;
 }
 
 .Colorone {
     background: #E6E6E6;
+}
+
+.header_enter {
+    font-size: 16px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1);
+}
+
+.header_enter a {
+    color: white;
 }

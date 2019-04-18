@@ -22,19 +22,23 @@
                     <span></span>
                     <span></span>
                     <span></span>
-                    <!-- <img src="img/首页logo.png" alt=""> -->
                 </div>
                 <div class="header_mid">
                     <input @keydown.enter="searchChange" class="search" type="text" v-model="keyWords"
                         placeholder="搜索关键词">
                     <span @click="searchChange"></span>
                 </div>
-                <div class="header_img pointer" @click="goAnswer">
-                    <img src="img/信息.png" alt="">
-                    <span v-if="length>0?isnum:!isnum">{{length}}</span>
-                </div>
+
                 <div class="header_name pointer">
-                    <span @click="goname">{{userName}}</span>
+                    <div class="header_img" @click="goAnswer" v-if="this.userName">
+                        <img src="img/信息.png" alt="">
+                        <span v-if="length>0?isnum:!isnum">{{length}}</span>
+                    </div>
+                    <div class="header_enter" v-else>
+                        <a @click="Enter">登录 | </a>
+                        <a @click="Resgiter">注册</a>
+                    </div>
+                    <span @click="goname" class="name" v-if="this.userName">{{userName}}</span>
                 </div>
                 <!-- 通知 -->
                 <div class="answer">
@@ -192,7 +196,7 @@
                             </li>
                             <li @click="reportChange">
                                 <img src="img/报备.png" alt="">
-                                <p>去报备</p>
+                                <p>进行报备</p>
                             </li>
                         </ul>
                     </div>
@@ -359,7 +363,7 @@
                     </template>
                     <!-- 子集 -->
 
-                
+
                     </ul>
                 </div>
             </div>

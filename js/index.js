@@ -80,6 +80,12 @@ var xm = new Vue({
         ]
     },
     methods: {
+        Resgiter() {
+            window.location.href = "login.html"
+        },
+        Enter() {
+            window.location.href = "login.html"
+        },
         quitChange() { //退出登录
             $.ajax({
                 type: "post",
@@ -98,7 +104,6 @@ var xm = new Vue({
             })
         },
         editChange() { //修改密码
-
             if (this.Npsw == this.Tpsw) {
                 $.ajax({
                     type: "post",
@@ -183,18 +188,24 @@ var xm = new Vue({
             window.open("write.html");
         },
         reportChange() { //打开报备
-            this.isshade = true
-            this.isCase = true
-            $.ajax({
-                type: "post",
-                url: `${api}/index/api/repairSorts`,
-                async: true,
-                data: {},
-                dataType: 'json',
-                success: (res) => {
-                    this.repairSorts = res.data;
-                }
-            })
+            this.userName = sessionStorage.getItem("username")
+            if (this.userName) {
+                this.isshade = true
+                this.isCase = true
+                $.ajax({
+                    type: "post",
+                    url: `${api}/index/api/repairSorts`,
+                    async: true,
+                    data: {},
+                    dataType: 'json',
+                    success: (res) => {
+                        this.repairSorts = res.data;
+                    }
+                })
+            } else {
+                warn.alert("请先登录")
+            }
+
         },
         reChange() { //报备
             var userContent = $(".wishContent").val();
@@ -544,7 +555,7 @@ var xm = new Vue({
         goUser() { //通知跳转
             window.location.href = "user.html?id=1"
         },
-      
+
         openSelect(index) {
             this.Colorindex = this.Colorindex == index ? -1 : index
         },
@@ -615,8 +626,6 @@ var xm = new Vue({
                 this.length = res.data.comment.length + res.data.replay.length
             }
         })
-
-
 
         this.userName = sessionStorage.getItem("username")
         if (this.userName == null) {
