@@ -158,13 +158,11 @@ var xm = new Vue({
             this.ismore = false;
         },
         gospeak(index) { //回复
-            if (this.userName==null) {
-                warn.alert("请先登录")
-                return;
-            } 
-            console
             this.currentActive = this.currentActive == index ? -1 : index;
-            
+            if (this.userName) {
+            } else {
+                warn.alert("请先登录")
+            }
         },
         gospeak1(index) { //查看回复  回复
             this.oneIndex = this.oneIndex == index ? -1 : index

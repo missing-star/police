@@ -158,13 +158,7 @@ var xm = new Vue({
             this.ismore = false;
         },
         gospeak(index) { //回复
-            if (this.userName==null) {
-                warn.alert("请先登录")
-                return;
-            } 
-            console
             this.currentActive = this.currentActive == index ? -1 : index;
-            
         },
         gospeak1(index) { //查看回复  回复
             this.oneIndex = this.oneIndex == index ? -1 : index
@@ -239,7 +233,9 @@ var xm = new Vue({
         lookchange(post_id, comment_id) { //查看回复
             if (this.userName) {
                 this.ip = ""
-            } 
+            } else {
+                this.ip
+            }
             this.currentPostId = post_id;
             this.currentCommentId = comment_id;
             this.currentComment = this.titleList.filter((posts) => {
@@ -299,7 +295,9 @@ var xm = new Vue({
             this.ismore = false;
             if (this.userName) {
                 this.ip = ""
-            } 
+            } else {
+                this.ip
+            }
             if (index != this.numIndex) {
                 this.numIndex = index;
             }
@@ -311,7 +309,8 @@ var xm = new Vue({
                 url: `${api}/index/api/getForumList`,
                 data: {
                     cate_id: id,
-                    ip: this.ip
+                    ip: this.ip,
+                    keyWords:this.keyWord
                 },
                 dataType: 'json',
                 success: (res) => {
@@ -346,7 +345,9 @@ var xm = new Vue({
             }
             if (this.userName) {
                 this.ip = ""
-            } 
+            } else {
+                this.ip
+            }
             var list = this.ForumCate
             var id = list[index].id
             $.ajax({
@@ -354,7 +355,8 @@ var xm = new Vue({
                 url: `${api}/index/api/getForumList`,
                 data: {
                     cate_id: id,
-                    ip: this.ip
+                    ip: this.ip,
+                    keywords:this.keyWords
                 },
                 dataType: 'json',
                 success: (res) => {
@@ -404,9 +406,8 @@ var xm = new Vue({
         commentChange(post_id, comment_id, uid, type) { //发布评论
             if (this.userName) {
                 this.ip = ""
-
             } else {
-                warn.alert("请先登录")
+                this.ip
             }
             if (comment_id) {
                 if (this.replyComment.trim() == '') {

@@ -160,7 +160,6 @@ var xm = new Vue({
         gospeak(index) { //回复
             if (this.userName==null) {
                 warn.alert("请先登录")
-                return;
             } 
             console
             this.currentActive = this.currentActive == index ? -1 : index;

@@ -53,8 +53,8 @@
                             <input type="password" v-model="Ppsw">
                         </li>
                     </ul>
-                    <span class="role_register" >
-                        <span @click="goRegister">注册 / </span><a href="index.html" class="role-a">暂不注册</a>
+                    <span class="role_register" @click="goRegister">
+                        <span></span> 注册/
                     </span>
                     <button class="enter" @click="policeEnter">登录</button>
                     <span class="other" @click="goBack">其他登录</span>
@@ -112,9 +112,7 @@
                         </li>
                     </ul>
                     <button class="enter enterone" @click="policeEnter">注册</button>
-                    <span class="other" >
-                            <span @click="goEnter">登录 / </span><a href="index.html" class="role-a">暂不登录</a>
-                    </span>
+                    <span class="other" @click="goEnter">登录</span>
                 </div>
             </div>
         </div>

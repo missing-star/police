@@ -162,16 +162,13 @@ html {
     color: #71bbf0;
 }
 
-.role-a {
-    color: rgba(169, 169, 169, 1);
-}
 .other {
     font-size: 0.14rem;
     font-family: PingFangSC-Regular;
     font-weight: 400;
     color: rgba(169, 169, 169, 1);
     line-height: 0.24rem;
-    margin-left: 4%;
+    margin-left: ;
     cursor: pointer;
 }
 
