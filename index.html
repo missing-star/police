@@ -40,12 +40,8 @@
                 <!-- 通知 -->
                 <div class="answer">
                     <span class="answer_sp"></span>
-                    <ul v-if="list.length != 0 || replaylist.length != 0" class="answer_uu" @click="goUser">
-                        <li v-for="item in list">
-                            {{item.nickname}} <span>评论了你的</span> {{item.title}}
-                            <span v-html="item.content"></span>
-                        </li>
-                        <li v-for="item in replaylist">
+                    <ul v-if="replaylist.length != 0" class="answer_uu" >
+                        <li v-for="(item,index) in replaylist" @click="goUser1(item.id)">
                             {{item.nickname}} <span>回复你</span>{{item.title}}
                         </li>
                     </ul>

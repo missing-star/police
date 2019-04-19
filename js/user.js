@@ -313,7 +313,7 @@ var xm = new Vue({
 
         },
         //文章点赞
-        likePostOrComment(post_id, comment_id, type,typeId) {
+        likePostOrComment(post_id, comment_id, type, typeId) {
             var data = {};
             $.ajax({
                 url: `${api}/index/api/phraisePost`,
@@ -446,6 +446,8 @@ var xm = new Vue({
         this.userName = sessionStorage.getItem("username")
         if (getUrlKey("id") == 1) {
             this.isone = false
+            this.isone1 = true
+            $(".User-uu>li:eq(1)").addClass('blue').siblings('li').removeClass('blue');
         }
 
         $.ajax({
@@ -509,11 +511,11 @@ $(".wrap_ul li").each(function (index) {
 })
 
 
-$(function(){
-    $(".User-uu>li").click(function(){
+$(function () {
+    $(".User-uu>li").click(function () {
         $(this).addClass('blue').siblings('li').removeClass('blue');
     })
-  });
+});
 
 function sortByCat(key) {
     switch (key) {

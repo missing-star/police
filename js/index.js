@@ -131,7 +131,7 @@ var xm = new Vue({
         appChange() {
             sessionStorage.setItem('id', 1)
         },
-        gouser() { //跳转我的主页
+        gouser(id) { //跳转我的主页
             sessionStorage.setItem('id', 2)
             window.location.href = "user.html"
         },
@@ -158,13 +158,13 @@ var xm = new Vue({
             this.ismore = false;
         },
         gospeak(index) { //回复
-            if (this.userName==null) {
+            if (this.userName == null) {
                 warn.alert("请先登录")
                 return;
-            } 
+            }
             console
             this.currentActive = this.currentActive == index ? -1 : index;
-            
+
         },
         gospeak1(index) { //查看回复  回复
             this.oneIndex = this.oneIndex == index ? -1 : index
@@ -239,7 +239,7 @@ var xm = new Vue({
         lookchange(post_id, comment_id) { //查看回复
             if (this.userName) {
                 this.ip = ""
-            } 
+            }
             this.currentPostId = post_id;
             this.currentCommentId = comment_id;
             this.currentComment = this.titleList.filter((posts) => {
@@ -299,7 +299,7 @@ var xm = new Vue({
             this.ismore = false;
             if (this.userName) {
                 this.ip = ""
-            } 
+            }
             if (index != this.numIndex) {
                 this.numIndex = index;
             }
@@ -317,7 +317,7 @@ var xm = new Vue({
                 success: (res) => {
                     this.titleList = res.result
 
-                    this.ForumCate[3].title = this.ForumCate[index+4].title
+                    this.ForumCate[3].title = this.ForumCate[index + 4].title
                     // this.postIndex = -1
                     // this.commentActive = -1
                     this.numIndex = -1
@@ -346,7 +346,7 @@ var xm = new Vue({
             }
             if (this.userName) {
                 this.ip = ""
-            } 
+            }
             var list = this.ForumCate
             var id = list[index].id
             $.ajax({
@@ -445,7 +445,7 @@ var xm = new Vue({
                         data: {
                             post_id: post_id,
                             content: this.Pcomment,
-                            ip:this.ip
+                            ip: this.ip
                         },
                         dataType: 'json',
                         success: (res) => {
@@ -560,8 +560,20 @@ var xm = new Vue({
             const reg = /style="[^\"]*?"/g;
             return content.replace(reg, '');
         },
-        goUser() { //通知跳转
-            window.location.href = "user.html?id=1"
+        goUser1(id) { //通知跳转
+            console.log(id)
+            $.ajax({
+                type: "post",
+                url: `${api}/index/api/clickRead`,
+                async: true,
+                data: {
+                    id: id
+                },
+                dataType: 'json',
+                success: (res) => {
+                    window.location.href = "user.html?id=1"
+                }
+            })
         },
 
     },
@@ -618,7 +630,8 @@ var xm = new Vue({
             data: {},
             dataType: 'json',
             success: (res) => {
-                this.length = res.data.comment.length + res.data.replay.length
+                console.log(res.data.replay.length)
+                this.length = res.data.replay.length
             }
         })
 
