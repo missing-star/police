@@ -810,12 +810,12 @@ function getWeekByDay(str) {
  */
 function timeToDateStr(timeStaps) {
     const newDate = new Date(timeStaps);
-    return newDate.getFullYear() + '/' + (newDate.getMonth() + 1) + '/' + newDate.getDate();
+    return newDate.getFullYear() + '/' + (newDate.getMonth() + 1) + '-' + newDate.getDate();
 }
 
 function getNowDate() {
     const date = new Date();
-    return date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
+    return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 }
 /**
  * 获得报备列表

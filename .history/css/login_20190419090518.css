@@ -158,7 +158,9 @@ html {
 
 .enter:hover,
 .other:hover,
-.role-a:hover {
+.role_register，
+ {
+:hover {
     color: #71bbf0;
 }
 
