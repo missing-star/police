@@ -42,11 +42,11 @@
 .header_mid span {
     display: inline-block;
     width: 20px;
-    height: 20px;
+    height: 24px;
     background: url(../img/sousuo.png)no-repeat;
     background-size: 100% 100%;
     position: absolute;
-    top: 5px;
+    top: 3px;
     right: 10px;
     cursor: pointer;
 }
