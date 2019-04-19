@@ -473,9 +473,8 @@ var xm = new Vue({
                 this.musicSort = res.data.music.sort
                 this.bookChange(res.data.book.sort[0].id, 0);
                 this.bookSort = res.data.book.sort
-                // this.tutorialList = res.data.tutorial.list
+                this.tutorialList = res.data.tutorial.list
                 var temp = res.data.tutorial.sort
-                this.turtorChange(0,res.data.tutorial.sort[0].id);
                 this.tutorialSort = temp;
 
                 this.total = res.data.book.list.length

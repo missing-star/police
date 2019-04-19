@@ -475,7 +475,7 @@ var xm = new Vue({
                 this.bookSort = res.data.book.sort
                 // this.tutorialList = res.data.tutorial.list
                 var temp = res.data.tutorial.sort
-                this.turtorChange(0,res.data.tutorial.sort[0].id);
+                this.turtorChange(res.data.tutorial.sort[0].id,0);
                 this.tutorialSort = temp;
 
                 this.total = res.data.book.list.length
